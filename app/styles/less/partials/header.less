@@ -1,0 +1,38 @@
+@head-border-radius: 20px;
+
+.usage-dashboard-header{
+	background: white;
+	font-weight: bold;
+	font-size: 11px;
+	line-height: 18px;
+	position: relative;
+	.usage-dashboard-header-inner{
+		padding-top: 5px;
+		padding-bottom: 5px;
+		.info{
+			position: absolute;
+			top: 5px;
+			right: 15px;
+		}
+		.usage-dashboard-header-menu{
+			margin: 0;
+			li{
+				background: white;
+				color: #2b2b2b;
+				&.active{
+					background: #2b2b2b;
+					color: #fbfbfb;
+					box-shadow: 0 0 2px gray;
+				}
+				border-radius: @head-border-radius;
+				display: inline-block;
+				padding: 0 20px;
+				cursor: pointer;
+			}
+		}
+	}
+	hr{
+		border-color: @dark-gray;
+		margin: 1px 0;
+	}
+}

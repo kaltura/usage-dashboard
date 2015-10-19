@@ -1,0 +1,53 @@
+<div class='side-menu row-fluid span2'>
+	<ul class='top-ul'>
+		<li class='side-menu-top-ul-item' ng-click='state.go("overall-usage")'>
+			<span>Dashboard Usage Reports</span>
+		</li>
+		<li>
+			<ul class='inner-ul'>
+				<li ng-class='{active:state.current.name=="overall-usage"}'>
+					<span>
+						<a ui-sref='overall-usage'>
+							Overall Usage Report
+						</a>
+					</span>
+				</li>
+				<li ng-class='{active:state.current.name=="plays"}'>
+					<span>
+						<a ui-sref='plays'>
+							Plays Report
+						</a>
+					</span>
+				</li>
+				<li ng-class='{active:state.current.name=="bandwidth"}'>
+					<span>
+						<a ui-sref='bandwidth'>
+							Bandwidth Report
+						</a>
+					</span>
+				</li>
+				<li ng-class='{active:state.current.name=="storage"}'>
+					<span>
+						<a ui-sref='storage'>
+							Storage Report
+						</a>
+					</span>
+				</li>
+				<li ng-class='{active:state.current.name=="transcoding-consumption"}'>
+					<span>
+						<a ui-sref='transcoding-consumption'>
+							Transcoding Consumption Report
+						</a>
+					</span>
+				</li>
+				<li ng-class='{active:state.current.name=="media-entries"}'>
+					<span>
+						<a ui-sref='media-entries'>
+							Media Entries Report
+						</a>
+					</span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>

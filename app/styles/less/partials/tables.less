@@ -1,0 +1,140 @@
+table{
+	outline: @table-border;
+	tr{
+		td,th{
+			&:not(:last-child){
+				border-right: @table-border;
+			}
+		}
+	}
+
+	&.half-width{
+		width: 50%;
+		min-width: @width-0/2;
+	}
+
+	&.one-third-width{
+		width: 33%;
+		min-width: @width-0/3;
+	}
+}
+
+.panel-table{
+	thead{
+		.gradient-table();
+		tr{
+			th{
+				margin: @padding 0 @padding 0 !important;
+				padding: 0 @padding 0 @padding;
+
+				height: 115px;
+
+				position: relative;
+				font-weight: normal;
+
+				.title,.units{
+					color: @text-gray;
+					font-size: @small-font;
+				}
+
+				.value{
+					position: absolute;
+					bottom: 0;
+					left: @padding;
+					color: @dark-aqua;
+					font-size: @panel-table-value-font-size;
+					line-height: @panel-table-value-font-size;
+				}
+			}
+		}
+	}
+
+	&.richer{
+		thead{
+			tr{
+				th{
+					.height(135px);
+
+					.values{
+						.height(80px);
+
+						position: absolute;
+						bottom: 0;
+						right: 0;
+						left: 0;
+						margin-left: @padding;
+						margin-right: @padding;
+						padding: @padding @padding 0 @padding;
+						background: @gradient-bottom;
+
+						.value{
+							left: 0;
+							top: 0;
+							position: relative;
+							&.under-bound{
+								color: @text-green;
+							}
+							&.near-bound{
+								color: @text-orange;
+							}
+							&.over-bound{
+								color: @text-red;
+							}
+						}
+
+						.total{
+							color: @text-light-gray;
+							font-size: @medium-font;
+						}
+
+						.text{
+							color: @text-light-gray;
+							font-size: @micro-font;
+							position: absolute;
+							bottom: 0;
+							left: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.usual-table{
+	thead{
+		.gradient-table();
+		tr{
+			th{
+				padding: 5px @padding 5px @padding;
+				font-size: @small-font;
+			}
+		}
+	}
+	tbody{
+		tr{
+			td{
+				padding: @padding;
+				font-size: @small-font;
+			}
+
+			&.even{
+				td{
+					background: @white-bg;
+				}
+			}
+
+			&.odd{
+				td{
+					background: @gray-bg;
+				}
+			}
+
+			&:hover{
+				td{
+					background: @dark-bg;
+				}
+			}
+		}
+	}
+}

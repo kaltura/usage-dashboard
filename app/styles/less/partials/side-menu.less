@@ -1,0 +1,40 @@
+.side-menu{
+	li{
+		padding-left: 20px;
+		position: relative;
+		span{
+			cursor: pointer;
+			a{
+				color: inherit;
+    			text-decoration: none;
+			}
+		}
+		&.active{
+			&:before{
+				content: '';
+				background: @blue;
+				height: 100%;
+				width: 7px;
+				display: block;
+				position: absolute;
+				left: 8px;
+			}
+		}
+	}
+	.top-ul{
+		font-size: @large-font;
+		.text-shadow();
+		.inner-ul{
+			margin-top: 5px;
+			font-size: @medium-font;
+			li{
+				padding-left: 20px;
+				span{
+					&:hover{
+						text-shadow: 1px 1px 1px #ADACAC;
+					}
+				}
+			}
+		}
+	}
+}

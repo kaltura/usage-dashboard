@@ -1,0 +1,30 @@
+.graph-row{
+	height: 300px;
+}
+
+@tooltip-padding-top: 4px;
+@tooltip-padding-right: 8px;
+@gradient-tooltip-top: @white-bg;
+@gradient-tooltip-bottom: @dark-gray;
+@tooltip-height: 50px;
+
+.graph-tooltip{
+	.gradient(@gradient-tooltip-top, @gradient-tooltip-bottom, 10%) !important;
+	border: 1px solid @dark-gray !important;
+	height: @tooltip-height !important;
+	padding: @tooltip-padding-top @tooltip-padding-right !important;
+	position: relative;
+	.text{
+		.text-shadow();
+		font-size: @small-font;
+		color: @text-gray;
+	}
+	.value{
+		font-size: @medium-font;
+		line-height: @medium-font;
+		color: @dark-aqua;
+		position: absolute;
+		bottom: @tooltip-padding-top;
+		left: @tooltip-padding-right;
+	}
+}
