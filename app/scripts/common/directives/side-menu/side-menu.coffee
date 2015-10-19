@@ -12,3 +12,8 @@ do ->
 
 	module.classy.controller
 		name: 'SideMenuCtrl'
+		injectToScope: ['go']
+
+		init: ->
+			@go.state()
+			@$.menuItems = @go.state('usage-dashboard').substates

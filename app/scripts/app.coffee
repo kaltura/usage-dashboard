@@ -9,12 +9,17 @@ do ->
 		'ui.router'
 		'restangular'
 		'classy'
-		#config
+		#common
 		'KalturaUsageDashboard.config'
+		'KalturaUsageDashboard.constants'
+		'KalturaUsageDashboard.run'
+		'KalturaUsageDashboard.utils'
 		#directives
 		'KalturaUsageDashboard.directives.header'
 		'KalturaUsageDashboard.directives.side-menu'
 		'KalturaUsageDashboard.directives.datepicker'
+		#services
+		'KalturaUsageDashboard.services.go'
 		#pages
 		'KalturaUsageDashboard.usage-dashboard'
 	]

@@ -8,7 +8,7 @@ do ->
 			views:
 				main:
 					controller: 'MediaEntriesReportCtrl'
-					templateUrl: 'app/scripts/pages/usage-dashboard/media-entries/media-entries-report.html'
+					templateUrl: 'app/scripts/pages/usage-dashboard/media-entries-report/media-entries-report.html'
 			data:
 				pageTitle: 'Media Entries Report'
 
