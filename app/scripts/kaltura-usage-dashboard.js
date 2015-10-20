@@ -290,7 +290,11 @@
     };
   });
   return module.classy.controller({
-    name: 'HeaderCtrl'
+    name: 'HeaderCtrl',
+    injectToScope: ['go'],
+    init: function() {
+      return this.$.items = this.go.state().substates;
+    }
   });
 })();
 
@@ -344,15 +348,15 @@
       state: (function(_this) {
         return function(name) {
           var state;
-          return _.extend($state.get(name), {
+          return _.extend($state.get(name) || {}, {
             substates: ((function() {
               var i, len, ref, results;
               ref = $state.get();
               results = [];
               for (i = 0, len = ref.length; i < len; i++) {
                 state = ref[i];
-                if (state.name.includes(name || '') && state.name.length && state.name.nPoints() === ((name != null ? name.nPoints() : void 0) + 1) || 0) {
-                  results.push(this.state(state));
+                if (state.name.includes(name || '') && state.name.length && state.name.nPoints() === (name != null ? name.nPoints() + 1 : 0)) {
+                  results.push(this.state(state.name));
                 }
               }
               return results;
@@ -604,7 +608,7 @@
         }
       },
       data: {
-        pageTitle: 'Usage Dashboard'
+        pageTitle: 'Account Usage Reports'
       }
     });
   });

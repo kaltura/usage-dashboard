@@ -18,7 +18,7 @@ do ->
 					controller: 'UsageDashboardCtrl'
 					templateUrl: 'app/scripts/pages/usage-dashboard/usage-dashboard.html'
 			data:
-				pageTitle: 'Usage Dashboard'
+				pageTitle: 'Account Usage Reports'
 
 
 	module.classy.controller

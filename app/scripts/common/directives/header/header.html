@@ -1,9 +1,11 @@
 <header class="usage-dashboard-header row-fluid">
 	<div class='usage-dashboard-header-inner container-fluid'>
 		<ul class='usage-dashboard-header-menu'>
-			<!-- <li>Account Usage Reports</li> -->
-			<li class='active'>Account Usage Reports</li>
-			<!-- <li>Account Usage Reports</li> -->
+			<li ng-repeat='item in items' ng-class='{active:go.current().name.includes(item.name)}'>
+				<a ui-sref='{{item.name}}'>
+					{{item.data.pageTitle}}
+				</a>
+			</li>
 		</ul>
 		<i class='info' uib-tooltip='Info about header' tooltip-placement='left' tooltip-animation='true' tooltip-trigger='mouseenter' tooltip-append-to-body='true'></i>
 	</div>

@@ -12,3 +12,7 @@ do ->
 
 	module.classy.controller
 		name: 'HeaderCtrl'
+		injectToScope: ['go']
+
+		init: ->
+			@$.items = @go.state().substates
