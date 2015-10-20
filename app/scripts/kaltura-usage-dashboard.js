@@ -2,9 +2,15 @@
   var module;
   module = angular.module('KalturaUsageDashboard.config', []);
   return module.config(function($urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider) {
+    var kmc;
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
-    RestangularProvider.setBaseUrl('api/');
+    kmc = {
+      vars: {
+        service_url: 'http://www.kaltura.com'
+      }
+    };
+    RestangularProvider.setBaseUrl(kmc.vars.service_url + "/api_v3/index.php");
     $urlRouterProvider.when('/usage-dashboard', '/usage-dashboard/overall-usage');
     return $urlRouterProvider.otherwise('/usage-dashboard');
   });
