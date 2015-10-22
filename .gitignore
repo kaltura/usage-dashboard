@@ -3,4 +3,6 @@ bower_components/*
 html/*
 *.sublime*
 gitignore/*
+scripts/build/*
 scripts/*.js
+index.html
