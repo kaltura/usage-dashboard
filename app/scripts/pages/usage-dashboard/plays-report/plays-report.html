@@ -1,8 +1,10 @@
 <div class='main-content container-fluid span10' id='plays-report'>
-	<div report-controls range='range' dates='dates' changed='fetch()' disabled='playsReport.playsNumber.loading || playsReport.mediaEntriesNumber.loading || playsReport.data.loading'></div>
+	<div report-controls from='dates.from' to='dates.to' changed='fetch()'></div>
 
 	<div class='row-fluid title-text'>
-		20 media entries played 57 times
+		<span ng-if='mediaEntriesNumber!=null && playsNumber!=null && !go.isLoading()'>
+			{{mediaEntriesNumber}} media entries played {{playsNumber}} times
+		</span>
 	</div>
 
 	<!-- <div class='row-fluid graph-row'>

@@ -6,11 +6,27 @@
     this.add([
       {
         id: 0,
-        name: 'Last month'
+        name: 'Last month',
+        dates: {
+          low: function() {
+            return new Date((new Date).subMonth().setDate(1));
+          },
+          high: function() {
+            return new Date((new Date).setDate(0));
+          }
+        }
       }, {
         id: 1,
         name: 'Last 3 months',
-        "default": true
+        "default": true,
+        dates: {
+          low: function() {
+            return new Date((new Date).subMonth(3).setDate(1));
+          },
+          high: function() {
+            return new Date((new Date).setDate(0));
+          }
+        }
       }, {
         id: 2,
         name: 'Custom date range by month',
@@ -166,6 +182,18 @@
       },
       toMDY: function() {
         return $filter('date')(this);
+      },
+      toYMDn: function() {
+        var str;
+        str = this.toYMD();
+        return parseInt(str.replace(/\-/g, ''));
+      },
+      subMonth: function(nMonths) {
+        if (nMonths == null) {
+          nMonths = 1;
+        }
+        this.setMonth(this.getMonth() - nMonths);
+        return this;
       },
       dg: function(date) {
         var v1, v2;
@@ -465,8 +493,8 @@
       templateUrl: 'app/scripts/common/directives/report-controls/report-controls.html',
       controller: 'ReportControlsCtrl',
       scope: {
-        range: '=?',
-        dates: '=?',
+        from: '=?',
+        to: '=?',
         changed: '&',
         disabled: '='
       }
@@ -474,53 +502,71 @@
   });
   return module.classy.controller({
     name: 'ReportControlsCtrl',
-    injectToScope: ['reportControlsSelectCollection'],
+    inject: ['$timeout'],
+    injectToScope: ['reportControlsSelectCollection', 'go'],
     init: function() {
-      var base;
+      return this._initParams();
+    },
+    watch: {
+      'select.model': function(value, old) {
+        if (value === old || (value == null)) {
+          return;
+        }
+        this._calcRange();
+        return this._changed();
+      },
+      'dates.low': function(value, old) {
+        if (value === old || (value == null)) {
+          return;
+        }
+        this._calcFrom();
+        return this._changed();
+      },
+      'dates.high': function(value, old) {
+        if (value === old || (value == null)) {
+          return;
+        }
+        this._calcTo();
+        return this._changed();
+      }
+    },
+    _initParams: function() {
       this.$.select = {
         data: this.reportControlsSelectCollection.arr,
         options: {
           allowClear: false,
           placeholder: 'Select period...',
           minimumResultsForSearch: -1
-        }
+        },
+        model: this.reportControlsSelectCollection.singleWhere({
+          "default": true
+        }).id
       };
-      this.$.select.model = this.reportControlsSelectCollection.singleWhere({
-        "default": true
-      }).id;
       this.$.dates = {
         low: new Date,
         high: new Date
       };
-      return typeof (base = this.$).changed === "function" ? base.changed() : void 0;
+      this._calcRange();
+      return this._changed();
     },
-    watch: {
-      'select.model': function(value, old) {
-        var base;
-        if (value === old || (value == null)) {
-          return;
-        }
-        this.$.range = this.reportControlsSelectCollection.by(value);
-        return typeof (base = this.$).changed === "function" ? base.changed() : void 0;
-      },
-      'dates.low': function(value, old) {
-        var base;
-        if (value === old || (value == null)) {
-          return;
-        }
-        if (value != null) {
-          return typeof (base = this.$).changed === "function" ? base.changed() : void 0;
-        }
-      },
-      'dates.high': function(value, old) {
-        var base;
-        if (value === old || (value == null)) {
-          return;
-        }
-        if (value != null) {
-          return typeof (base = this.$).changed === "function" ? base.changed() : void 0;
-        }
-      }
+    _changed: function() {
+      return this.$timeout((function(_this) {
+        return function() {
+          var base;
+          return typeof (base = _this.$).changed === "function" ? base.changed() : void 0;
+        };
+      })(this));
+    },
+    _calcRange: function() {
+      this.$.range = this.reportControlsSelectCollection.by(this.$.select.model);
+      this._calcFrom();
+      return this._calcTo();
+    },
+    _calcFrom: function() {
+      return this.$.from = this.$.range.allowDatepickers ? this.$.dates.low : this.$.range.dates.low();
+    },
+    _calcTo: function() {
+      return this.$.to = this.$.range.allowDatepickers ? this.$.dates.high : this.$.range.dates.high();
     }
   });
 })();
@@ -549,17 +595,33 @@
 (function() {
   var module;
   module = angular.module('KalturaUsageDashboard.factories.rest', []);
-  return module.factory('RestFactory', function(Restangular, Collection, x2js) {
+  return module.factory('RestFactory', function(Restangular, Collection, x2js, go) {
     return function(config) {
-      var rest;
       _.extend(config, {
         dontCollect: true
       });
-      rest = new Collection(Restangular.one(''), config);
-      rest.addFetchInterceptor(function(response) {
+      _.extend(this, new Collection(Restangular.one(''), config), {
+        extract: {
+          dict: function(response) {
+            var keys, values;
+            keys = response.header.split(',');
+            values = response.data.split(',');
+            return _.zipObject(keys, values);
+          }
+        }
+      });
+      this.addFetchInterceptor(function(response) {
         return x2js.xml_str2json(response).xml.result;
       });
-      return rest;
+      this.extendFetch({
+        b: function() {
+          return go.inc();
+        },
+        f: function() {
+          return go.dec();
+        }
+      });
+      return this;
     };
   });
 })();
@@ -573,7 +635,7 @@
         return window.kmc || {
           vars: {
             service_url: 'http://www.kaltura.com',
-            ks: 'YTQ2OGFkNDVmYzU5ZTlkMTJkZGM3YmNkMTdiMDRiNjU0ZGY0MzIzMHw5MzkzNDE7OTM5MzQxOzE0NDU1MTgzNTE7MjsxNDQ1NDMxOTUxLjkxNjtya3NoYXJlZGJveEBnbWFpbC5jb207ZGlzYWJsZWVudGl0bGVtZW50Ozs='
+            ks: 'Y2M0MDY1ZWU5ZTk2NThhMjJlMzgyMzM2MzUwYzVjMTUyNmZjZmY3MHw5MzkzNDE7OTM5MzQxOzE0NDU2MDUyOTM7MjsxNDQ1NTE4ODkzLjMxMzg7cmtzaGFyZWRib3hAZ21haWwuY29tO2Rpc2FibGVlbnRpdGxlbWVudDs7'
           }
         };
       }
@@ -583,30 +645,13 @@
 
 (function() {
   var module;
-  module = angular.module('KalturaUsageDashboard.rest', []);
-  module.service('playsReport', function(RestFactory) {
-    return _.extend(this, {
-      playsNumber: new RestFactory({
-        params: {
-          action: 'getTotal',
-          reportType: 1
-        }
-      }),
-      mediaEntriesNumber: new RestFactory({
-        params: {
-          action: 'getTable',
-          reportType: 1
-        }
-      }),
-      data: new RestFactory({
-        params: {
-          action: 'getGraphs',
-          reportType: 1
-        }
-      })
-    });
-  });
-  module.service('bandwidthReport', function(RestFactory) {
+  return module = angular.module('KalturaUsageDashboard.rest', ['KalturaUsageDashboard.rest.plays-report', 'KalturaUsageDashboard.rest.bandwidth-report', 'KalturaUsageDashboard.rest.storage-report', 'KalturaUsageDashboard.rest.transcoding-consumption-report', 'KalturaUsageDashboard.rest.media-entries-report']);
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.rest.bandwidth-report', []);
+  return module.service('bandwidthReport', function(RestFactory) {
     return new RestFactory({
       params: {
         action: 'getGraphs',
@@ -615,30 +660,99 @@
       }
     });
   });
-  module.service('storageReport', function(RestFactory) {
-    return new RestFactory({
-      params: {
-        action: 'getGraphs',
-        reportType: 201,
-        'reportInputFilter:interval': 'months'
-      }
-    });
-  });
-  module.service('transcodingConsumptionReport', function(RestFactory) {
-    return new RestFactory({
-      params: {
-        action: 'getGraphs',
-        reportType: 201,
-        'reportInputFilter:interval': 'months'
-      }
-    });
-  });
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.rest.media-entries-report', []);
   return module.service('mediaEntriesReport', function(RestFactory) {
     return new RestFactory({
       params: {
         action: 'getGraphs',
         reportType: 5,
         'reportInputFilter:interval': 'days'
+      }
+    });
+  });
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.rest.plays-report', []);
+  module.service('playsReport.playsNumber', function(RestFactory) {
+    _.extend(this, new RestFactory({
+      params: {
+        action: 'getTotal',
+        reportType: 1
+      }
+    }));
+    this.addFetchInterceptor((function(_this) {
+      return function(response) {
+        return parseInt(_this.extract.dict(response).count_plays || 0);
+      };
+    })(this));
+    return this;
+  });
+  module.service('playsReport.mediaEntriesNumber', function(RestFactory) {
+    _.extend(this, new RestFactory({
+      params: {
+        action: 'getTable',
+        reportType: 1,
+        'pager:objectType': 'KalturaFilterPager',
+        'pager:pageIndex': 1,
+        'pager:pageSize': 1
+      }
+    }));
+    this.addFetchInterceptor((function(_this) {
+      return function(response) {
+        return parseInt(response.totalCount || 0);
+      };
+    })(this));
+    return this;
+  });
+  module.service('playsReport.data', function(RestFactory) {
+    return _.extend(this, new RestFactory({
+      params: {
+        action: 'getGraphs',
+        reportType: 1,
+        'reportInputFilter:interval': 'days'
+      }
+    }));
+  });
+  return module.service('playsReport', [
+    'playsReport.playsNumber', 'playsReport.mediaEntriesNumber', 'playsReport.data', function(playsNumber, mediaEntriesNumber, data) {
+      return {
+        playsNumber: playsNumber,
+        mediaEntriesNumber: mediaEntriesNumber,
+        data: data
+      };
+    }
+  ]);
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.rest.storage-report', []);
+  return module.service('storageReport', function(RestFactory) {
+    return new RestFactory({
+      params: {
+        action: 'getGraphs',
+        reportType: 201,
+        'reportInputFilter:interval': 'months'
+      }
+    });
+  });
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.rest.transcoding-consumption-report', []);
+  return module.service('transcodingConsumptionReport', function(RestFactory) {
+    return new RestFactory({
+      params: {
+        action: 'getGraphs',
+        reportType: 201,
+        'reportInputFilter:interval': 'months'
       }
     });
   });
@@ -687,6 +801,38 @@
               return results;
             }).call(_this)) || []
           });
+        };
+      })(this),
+      flags: {
+        loading: 0
+      },
+      inc: (function(_this) {
+        return function(n) {
+          if (n == null) {
+            n = 1;
+          }
+          return _this.flags.loading += n;
+        };
+      })(this),
+      dec: (function(_this) {
+        return function(n) {
+          if (n == null) {
+            n = 1;
+          }
+          return _this.flags.loading -= n;
+        };
+      })(this),
+      isLoading: (function(_this) {
+        return function() {
+          var key, ref, value;
+          ref = _this.flags;
+          for (key in ref) {
+            value = ref[key];
+            if (value > 0) {
+              return true;
+            }
+          }
+          return false;
         };
       })(this)
     });
@@ -873,7 +1019,7 @@
   });
   return module.classy.controller({
     name: 'PlaysReportCtrl',
-    injectToScope: ['playsReport'],
+    inject: ['playsReport'],
     fetch: function() {
       this._extractPayload();
       this._fetchPlaysNumber();
@@ -882,38 +1028,26 @@
     },
     _extractPayload: function() {
       return this.payload = {
-        'reportInputFilter:fromDay': 20150918,
-        'reportInputFilter:toDay': 20151018
+        'reportInputFilter:fromDay': this.$.dates.from.toYMDn(),
+        'reportInputFilter:toDay': this.$.dates.to.toYMDn()
       };
     },
     _fetchPlaysNumber: function() {
       return this.playsReport.playsNumber.fetch(this.payload).then((function(_this) {
         return function(response) {
-          return console.log(response);
-        };
-      })(this), (function(_this) {
-        return function(response) {
-          return console.log(response);
+          return _this.$.playsNumber = response;
         };
       })(this));
     },
     _fetchMediaEntriesNumber: function() {
       return this.playsReport.mediaEntriesNumber.fetch(this.payload).then((function(_this) {
         return function(response) {
-          return console.log(response);
-        };
-      })(this), (function(_this) {
-        return function(response) {
-          return console.log(response);
+          return _this.$.mediaEntriesNumber = response;
         };
       })(this));
     },
     _fetchData: function() {
       return this.playsReport.data.fetch(this.payload).then((function(_this) {
-        return function(response) {
-          return console.log(response);
-        };
-      })(this), (function(_this) {
         return function(response) {
           return console.log(response);
         };

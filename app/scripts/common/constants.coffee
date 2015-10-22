@@ -87,6 +87,14 @@ do ->
 
 		toMDY: -> $filter('date') @
 
+		toYMDn: ->
+			str = @toYMD()
+			parseInt str.replace /\-/g, ''
+
+		subMonth: (nMonths = 1) ->
+			@setMonth @getMonth() - nMonths
+			@
+
 		#date greater (@ > date ?) comparison in DAYS context
 		dg: (date) ->
 			v1 = @valueOf() / dayms
