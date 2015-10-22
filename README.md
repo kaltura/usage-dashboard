@@ -1,6 +1,6 @@
 # Kaltura VPaaS Usage Dashboard
 
-Kaltura VPaaS Usage Dashbaord frontend (Angular.js)
+Kaltura VPaaS Usage Dashboard frontend (Angular.js)
 
 ## Preparations
 
@@ -14,6 +14,7 @@ Kaltura VPaaS Usage Dashbaord frontend (Angular.js)
 ### Development version
 
 Builds, watches and serves project without minification and concatenation
+
 The local server starts at `localhost:9000`
 
 > grunt
@@ -25,6 +26,7 @@ which is equal to
 ### Production version
 
 Builds, watches and serves project with js concatenation and minification
+
 The local server starts at `localhost:9000`
 
 > grunt serve:production
