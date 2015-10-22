@@ -1,16 +1,41 @@
 (function() {
   var module;
+  module = angular.module('KalturaUsageDashboard.collections', []);
+  return module.service('reportControlsSelectCollection', function(Collection) {
+    _.extend(this, new Collection);
+    this.add([
+      {
+        id: 0,
+        name: 'Last month'
+      }, {
+        id: 1,
+        name: 'Last 3 months',
+        "default": true
+      }, {
+        id: 2,
+        name: 'Custom date range by month',
+        allowDatepickers: true
+      }
+    ]);
+    return this;
+  });
+})();
+
+(function() {
+  var module;
   module = angular.module('KalturaUsageDashboard.config', []);
-  return module.config(function($urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider) {
+  return module.config(function($urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider, kmcProvider) {
     var kmc;
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
-    kmc = {
-      vars: {
-        service_url: 'http://www.kaltura.com'
-      }
-    };
+    kmc = kmcProvider.$get();
     RestangularProvider.setBaseUrl(kmc.vars.service_url + "/api_v3/index.php");
+    RestangularProvider.setDefaultRequestParams({
+      ks: kmc.vars.ks,
+      service: 'report',
+      'reportInputFilter:timeZoneOffset': (new Date).getTimezoneOffset(),
+      'reportInputFilter:objectType': 'KalturaReportInputFilter'
+    });
     $urlRouterProvider.when('/usage-dashboard', '/usage-dashboard/overall-usage');
     return $urlRouterProvider.otherwise('/usage-dashboard');
   });
@@ -20,6 +45,12 @@
   var module;
   module = angular.module('KalturaUsageDashboard.constants', []);
   module.constant('dayms', 1000 * 60 * 60 * 24);
+  module.constant('graph', {
+    colorColumn: '#02a3d1',
+    colorAxis: '#c2d2e1',
+    mainBg: '#f0eeef',
+    borderWidth: 7
+  });
   module.constant('ArrayPrototype', {
     byField: function(field, value) {
       var e, index, j, len;
@@ -252,15 +283,19 @@
       templateUrl: 'app/scripts/common/directives/datepicker/datepicker.html',
       controller: 'KalturaDatepickerCtrl',
       scope: {
-        model: '=datepicker',
+        model: '=kalturaDatepicker',
+        disabled: '=',
+        min: '=?',
+        max: '=?',
         name: '=?'
       }
     };
   });
   return module.classy.controller({
     name: 'KalturaDatepickerCtrl',
-    inject: ['$element'],
+    inject: ['$element', '$timeout'],
     init: function() {
+      this.input = this.$element.find('input');
       this.$.options = {
         changeYear: true,
         changeMonth: true,
@@ -269,17 +304,133 @@
       if (!this.$.name) {
         this.$.name = 'datepicker';
       }
-      if (!this.$.model) {
-        return this.$.model = new Date;
+      return this.$timeout((function(_this) {
+        return function() {
+          _this._flushMin();
+          return _this._flushMax();
+        };
+      })(this));
+    },
+    watch: {
+      min: function(value) {
+        if (value) {
+          return this._flushMin();
+        }
+      },
+      max: function(value) {
+        if (value) {
+          return this._flushMax();
+        }
       }
     },
+    _flushMin: function() {
+      return this.input.datepicker('option', 'minDate', this.$.min);
+    },
+    _flushMax: function() {
+      return this.input.datepicker('option', 'maxDate', this.$.max);
+    },
     open: function() {
-      this.$element.find('input').datepicker('show');
+      this.input.datepicker('show');
       return null;
     },
     hide: function() {
-      this.$element.find('input').datepicker('hide');
+      this.input.datepicker('hide');
       return null;
+    }
+  });
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.directives.graph', ['classy']);
+  module.directive('graph', function() {
+    return {
+      replace: true,
+      restrict: 'A',
+      templateUrl: 'app/scripts/common/directives/graph/graph.html',
+      controller: 'GraphCtrl',
+      scope: {
+        data: '=graph'
+      }
+    };
+  });
+  return module.classy.controller({
+    name: 'GraphCtrl',
+    inject: ['graph'],
+    init: function() {
+      var data;
+      data = [[0, 12], [1, 37], [2, 1], [3, 75]];
+      return this.$.graph = {
+        data: [
+          {
+            color: this.graph.colorColumn,
+            data: data
+          }
+        ],
+        options: {
+          series: {
+            bars: {
+              show: true,
+              fill: true,
+              fillColor: this.graph.colorColumn
+            }
+          },
+          tooltip: {
+            show: true,
+            content: function(label, x, y, flot) {
+              return "<div class='text'>" + flot.series.xaxis.ticks[flot.dataIndex].label + "</div>\n<div class='value'>" + flot.series.data[flot.dataIndex][1] + "</div>";
+            },
+            cssClass: 'graph-tooltip'
+          },
+          bars: {
+            align: 'center',
+            barWidth: 0.75
+          },
+          xaxis: {
+            show: true,
+            color: this.graph.colorAxis,
+            axisLabel: 'Months',
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'arial,sans serif',
+            axisLabelPadding: 12,
+            ticks: [[0, 'August, 2015'], [1, 'September, 2015'], [2, 'October, 2015'], [3, 'November, 2015']],
+            tickLength: 0,
+            min: -0.5,
+            max: data.length - 0.5
+          },
+          yaxis: {
+            axisLabel: 'Plays Number',
+            color: this.graph.colorAxis,
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'arial,sans serif',
+            axisLabelPadding: 10,
+            reserveSpace: true,
+            tickLength: 15
+          },
+          legend: {
+            noColumns: 0,
+            labelBoxBorderColor: '#000000',
+            position: 'nw'
+          },
+          grid: {
+            show: true,
+            hoverable: true,
+            clickable: true,
+            borderWidth: {
+              top: 0,
+              right: 0,
+              bottom: this.graph.borderWidth,
+              left: this.graph.borderWidth
+            },
+            borderColor: this.graph.colorAxis,
+            backgroundColor: this.graph.mainBg,
+            aboveData: false,
+            axisMargin: 10
+          }
+        }
+      };
     }
   });
 })();
@@ -306,6 +457,76 @@
 
 (function() {
   var module;
+  module = angular.module('KalturaUsageDashboard.directives.report-controls', ['classy']);
+  module.directive('reportControls', function() {
+    return {
+      replace: true,
+      restrict: 'A',
+      templateUrl: 'app/scripts/common/directives/report-controls/report-controls.html',
+      controller: 'ReportControlsCtrl',
+      scope: {
+        range: '=?',
+        dates: '=?',
+        changed: '&',
+        disabled: '='
+      }
+    };
+  });
+  return module.classy.controller({
+    name: 'ReportControlsCtrl',
+    injectToScope: ['reportControlsSelectCollection'],
+    init: function() {
+      var base;
+      this.$.select = {
+        data: this.reportControlsSelectCollection.arr,
+        options: {
+          allowClear: false,
+          placeholder: 'Select period...',
+          minimumResultsForSearch: -1
+        }
+      };
+      this.$.select.model = this.reportControlsSelectCollection.singleWhere({
+        "default": true
+      }).id;
+      this.$.dates = {
+        low: new Date,
+        high: new Date
+      };
+      return typeof (base = this.$).changed === "function" ? base.changed() : void 0;
+    },
+    watch: {
+      'select.model': function(value, old) {
+        var base;
+        if (value === old || (value == null)) {
+          return;
+        }
+        this.$.range = this.reportControlsSelectCollection.by(value);
+        return typeof (base = this.$).changed === "function" ? base.changed() : void 0;
+      },
+      'dates.low': function(value, old) {
+        var base;
+        if (value === old || (value == null)) {
+          return;
+        }
+        if (value != null) {
+          return typeof (base = this.$).changed === "function" ? base.changed() : void 0;
+        }
+      },
+      'dates.high': function(value, old) {
+        var base;
+        if (value === old || (value == null)) {
+          return;
+        }
+        if (value != null) {
+          return typeof (base = this.$).changed === "function" ? base.changed() : void 0;
+        }
+      }
+    }
+  });
+})();
+
+(function() {
+  var module;
   module = angular.module('KalturaUsageDashboard.directives.side-menu', ['classy']);
   module.directive('sideMenu', function() {
     return {
@@ -322,6 +543,104 @@
       this.go.state();
       return this.$.menuItems = this.go.state('usage-dashboard').substates;
     }
+  });
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.factories.rest', []);
+  return module.factory('RestFactory', function(Restangular, Collection, x2js) {
+    return function(config) {
+      var rest;
+      _.extend(config, {
+        dontCollect: true
+      });
+      rest = new Collection(Restangular.one(''), config);
+      rest.addFetchInterceptor(function(response) {
+        return x2js.xml_str2json(response).xml.result;
+      });
+      return rest;
+    };
+  });
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.kmc-config', []);
+  return module.provider('kmc', function() {
+    return {
+      $get: function() {
+        return window.kmc || {
+          vars: {
+            service_url: 'http://www.kaltura.com',
+            ks: 'YTQ2OGFkNDVmYzU5ZTlkMTJkZGM3YmNkMTdiMDRiNjU0ZGY0MzIzMHw5MzkzNDE7OTM5MzQxOzE0NDU1MTgzNTE7MjsxNDQ1NDMxOTUxLjkxNjtya3NoYXJlZGJveEBnbWFpbC5jb207ZGlzYWJsZWVudGl0bGVtZW50Ozs='
+          }
+        };
+      }
+    };
+  });
+})();
+
+(function() {
+  var module;
+  module = angular.module('KalturaUsageDashboard.rest', []);
+  module.service('playsReport', function(RestFactory) {
+    return _.extend(this, {
+      playsNumber: new RestFactory({
+        params: {
+          action: 'getTotal',
+          reportType: 1
+        }
+      }),
+      mediaEntriesNumber: new RestFactory({
+        params: {
+          action: 'getTable',
+          reportType: 1
+        }
+      }),
+      data: new RestFactory({
+        params: {
+          action: 'getGraphs',
+          reportType: 1
+        }
+      })
+    });
+  });
+  module.service('bandwidthReport', function(RestFactory) {
+    return new RestFactory({
+      params: {
+        action: 'getGraphs',
+        reportType: 201,
+        'reportInputFilter:interval': 'months'
+      }
+    });
+  });
+  module.service('storageReport', function(RestFactory) {
+    return new RestFactory({
+      params: {
+        action: 'getGraphs',
+        reportType: 201,
+        'reportInputFilter:interval': 'months'
+      }
+    });
+  });
+  module.service('transcodingConsumptionReport', function(RestFactory) {
+    return new RestFactory({
+      params: {
+        action: 'getGraphs',
+        reportType: 201,
+        'reportInputFilter:interval': 'months'
+      }
+    });
+  });
+  return module.service('mediaEntriesReport', function(RestFactory) {
+    return new RestFactory({
+      params: {
+        action: 'getGraphs',
+        reportType: 5,
+        'reportInputFilter:interval': 'days'
+      }
+    });
   });
 })();
 
@@ -553,7 +872,53 @@
     });
   });
   return module.classy.controller({
-    name: 'PlaysReportCtrl'
+    name: 'PlaysReportCtrl',
+    injectToScope: ['playsReport'],
+    fetch: function() {
+      this._extractPayload();
+      this._fetchPlaysNumber();
+      this._fetchMediaEntriesNumber();
+      return this._fetchData();
+    },
+    _extractPayload: function() {
+      return this.payload = {
+        'reportInputFilter:fromDay': 20150918,
+        'reportInputFilter:toDay': 20151018
+      };
+    },
+    _fetchPlaysNumber: function() {
+      return this.playsReport.playsNumber.fetch(this.payload).then((function(_this) {
+        return function(response) {
+          return console.log(response);
+        };
+      })(this), (function(_this) {
+        return function(response) {
+          return console.log(response);
+        };
+      })(this));
+    },
+    _fetchMediaEntriesNumber: function() {
+      return this.playsReport.mediaEntriesNumber.fetch(this.payload).then((function(_this) {
+        return function(response) {
+          return console.log(response);
+        };
+      })(this), (function(_this) {
+        return function(response) {
+          return console.log(response);
+        };
+      })(this));
+    },
+    _fetchData: function() {
+      return this.playsReport.data.fetch(this.payload).then((function(_this) {
+        return function(response) {
+          return console.log(response);
+        };
+      })(this), (function(_this) {
+        return function(response) {
+          return console.log(response);
+        };
+      })(this));
+    }
   });
 })();
 
@@ -625,8 +990,5 @@
 
 (function() {
   var module;
-  module = angular.module('KalturaUsageDashboard', ['angular-flot', 'rt.select2', 'ui.date', 'ui.bootstrap', 'ui.router', 'restangular', 'classy', 'KalturaUsageDashboard.config', 'KalturaUsageDashboard.constants', 'KalturaUsageDashboard.run', 'KalturaUsageDashboard.utils', 'KalturaUsageDashboard.directives.header', 'KalturaUsageDashboard.directives.side-menu', 'KalturaUsageDashboard.directives.datepicker', 'KalturaUsageDashboard.services.go', 'KalturaUsageDashboard.usage-dashboard']);
-  return module.classy.controller({
-    name: 'KalturaUsageDashboardCtrl'
-  });
+  return module = angular.module('KalturaUsageDashboard', ['angular-flot', 'rt.select2', 'ui.date', 'ui.bootstrap', 'ui.router', 'restangular', 'classy', 'cb.x2js', 'ng-bundle-collection', 'KalturaUsageDashboard.kmc-config', 'KalturaUsageDashboard.config', 'KalturaUsageDashboard.constants', 'KalturaUsageDashboard.run', 'KalturaUsageDashboard.utils', 'KalturaUsageDashboard.rest', 'KalturaUsageDashboard.collections', 'KalturaUsageDashboard.directives.header', 'KalturaUsageDashboard.directives.side-menu', 'KalturaUsageDashboard.directives.datepicker', 'KalturaUsageDashboard.directives.graph', 'KalturaUsageDashboard.directives.report-controls', 'KalturaUsageDashboard.services.go', 'KalturaUsageDashboard.factories.rest', 'KalturaUsageDashboard.usage-dashboard']);
 })();

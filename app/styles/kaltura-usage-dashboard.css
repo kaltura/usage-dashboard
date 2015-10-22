@@ -357,6 +357,10 @@ table.one-third-width {
   margin: auto;
   top: 3px;
 }
+.datepicker.disabled .icon {
+  cursor: default;
+  color: #888888;
+}
 .select {
   padding: 0 10px;
   height: 24px;
@@ -438,6 +442,10 @@ table.one-third-width {
 .select .select2-container-active .select2-choice,
 .select .select2-container-active .select2-choices {
   border: 1px solid #d8d7d7;
+}
+.select .select2-container-disabled .select2-choice,
+.select .select2-container-disabled .select2-choices {
+  color: #888888;
 }
 .select2-drop {
   font-size: 12px;

@@ -10,25 +10,43 @@ do ->
 		templateUrl: 'app/scripts/common/directives/datepicker/datepicker.html'
 		controller: 'KalturaDatepickerCtrl'
 		scope:
-			model: '=datepicker'
+			model: '=kalturaDatepicker'
+			disabled: '='
+			min: '=?'
+			max: '=?'
 			name: '=?'
 
 	module.classy.controller
 		name: 'KalturaDatepickerCtrl'
-		inject: ['$element']
+		inject: ['$element', '$timeout']
 
 		init: ->
+			@input = @$element.find 'input'
 			@$.options =
 				changeYear: yes
 				changeMonth: yes
 				yearRange: '2000:-0'
 			@$.name = 'datepicker' unless @$.name
-			@$.model = new Date unless @$.model
+			@$timeout =>
+				@_flushMin()
+				@_flushMax()
+
+		watch:
+			min: (value) -> @_flushMin() if value
+
+			max: (value) -> @_flushMax() if value
+
+		_flushMin: ->
+			@input.datepicker 'option', 'minDate', @$.min
+
+		_flushMax: ->
+			@input.datepicker 'option', 'maxDate', @$.max
+
 
 		open: ->
-			@$element.find('input').datepicker 'show'
+			@input.datepicker 'show'
 			null
 
 		hide: ->
-			@$element.find('input').datepicker 'hide'
+			@input.datepicker 'hide'
 			null

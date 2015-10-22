@@ -1,13 +1,5 @@
 <div class='main-content container-fluid span10' id='plays-report'>
-	<div class='row-fluid controls-row'>
-		<span class='text'>Date Range:</span>
-		<span class='select'>
-			<select2 ng-model="select.model" s2-options="range.id as range.name for range in select.data" options='select.options'></select2>
-		</span>
-		<span class='text'>Dates:</span>
-		<span kaltura-datepicker='dateMin'></span>
-		<span kaltura-datepicker='dateMax'></span>
-	</div>
+	<div report-controls range='range' dates='dates' changed='fetch()' disabled='playsReport.playsNumber.loading || playsReport.mediaEntriesNumber.loading || playsReport.data.loading'></div>
 
 	<div class='row-fluid title-text'>
 		20 media entries played 57 times
@@ -18,7 +10,7 @@
 	</div> -->
 
 	<div class='row-fluid graph-row'>
-		<flot dataset='graph.data' options='graph.options'></flot>
+		<div graph></div>
 	</div>
 
 	<div class='row-fluid title-text'>

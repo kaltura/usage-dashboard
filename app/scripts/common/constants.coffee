@@ -2,7 +2,16 @@ do ->
 
 	module = angular.module 'KalturaUsageDashboard.constants', []
 
+
 	module.constant 'dayms', 1000*60*60*24
+
+
+	module.constant 'graph',
+		colorColumn: '#02a3d1'
+		colorAxis: '#c2d2e1'
+		mainBg: '#f0eeef'
+		borderWidth: 7
+
 
 	module.constant 'ArrayPrototype',
 		byField: (field, value) ->
