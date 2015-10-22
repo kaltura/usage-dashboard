@@ -60,140 +60,144 @@ do ->
 		nPoints: -> @nMatches '\\\.'
 
 
-	module.service 'DatePrototype', ($filter, dayms) ->
+	module.service 'DatePrototype', [
+		'$filter'
+		'dayms'
+		($filter, dayms) ->
 
-		fullzero: ->
-			@setYear 0
-			@setMonth 0
-			@setDate 1
-			@zero()
+			fullzero: ->
+				@setYear 0
+				@setMonth 0
+				@setDate 1
+				@zero()
 
-		zero: ->
-			@setHours 0, 0, 0, 0
-			@
-			
-		dateTimeZoneFix: -> new Date @setHours @getHours() + @getTimezoneOffset() / 60
+			zero: ->
+				@setHours 0, 0, 0, 0
+				@
+				
+			dateTimeZoneFix: -> new Date @setHours @getHours() + @getTimezoneOffset() / 60
 
-		toMonthStart: ->
-			@setDate 1
-			@
+			toMonthStart: ->
+				@setDate 1
+				@
 
-		toMonthEnd: ->
-			@setMonth @getMonth() + 1
-			@setDate 0
-			@
+			toMonthEnd: ->
+				@setMonth @getMonth() + 1
+				@setDate 0
+				@
 
-		toYMD: -> $filter('date') @, 'yyyy-MM-dd'
+			toYMD: -> $filter('date') @, 'yyyy-MM-dd'
 
-		toMDY: -> $filter('date') @
+			toMDY: -> $filter('date') @
 
-		toYMDn: ->
-			str = @toYMD()
-			parseInt str.replace /\-/g, ''
+			toYMDn: ->
+				str = @toYMD()
+				parseInt str.replace /\-/g, ''
 
-		subMonth: (nMonths = 1) ->
-			@setMonth @getMonth() - nMonths
-			@
+			subMonth: (nMonths = 1) ->
+				@setMonth @getMonth() - nMonths
+				@
 
-		#date greater (@ > date ?) comparison in DAYS context
-		dg: (date) ->
-			v1 = @valueOf() / dayms
-			v2 = (new Date date).valueOf() / dayms
-			v1 > v2
+			#date greater (@ > date ?) comparison in DAYS context
+			dg: (date) ->
+				v1 = @valueOf() / dayms
+				v2 = (new Date date).valueOf() / dayms
+				v1 > v2
 
-		#date smaller (@ < date ?) comparison in DAYS context
-		ds: (date) -> (new Date date).dg @
+			#date smaller (@ < date ?) comparison in DAYS context
+			ds: (date) -> (new Date date).dg @
 
-		#date greater or equals (@ >= date ?) comparison in DAYS context
-		dge: (date) ->
-			v1 = @valueOf() / dayms
-			v2 = (new Date date).valueOf() / dayms
-			v1 >= v2
+			#date greater or equals (@ >= date ?) comparison in DAYS context
+			dge: (date) ->
+				v1 = @valueOf() / dayms
+				v2 = (new Date date).valueOf() / dayms
+				v1 >= v2
 
-		#date smaller or equals (@ <= date ?) comparison in DAYS context
-		dse: (date) -> (new Date date).dge @
+			#date smaller or equals (@ <= date ?) comparison in DAYS context
+			dse: (date) -> (new Date date).dge @
 
-		#date equals (@ = date ?) comparison in DAYS context
-		de: (date) ->
-			v1 = @valueOf() / dayms
-			v2 = (new Date date).valueOf() / dayms
-			v1 is v2
+			#date equals (@ = date ?) comparison in DAYS context
+			de: (date) ->
+				v1 = @valueOf() / dayms
+				v2 = (new Date date).valueOf() / dayms
+				v1 is v2
 
-		#date greater (@ > date ?) comparison by milliseconds
-		dg_ms: (date) ->
-			v1 = @valueOf()
-			v2 = (new Date date).valueOf()
-			v1 > v2
+			#date greater (@ > date ?) comparison by milliseconds
+			dg_ms: (date) ->
+				v1 = @valueOf()
+				v2 = (new Date date).valueOf()
+				v1 > v2
 
-		#date smaller (@ < date ?) comparison by milliseconds
-		ds_ms: (date) ->
-			v1 = @valueOf()
-			v2 = (new Date date).valueOf()
-			v1 < v2
+			#date smaller (@ < date ?) comparison by milliseconds
+			ds_ms: (date) ->
+				v1 = @valueOf()
+				v2 = (new Date date).valueOf()
+				v1 < v2
 
-		#date greater or equals (@ >= date ?) comparison by milliseconds
-		dge_ms: (date) ->
-			v1 = @valueOf()
-			v2 = (new Date date).valueOf()
-			v1 >= v2
+			#date greater or equals (@ >= date ?) comparison by milliseconds
+			dge_ms: (date) ->
+				v1 = @valueOf()
+				v2 = (new Date date).valueOf()
+				v1 >= v2
 
-		#date smaller or equals (@ <= date ?) comparison by milliseconds
-		dse_ms: (date) ->
-			v1 = @valueOf()
-			v2 = (new Date date).valueOf()
-			v1 <= v2
+			#date smaller or equals (@ <= date ?) comparison by milliseconds
+			dse_ms: (date) ->
+				v1 = @valueOf()
+				v2 = (new Date date).valueOf()
+				v1 <= v2
 
-		#date greater than now (@ > now ?) comparison by milliseconds
-		dgNow: -> @dg_ms new Date
+			#date greater than now (@ > now ?) comparison by milliseconds
+			dgNow: -> @dg_ms new Date
 
 
-		#date smaller than now (@ < now ?) comparison by milliseconds
-		dsNow: -> @ds_ms new Date
+			#date smaller than now (@ < now ?) comparison by milliseconds
+			dsNow: -> @ds_ms new Date
 
-		#date equals (@ = date ?) comparison by year, month, day
-		de_ymd: (date) ->
-			d1 = new Date @
-			d2 = new Date date
-			v1 = (d1.setHours 0,0,0,0).valueOf() / dayms
-			v2 = (d2.setHours 0,0,0,0).valueOf() / dayms
-			v1 is v2
+			#date equals (@ = date ?) comparison by year, month, day
+			de_ymd: (date) ->
+				d1 = new Date @
+				d2 = new Date date
+				v1 = (d1.setHours 0,0,0,0).valueOf() / dayms
+				v2 = (d2.setHours 0,0,0,0).valueOf() / dayms
+				v1 is v2
 
-		#time greater or equals (hours and minutes)
-		tge: (date) ->
-			d2 = new Date date
-			d1 = new Date @
-			h1 = d1.getHours()
-			h2 = d2.getHours()
-			m2 = d2.getMinutes()
-			m1 = d1.getMinutes()
-			h1*60 + m1 >= h2*60 + m2
+			#time greater or equals (hours and minutes)
+			tge: (date) ->
+				d2 = new Date date
+				d1 = new Date @
+				h1 = d1.getHours()
+				h2 = d2.getHours()
+				m2 = d2.getMinutes()
+				m1 = d1.getMinutes()
+				h1*60 + m1 >= h2*60 + m2
 
-		#time equals (hours and minutes)
-		te: (date) ->
-			d1 = new Date @
-			d2 = new Date date
-			h1 = d1.getHours()
-			h2 = d2.getHours()
-			m1 = d1.getMinutes()
-			m2 = d2.getMinutes()
-			h1 is h2 and m1 is m2
+			#time equals (hours and minutes)
+			te: (date) ->
+				d1 = new Date @
+				d2 = new Date date
+				h1 = d1.getHours()
+				h2 = d2.getHours()
+				m1 = d1.getMinutes()
+				m2 = d2.getMinutes()
+				h1 is h2 and m1 is m2
 
-		#time equals (hours, minutes and seconds)
-		tse: (date) ->
-			d1 = new Date @
-			d2 = new Date date
-			h1 = d1.getHours()
-			h2 = d2.getHours()
-			m1 = d1.getMinutes()
-			m2 = d2.getMinutes()
-			s1 = d1.getSeconds()
-			s2 = d2.getSeconds()
-			h1 is h2 and m1 is m2 and s1 is s2
+			#time equals (hours, minutes and seconds)
+			tse: (date) ->
+				d1 = new Date @
+				d2 = new Date date
+				h1 = d1.getHours()
+				h2 = d2.getHours()
+				m1 = d1.getMinutes()
+				m2 = d2.getMinutes()
+				s1 = d1.getSeconds()
+				s2 = d2.getSeconds()
+				h1 is h2 and m1 is m2 and s1 is s2
 
-		isInMonth: (date) ->
-			date = new Date date
-			date.getFullYear() is @getFullYear() and date.getMonth() is @getMonth()
+			isInMonth: (date) ->
+				date = new Date date
+				date.getFullYear() is @getFullYear() and date.getMonth() is @getMonth()
 
-		isInPreviousMonth: (date) ->
-			date = new Date date
-			@isInMonth date.setMonth date.getMonth() - 1
+			isInPreviousMonth: (date) ->
+				date = new Date date
+				@isInMonth date.setMonth date.getMonth() - 1
+	]

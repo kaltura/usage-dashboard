@@ -15,12 +15,15 @@
 	<base href="/">
 	<link rel='shortcut icon' href='http://corp.kaltura.com/sites/default/files/favicon%20%289%29_0.ico' type='image/ico'>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="app/styles/kmc.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
 	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/font-awesome/css/font-awesome.css"/>
 	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/select2/select2.css"/>
-	<link rel="stylesheet" type="text/css" media="screen" href="app/styles/kaltura-usage-dashboard.css">
+
+	<!-- include: "type": "css", "files": "<%= config.styles %>/**/*.css" -->
+	<link href="app/styles/!kmc.css" rel="stylesheet" type="text/css">
+	<link href="app/styles/kaltura-vpaas-usage-dashboard.css" rel="stylesheet" type="text/css">
+	<!-- /include -->
 </head>
 
 <body ng-cloak>
@@ -47,9 +50,41 @@
 	<script src="bower_components/ng-bundle-collection/dist/ng-bundle-collection.js"></script>
 	<script src="bower_components/x2js/xml2json.min.js"></script>
 	<script src="bower_components/angular-x2js/dist/x2js.min.js"></script>
-	<!-- endbower -->	
-	<script type="text/javascript" src='app/assets/angular-classy/angular-classy.js'></script>
-	<script type="text/javascript" src='app/scripts/kaltura-usage-dashboard.js'></script>
+	<!-- endbower -->
+
+	<!-- include: "type": "js", "files": "<%= config.assets %>/**/*.js" -->
+	<script src="app/assets/angular-classy/angular-classy.js"></script>
+	<!-- /include -->
+
+	<!-- include: "type": "js", "files": "<%= config.js_build %>/**/*.js" -->
+	<script src="app/scripts/build/app.js"></script>
+	<script src="app/scripts/build/common/collections.js"></script>
+	<script src="app/scripts/build/common/config.js"></script>
+	<script src="app/scripts/build/common/constants.js"></script>
+	<script src="app/scripts/build/common/directives/datepicker/datepicker.js"></script>
+	<script src="app/scripts/build/common/directives/graph/graph.js"></script>
+	<script src="app/scripts/build/common/directives/header/header.js"></script>
+	<script src="app/scripts/build/common/directives/report-controls/report-controls.js"></script>
+	<script src="app/scripts/build/common/directives/side-menu/side-menu.js"></script>
+	<script src="app/scripts/build/common/factories/rest-factory.js"></script>
+	<script src="app/scripts/build/common/kmc-config.js"></script>
+	<script src="app/scripts/build/common/rest.js"></script>
+	<script src="app/scripts/build/common/rest/bandwidth-report-rest.js"></script>
+	<script src="app/scripts/build/common/rest/media-entries-rest.js"></script>
+	<script src="app/scripts/build/common/rest/plays-report-rest.js"></script>
+	<script src="app/scripts/build/common/rest/storage-report-rest.js"></script>
+	<script src="app/scripts/build/common/rest/transcoding-consumption-rest.js"></script>
+	<script src="app/scripts/build/common/run.js"></script>
+	<script src="app/scripts/build/common/services/go.js"></script>
+	<script src="app/scripts/build/common/utils.js"></script>
+	<script src="app/scripts/build/pages/usage-dashboard/bandwidth-report/bandwidth-report.js"></script>
+	<script src="app/scripts/build/pages/usage-dashboard/media-entries-report/media-entries-report.js"></script>
+	<script src="app/scripts/build/pages/usage-dashboard/overall-usage-report/overall-usage-report.js"></script>
+	<script src="app/scripts/build/pages/usage-dashboard/plays-report/plays-report.js"></script>
+	<script src="app/scripts/build/pages/usage-dashboard/storage-report/storage-report.js"></script>
+	<script src="app/scripts/build/pages/usage-dashboard/transcoding-consumption-report/transcoding-consumption-report.js"></script>
+	<script src="app/scripts/build/pages/usage-dashboard/usage-dashboard.js"></script>
+	<!-- /include -->
 
 	<!--
 		IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie

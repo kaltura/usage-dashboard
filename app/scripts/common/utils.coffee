@@ -49,6 +49,9 @@ do ->
 				) navigator.userAgent or navigator.vendor or window.opera
 				check
 
-	module.service 'tryApply', ($rootScope) ->
-		(fn) ->
-			if $rootScope.$$phase then fn() else $rootScope.$apply fn
+	module.service 'tryApply', [
+		'$rootScope'
+		($rootScope) ->
+			(fn) ->
+				if $rootScope.$$phase then fn() else $rootScope.$apply fn
+	]

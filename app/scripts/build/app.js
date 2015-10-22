@@ -1,0 +1,4 @@
+(function() {
+  var module;
+  return module = angular.module('KalturaUsageDashboard', ['angular-flot', 'rt.select2', 'ui.date', 'ui.bootstrap', 'ui.router', 'restangular', 'classy', 'cb.x2js', 'ng-bundle-collection', 'KalturaUsageDashboard.kmc-config', 'KalturaUsageDashboard.config', 'KalturaUsageDashboard.constants', 'KalturaUsageDashboard.run', 'KalturaUsageDashboard.utils', 'KalturaUsageDashboard.rest', 'KalturaUsageDashboard.collections', 'KalturaUsageDashboard.directives.header', 'KalturaUsageDashboard.directives.side-menu', 'KalturaUsageDashboard.directives.datepicker', 'KalturaUsageDashboard.directives.graph', 'KalturaUsageDashboard.directives.report-controls', 'KalturaUsageDashboard.services.go', 'KalturaUsageDashboard.factories.rest', 'KalturaUsageDashboard.usage-dashboard']);
+})();

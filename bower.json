@@ -10,6 +10,7 @@
     "type": "git",
     "url": "https://git.steelkiwi.com/tarash/kaltura-vpaas-usage-dashboard"
   },
+  "directory": "bower_components",
   "devDependencies": {
     "bootstrap": "~3.3.5",
     "font-awesome": "~4.4.0",

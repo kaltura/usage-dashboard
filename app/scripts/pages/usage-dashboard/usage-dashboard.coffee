@@ -10,15 +10,19 @@ do ->
 		'KalturaUsageDashboard.usage-dashboard.media-entries-report'
 	]
 
-	module.config ($stateProvider, $urlRouterProvider) ->
-		$stateProvider.state 'usage-dashboard',
-			url: '/usage-dashboard'
-			views:
-				main:
-					controller: 'UsageDashboardCtrl'
-					templateUrl: 'app/scripts/pages/usage-dashboard/usage-dashboard.html'
-			data:
-				pageTitle: 'Account Usage Reports'
+	module.config [
+		'$stateProvider'
+		'$urlRouterProvider'
+		($stateProvider, $urlRouterProvider) ->
+			$stateProvider.state 'usage-dashboard',
+				url: '/usage-dashboard'
+				views:
+					main:
+						controller: 'UsageDashboardCtrl'
+						templateUrl: 'app/scripts/pages/usage-dashboard/usage-dashboard.html'
+				data:
+					pageTitle: 'Account Usage Reports'
+	]
 
 
 	module.classy.controller

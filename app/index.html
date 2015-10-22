@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app='KalturaUsageDashboard'>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="title" content="Kaltura - Open Source Video Platform">
+	<meta name="robots" content="index, follow">
+	<meta name="description" content="Kaltura Management Console. Media Asset Management System. Video solutions for video streaming and video management. Kaltura - The Open Source Video Platform.">
+	<meta name="keywords" content="production, shows, talent, discover, contribute, share, enhance, first open source video platform, video editing, media collaboration, online video, movie, wikimentaries, wiki">
+	<meta name="language" content="en">
+	<meta name="verify-v1" content="JIjZEB+ZCdDyAw49II0fIpcLfFc40M9EzXEY5/Tva68=">
+
+	<title>KMC &gt; Usage Dashboard</title>
+	<base href="/">
+	<link rel='shortcut icon' href='http://corp.kaltura.com/sites/default/files/favicon%20%289%29_0.ico' type='image/ico'>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/font-awesome/css/font-awesome.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/select2/select2.css"/>
+
+	<!-- include: "type": "css", "files": "<%= config.styles %>/**/*.css" -->
+	<!-- /include -->
+</head>
+
+<body ng-cloak>
+
+	<div header></div>
+
+	<div ui-view='main'></div>
+
+	<!-- bower:js -->
+	<!-- endbower -->
+
+	<!-- include: "type": "js", "files": "<%= config.assets %>/**/*.js" -->
+	<!-- /include -->
+
+	<!-- include: "type": "js", "files": "<%= config.js_build %>/**/*.js" -->
+	<!-- /include -->
+
+	<!--
+		IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+		For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+	-->
+	<!--[if lt IE 9]>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+		<script>
+			document.createElement('ui-select');
+			document.createElement('ui-select-match');
+			document.createElement('ui-select-choices');
+			document.createElement('header');
+			document.createElement('article');
+			document.createElement('section');
+			document.createElement('aside');
+			document.createElement('nav');
+			document.createElement('footer');
+		</script>
+	<![endif]-->
+
+</body>
+
+</html>
