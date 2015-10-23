@@ -48,13 +48,16 @@ do ->
 					unless @$.months[monthMark]?
 						@$.months[monthMark] =
 							label: @$filter('date') day.date, 'MMMM, yyyy'
-							dates: day.date
+							dates: []
 							value: 0
 						nMonths++
+					@$.months[monthMark].dates.push day.date
 					@$.months[monthMark].value += parseInt day.value
-				for month in @$.months
+				for k, month of @$.months
 					if month.dates.length isnt month.dates[0].nDaysInMonth()
-						month.label = "(#{month.dates[0].getDate()} - #{}) #{month.label}"
+						firstDate = month.dates[0].getDate()
+						lastDate = month.dates[month.dates.length-1].getDate()
+						month.label = "#{firstDate} #{if firstDate isnt lastDate then '-' + lastDate else ''} #{month.label}"
 
 
 
