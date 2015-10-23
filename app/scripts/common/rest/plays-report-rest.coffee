@@ -36,7 +36,7 @@ do ->
 	]
 
 
-	module.service 'playsReport.data', [
+	module.service 'playsReport.graphData', [
 		'RestFactory'
 		(RestFactory) ->
 			_.extend @, new RestFactory
@@ -44,15 +44,20 @@ do ->
 					action: 'getGraphs'
 					reportType: 1
 					'reportInputFilter:interval': 'days'
+
+			@addFetchInterceptor (response) =>
+				@extract.graph(response).count_plays or []
+
+			@
 	]
 
 
 	module.service 'playsReport', [
 		'playsReport.playsNumber'
 		'playsReport.mediaEntriesNumber'
-		'playsReport.data'
-		(playsNumber, mediaEntriesNumber, data) ->
+		'playsReport.graphData'
+		(playsNumber, mediaEntriesNumber, graphData) ->
 			playsNumber: playsNumber
 			mediaEntriesNumber: mediaEntriesNumber
-			data: data
+			graphData: graphData
 	]

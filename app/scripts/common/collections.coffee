@@ -7,6 +7,12 @@ do ->
 		(Collection) ->
 			_.extend @, new Collection
 			@add [
+				id: -1
+				name: 'Current month'
+				dates:
+					low: -> new Date (new Date).setDate 1
+					high: -> new Date
+			,
 				id: 0
 				name: 'Last month'
 				dates:

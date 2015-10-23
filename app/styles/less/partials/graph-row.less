@@ -1,6 +1,53 @@
+@rotate-small: -30deg;
+@rotate-medium: -45deg;
+@rotate-large: -80deg;
+@rotate-small-height: 20px;
+@rotate-medium-height: 30px;
+@rotate-large-height: 50px;
+@height: 300px;
+
 .graph-row{
-	height: 300px;
+	height: @height;
 	margin-bottom: @padding * 2 !important;
+
+	.flot-x-axis{
+		margin-top: 5px;
+		.flot-tick-label{
+			max-width: 150px !important;
+		}
+	}
+
+	&.rotate-x-labels-small{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-small);
+				margin-top: @rotate-small-height;
+			}
+		}
+		height: @height + @rotate-small-height;
+		margin-bottom: @padding * 3 !important;
+	}
+	&.rotate-x-labels-medium{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-medium);
+				margin-top: @rotate-medium-height;
+			}
+		}
+		height: @height + @rotate-medium-height;
+		margin-bottom: @padding * 3 !important;
+	}
+	&.rotate-x-labels-large{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-large);
+				margin-top: @rotate-large-height;
+			}
+		}
+		height: @height + @rotate-large-height;
+		margin-bottom: @padding * 5 !important;
+		margin-left: -5px;
+	}
 }
 
 @tooltip-padding-top: 4px;

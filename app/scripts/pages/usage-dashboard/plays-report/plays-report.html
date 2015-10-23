@@ -10,10 +10,8 @@
 	<!-- <div class='row-fluid graph-row'>
 		<canvas tc-chartjs-bar chart-options="chart.options" chart-data="chart.data" auto-legend></canvas>
 	</div> -->
-
-	<div class='row-fluid graph-row'>
-		<div graph></div>
-	</div>
+	
+	<div graph='months'></div>
 
 	<div class='row-fluid title-text'>
 		Monthly Usage Breakdown
@@ -28,17 +26,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class='even'>
-					<td>September 2015</td>
-					<td>123</td>
-				</tr>
-				<tr class='odd'>
-					<td>August 2015</td>
-					<td>123</td>
-				</tr>
-				<tr class='even'>
-					<td>July 2015</td>
-					<td>123</td>
+				<tr class='even' ng-repeat='month in months' ng-class='{odd:$index%2==1, even:$index%2==0}'>
+					<td>{{month.label}}</td>
+					<td>{{month.value}}</td>
 				</tr>
 			</tbody>
 		</table>

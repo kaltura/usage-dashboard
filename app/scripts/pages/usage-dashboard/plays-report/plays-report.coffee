@@ -17,7 +17,7 @@ do ->
 
 	module.classy.controller
 		name: 'PlaysReportCtrl'
-		inject: ['playsReport']
+		inject: ['playsReport', 'utils', '$filter']
 
 		fetch: ->
 			@_extractPayload()
@@ -39,5 +39,37 @@ do ->
 				@$.mediaEntriesNumber = response
 
 		_fetchData: ->
-			@playsReport.data.fetch(@payload).then (response) =>
-				console.log response
+			@$.months = null
+			@playsReport.graphData.fetch(@payload).then (response) =>
+				@$.months = {}
+				nMonths = 0
+				for day in response
+					monthMark = day.date.toYM()
+					unless @$.months[monthMark]?
+						@$.months[monthMark] =
+							label: @$filter('date') day.date, 'MMMM, yyyy'
+							dates: day.date
+							value: 0
+						nMonths++
+					@$.months[monthMark].value += parseInt day.value
+				for month in @$.months
+					if month.dates.length isnt month.dates[0].nDaysInMonth()
+						month.label = "(#{month.dates[0].getDate()} - #{}) #{month.label}"
+
+
+
+			# @$.numbers = {}
+			# d = new Date @$.dates.from
+			# while d.toYM() <= @$.dates.to.toYM()
+			# 	do =>
+			# 		from = new Date d
+			# 		from.setDate 1
+			# 		to = new Date d
+			# 		to.setMonth to.getMonth() + 1
+			# 		to.setDate 0
+			# 		payload =
+			# 			'reportInputFilter:fromDay': from.toYMDn()
+			# 			'reportInputFilter:toDay': to.toYMDn()
+			# 		@playsReport.playsNumber.fetch(payload).then (response) =>
+			# 			@$.numbers[from.toYM()] = response
+			# 		d.setMonth d.getMonth() + 1

@@ -33,6 +33,21 @@ do ->
 
 		parity: (index) -> if index % 2 then 'odd' else 'even'
 
+		date:
+			# number like 20151023, where 2015 - year, 10 - month, 23 - date
+			fromYMDn: (n) ->
+				new Date Math.floor(n / 10000), Math.floor(n % 10000 / 100 - 1), n % 100
+
+			#number like 201510, where 2015 - year, 10 - month
+			fromYMn: (n) ->
+				new Date Math.floor(n / 100), n % 100 - 1
+
+			#string like "2015-10-23"
+			fromYMD: (str) -> new Date str
+
+			#string like "2015-10"
+			fromYM: (str) -> new Date "#{str}-01"
+
 		navigator:
 			isMobileOrTablet: ->
 				check = no

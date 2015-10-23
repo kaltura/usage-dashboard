@@ -264,6 +264,61 @@ table.one-third-width {
   height: 300px;
   margin-bottom: 20px !important;
 }
+.graph-row .flot-x-axis {
+  margin-top: 5px;
+}
+.graph-row .flot-x-axis .flot-tick-label {
+  max-width: 150px !important;
+}
+.graph-row.rotate-x-labels-small {
+  height: 320px;
+  margin-bottom: 30px !important;
+}
+.graph-row.rotate-x-labels-small .flot-x-axis .flot-tick-label {
+  transform: rotate(-30deg);
+  -ms-transform: rotate(-30deg);
+  /* IE 9 */
+  -moz-transform: rotate(-30deg);
+  /* Firefox */
+  -webkit-transform: rotate(-30deg);
+  /* Safari and Chrome */
+  -o-transform: rotate(-30deg);
+  /* Opera */
+  margin-top: 20px;
+}
+.graph-row.rotate-x-labels-medium {
+  height: 330px;
+  margin-bottom: 30px !important;
+}
+.graph-row.rotate-x-labels-medium .flot-x-axis .flot-tick-label {
+  transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  /* IE 9 */
+  -moz-transform: rotate(-45deg);
+  /* Firefox */
+  -webkit-transform: rotate(-45deg);
+  /* Safari and Chrome */
+  -o-transform: rotate(-45deg);
+  /* Opera */
+  margin-top: 30px;
+}
+.graph-row.rotate-x-labels-large {
+  height: 350px;
+  margin-bottom: 50px !important;
+  margin-left: -5px;
+}
+.graph-row.rotate-x-labels-large .flot-x-axis .flot-tick-label {
+  transform: rotate(-80deg);
+  -ms-transform: rotate(-80deg);
+  /* IE 9 */
+  -moz-transform: rotate(-80deg);
+  /* Firefox */
+  -webkit-transform: rotate(-80deg);
+  /* Safari and Chrome */
+  -o-transform: rotate(-80deg);
+  /* Opera */
+  margin-top: 50px;
+}
 .graph-tooltip {
   background: -moz-linear-gradient(top, #ffffff 10%, #d8d7d7 100%) !important;
   /* FF3.6+ */

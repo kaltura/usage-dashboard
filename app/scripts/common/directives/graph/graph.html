@@ -1,3 +1,9 @@
-<span>
-	<flot dataset='graph.data' options='graph.options'></flot>
-</span>
+<div class='row-fluid graph-row' ng-class='{
+	"rotate-x-labels-small": graph.data[0].data.length >=12 && graph.data[0].data.length < 15,
+	"rotate-x-labels-medium": graph.data[0].data.length >= 15 && graph.data[0].data.length < 26,
+	"rotate-x-labels-large": graph.data[0].data.length >= 26
+}'>
+	<span>
+		<flot ng-if='graph!=null' dataset='graph.data' options='graph.options'></flot>
+	</span>
+</div>

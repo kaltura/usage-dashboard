@@ -22,12 +22,6 @@ do ->
 			kmc = kmcProvider.$get()
 
 			RestangularProvider.setBaseUrl "#{kmc.vars.service_url}/api_v3/index.php"
-			RestangularProvider.setDefaultRequestParams
-				ks: kmc.vars.ks
-				service: 'report'
-				'reportInputFilter:timeZoneOffset': (new Date).getTimezoneOffset()
-				'reportInputFilter:objectType': 'KalturaReportInputFilter'
-
 
 			$urlRouterProvider.when '/usage-dashboard', '/usage-dashboard/overall-usage'
 			$urlRouterProvider.otherwise '/usage-dashboard'

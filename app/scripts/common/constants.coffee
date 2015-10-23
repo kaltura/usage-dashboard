@@ -59,7 +59,6 @@ do ->
 
 		nPoints: -> @nMatches '\\\.'
 
-
 	module.service 'DatePrototype', [
 		'$filter'
 		'dayms'
@@ -90,13 +89,22 @@ do ->
 
 			toMDY: -> $filter('date') @
 
-			toYMDn: ->
-				str = @toYMD()
-				parseInt str.replace /\-/g, ''
+			toYMDn: -> parseInt @toYMD().replace /\-/g, ''
+
+			toYM: ->
+				$filter('date') @, 'yyyy-MM'
+
+			toYMn: -> parseInt @toYM().replace /\-/g, ''
 
 			subMonth: (nMonths = 1) ->
 				@setMonth @getMonth() - nMonths
 				@
+
+			nDaysInMonth: ->
+				d = new Date @
+				d.setMonth d.getMonth() + 1
+				d.setDate 0
+				d.getDate()
 
 			#date greater (@ > date ?) comparison in DAYS context
 			dg: (date) ->

@@ -14,14 +14,35 @@ do ->
 		name: 'GraphCtrl'
 		inject: ['graph']
 
-		init: ->
+		watch:
+			data: (value) -> 
+				if value? and not _.isEmpty value
+					@_buildGraphData()
+				else
+					@$.graph = null
+				
+		_buildGraphData: ->
+			data = []
+			xaxisTicks = []
+			index = 0
+			maxDataValue = 0
+			for k, month of @$.data
+				data.push [
+					index
+					month.value
+				]
+				xaxisTicks.push [
+					index
+					month.label
+				]
+				if maxDataValue < month.value
+					maxDataValue = month.value
+				index++
 
-			data = [
-				[0,	12]
-				[1,	37]
-				[2,	1]
-				[3,	75]
-			]
+			str = maxDataValue.toString()
+			rank = Math.pow 10, (str.length - 1) or 1
+			maxYTick = parseInt(str[0]) * rank or 10
+			maxYTick+=rank if maxYTick < maxDataValue
 
 			@$.graph =
 				data: [
@@ -57,16 +78,11 @@ do ->
 						show: yes
 						color: @graph.colorAxis
 						axisLabel: 'Months'
-						axisLabelUseCanvas: yes
+						# axisLabelUseCanvas: yes
 						axisLabelFontSizePixels: 12
 						axisLabelFontFamily: 'arial,sans serif'
-						axisLabelPadding: 12
-						ticks: [
-							[0,	'August, 2015']
-							[1,	'September, 2015']
-							[2,	'October, 2015']
-							[3,	'November, 2015']
-						]
+						axisLabelPadding: 20
+						ticks: xaxisTicks
 						tickLength: 0
 						min: -0.5
 						max: data.length - 0.5
@@ -77,12 +93,13 @@ do ->
 						axisLabelFontSizePixels: 12
 						axisLabelFontFamily: 'arial,sans serif'
 						axisLabelPadding: 10
-						# tickFormatter: (v, axis) -> v
 						# alignTicksWithAxis: 10
 						reserveSpace: yes
 						tickLength: 15
-						# tickSize: 5
-						# min: -1
+						tickSize: rank/2
+						max: maxYTick
+						tickFormatter: (val) ->
+							"<p>#{if val % rank then '' else val}</p>"
 					legend:
 						noColumns: 0
 						labelBoxBorderColor: '#000000'
@@ -101,3 +118,8 @@ do ->
 						backgroundColor: @graph.mainBg
 						aboveData: no
 						axisMargin: 10
+
+			# @$.graph.options.xaxis.rotateTicks = switch yes
+			# 	when 8 <= data.length < 12 then 30
+			# 	when 12 <= data.length < 20 then 45
+			# 	when 20 <= data.length then 60
