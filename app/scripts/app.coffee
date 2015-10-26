@@ -11,6 +11,7 @@ do ->
 		'classy'
 		'cb.x2js'
 		'ng-bundle-collection'
+		'angular-spinkit'
 		#common
 		'KalturaUsageDashboard.kmc-config'
 		'KalturaUsageDashboard.config'
@@ -25,6 +26,7 @@ do ->
 		'KalturaUsageDashboard.directives.datepicker'
 		'KalturaUsageDashboard.directives.graph'
 		'KalturaUsageDashboard.directives.report-controls'
+		'KalturaUsageDashboard.directives.spinner'
 		#services
 		'KalturaUsageDashboard.services.go'
 		#factories

@@ -15,10 +15,11 @@
 	<base href="/">
 	<link rel='shortcut icon' href='http://corp.kaltura.com/sites/default/files/favicon%20%289%29_0.ico' type='image/ico'>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
-	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/font-awesome/css/font-awesome.css"/>
-	<link rel="stylesheet" type="text/css" media="screen" href="bower_components/select2/select2.css"/>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css"/>
+	<link rel="stylesheet" type="text/css" href="bower_components/select2/select2.css"/>
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-spinkit/build/angular-spinkit.min.css">
 
 	<!-- include: "type": "css", "files": "<%= config.styles %>/**/*.css" -->
 	<!-- /include -->
@@ -32,6 +33,7 @@
 
 	<!-- bower:js -->
 	<!-- endbower -->
+	<script src="bower_components/flot-axislabels/jquery.flot.axislabels.js"></script>
 
 	<!-- include: "type": "js", "files": "<%= config.assets %>/**/*.js" -->
 	<!-- /include -->
@@ -58,6 +60,8 @@
 			document.createElement('footer');
 		</script>
 	<![endif]-->
+
+	<div spinner></div>
 
 </body>
 

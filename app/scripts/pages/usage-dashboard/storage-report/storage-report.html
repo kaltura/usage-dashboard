@@ -1,22 +1,12 @@
 <div class='main-content container-fluid span10' id='storage-report'>
-	<div class='row-fluid controls-row'>
-		<span class='text'>Date Range:</span>
-		<span class='select'>
-			<select2 ng-model="select.model" s2-options="range.id as range.name for range in select.data" options='select.options'></select2>
-		</span>
-		<span class='text'>Dates:</span>
-		<span kaltura-datepicker='dateMin'></span>
-		<span kaltura-datepicker='dateMax'></span>
-	</div>
+	<div report-controls from='dates.from' to='dates.to' changed='fetch()'></div>
 
 	<div class='row-fluid title-text'>
 		<span class='export-to-csv'>Export to CSV</span>
 	</div>
 
-	<div class='row-fluid graph-row'>
-		<flot dataset='graph.data' options='graph.options'></flot>
-	</div>
-	
+	<div graph='months' decorate='"months"' y-label='Average Storage' units='(MB)'></div>
+
 	<div class='row-fluid title-text'>
 		Monthly Usage Breakdown
 	</div>
@@ -26,29 +16,13 @@
 			<thead>
 				<tr>
 					<th>Month</th>
-					<th>Average storage (MB)</th>
+					<th>Average Storage (MB)</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr class='even'>
-					<td>September, 2015</td>
-					<td>425326</td>
-				</tr>
-				<tr class='odd'>
-					<td>October, 2015</td>
-					<td>425326</td>
-				</tr>
-				<tr class='even'>
-					<td>November, 2015</td>
-					<td>425326</td>
-				</tr>
-				<tr class='odd'>
-					<td>December, 2015</td>
-					<td>425326</td>
-				</tr>
-				<tr class='even'>
-					<td>January, 2016</td>
-					<td>425326</td>
+				<tr ng-repeat='month in months' ng-class='{odd:$index%2==1, even:$index%2==0}'>
+					<td>{{month.label}}</td>
+					<td>{{month.value}}</td>
 				</tr>
 			</tbody>
 		</table>

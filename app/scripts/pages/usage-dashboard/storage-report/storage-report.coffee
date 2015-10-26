@@ -17,3 +17,30 @@ do ->
 
 	module.classy.controller
 		name: 'StorageReportCtrl'
+		inject: ['storageReport', 'utils', '$filter']
+
+		fetch: ->
+			@_extractPayload()
+			@_fetchData()
+
+		_extractPayload: ->
+			@payload =
+				'reportInputFilter:fromDay': @$.dates.from.toYMDn()
+				'reportInputFilter:toDay': @$.dates.to.toYMDn()
+
+		_fetchData: ->
+			@$.months = null
+			@storageReport.fetch(@payload).then (response) =>
+				months = @utils.arrToObjByFn response, (month) =>
+					_.extend month,
+						label: @$filter('date') month.date, 'MMMM, yyyy'
+						value: parseFloat(month.value).toFixed 2
+						dates: []
+					month.date.toYM()
+				date = new Date @$.dates.from
+				while date.toYMDn() <= @$.dates.to.toYMDn()
+					monthMark = date.toYM()
+					months[monthMark].dates.push new Date date
+					date.setDate date.getDate() + 1
+				@$.months = @utils.objToArr months
+				@$.months.dates = @$.dates

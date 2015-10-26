@@ -10,6 +10,8 @@ do ->
 		scope:
 			data: '=graph'
 			decorate: '='
+			units: '@'
+			yLabel: '@'
 
 	module.classy.controller
 		name: 'GraphCtrl'
@@ -50,7 +52,7 @@ do ->
 					maxDataValue = month.value
 				index++
 
-			str = maxDataValue.toString()
+			str = parseInt(maxDataValue).toString()
 			rank = Math.pow 10, (str.length - 1) or 1
 			tickSize = rank/2
 			maxYTick = parseInt(str[0]) * rank or 10
@@ -81,10 +83,10 @@ do ->
 						# 	lineWidth: 1
 					tooltip:
 						show: yes
-						content: (label, x, y, flot) ->
+						content: (label, x, y, flot) =>
 							"""
 								<div class='text'>#{flot.series.xaxis.ticks[flot.dataIndex].label}</div>
-								<div class='value'>#{flot.series.data[flot.dataIndex][1]}</div>
+								<div class='value'>#{flot.series.data[flot.dataIndex][1]} #{@$.units or ''}</div>
 							"""
 						cssClass: 'graph-tooltip'
 					bars:
@@ -93,22 +95,19 @@ do ->
 					xaxis:
 						show: yes
 						color: @constants.graph.colorAxis
-						axisLabel: 'Months'
-						# axisLabelUseCanvas: yes
-						axisLabelFontSizePixels: 12
-						axisLabelFontFamily: 'arial,sans serif'
-						axisLabelPadding: 20
 						ticks: xaxisTicks
 						tickLength: 0
 						min: -0.5
 						max: data.length - 0.5
 					yaxis:
-						axisLabel: 'Plays Number'
+						show: yes
+						axisLabel: "#{@$.yLabel or ''} #{@$.units or ''}"
 						color: @constants.graph.colorAxis
 						axisLabelUseCanvas: yes
 						axisLabelFontSizePixels: 12
 						axisLabelFontFamily: 'arial,sans serif'
 						axisLabelPadding: 10
+						axisLabelColour: @constants.graph.colorText
 						# alignTicksWithAxis: 10
 						reserveSpace: yes
 						tickLength: 15

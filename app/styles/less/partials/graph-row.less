@@ -1,7 +1,9 @@
+@rotate-tiny: -15deg;
 @rotate-small: -30deg;
 @rotate-medium: -45deg;
 @rotate-large: -78deg;
 @rotate-full: -89deg;
+@rotate-tiny-height: 20px;
 @rotate-small-height: 25px;
 @rotate-medium-height: 35px;
 @rotate-large-height: 50px;
@@ -14,6 +16,9 @@
 	display: block;
 	margin-bottom: @padding * 2 !important;
 
+	.tickLabel{
+		color: @graph-text;
+	}
 	.flot-x-axis{
 		margin-top: 5px;
 		.flot-tick-label{
@@ -21,6 +26,16 @@
 		}
 	}
 
+	&.rotate-x-labels-tiny{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-tiny);
+				margin-top: @rotate-tiny-height;
+			}
+		}
+		height: @height + @rotate-tiny-height;
+		margin-bottom: @padding * 2 !important;
+	}
 	&.rotate-x-labels-small{
 		.flot-x-axis{
 			.flot-tick-label{
@@ -39,7 +54,7 @@
 			}
 		}
 		height: @height + @rotate-medium-height;
-		margin-bottom: @padding * 3 !important;
+		margin-bottom: @padding * 4 !important;
 	}
 	&.rotate-x-labels-large{
 		.flot-x-axis{
@@ -68,12 +83,11 @@
 @tooltip-padding-right: 8px;
 @gradient-tooltip-top: @white-bg;
 @gradient-tooltip-bottom: @dark-gray;
-@tooltip-height: 50px;
+@tooltip-margin: 10px;
 
 .graph-tooltip{
 	.gradient(@gradient-tooltip-top, @gradient-tooltip-bottom, 10%) !important;
 	border: 1px solid @dark-gray !important;
-	height: @tooltip-height !important;
 	padding: @tooltip-padding-top @tooltip-padding-right !important;
 	position: relative;
 	.text{
@@ -85,8 +99,8 @@
 		font-size: @medium-font;
 		line-height: @medium-font;
 		color: @dark-aqua;
-		position: absolute;
 		bottom: @tooltip-padding-top;
 		left: @tooltip-padding-right;
+		margin-top: @tooltip-margin;
 	}
 }

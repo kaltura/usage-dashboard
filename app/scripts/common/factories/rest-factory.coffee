@@ -27,12 +27,16 @@ do ->
 							keys = response.header.split ','
 							values = response.data.split ','
 							_.zipObject keys, values
-						graph: (response) ->
+						graph: (response, interval) ->
 							keys = _.pluck response.item, 'id'
+							dateFn = utils.date[switch interval
+								when 'day' then 'fromYMDn'
+								when 'month' then 'fromYMn'
+							]
 							values = _.pluck(response.item, 'data').map (data) ->
 								for day in data.split ';' when day.length
 									parts = day.split ','
-									date: utils.date.fromYMDn parseInt parts[0]
+									date: dateFn parseInt parts[0]
 									value: parts[1]
 							_.zipObject keys, values
 

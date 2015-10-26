@@ -15,11 +15,13 @@ do ->
 	module.constant 'graph',
 		colorColumn: '#02a3d1'
 		colorAxis: '#c2d2e1'
+		colorText: '#585858'
 		mainBg: '#f0eeef'
 		borderWidth: 7
 		labelRotation:
-			small: 10
-			medium: 14
+			tiny: 10
+			small: 14
+			medium: 19
 			large: 26
 			full: 32
 		dataDecorators:

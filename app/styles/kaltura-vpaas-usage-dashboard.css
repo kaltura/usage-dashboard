@@ -1,6 +1,19 @@
 .border {
   border: 1px solid #d8d7d7;
 }
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+}
+.spinner [class*='spinner'] {
+  margin: -15px 0 0 0;
+}
+.spinner [class*='spinner'] > div {
+  background-color: #2b2b2b;
+}
 body {
   font-family: arial, sans-serif;
   background: #f0eeef;
@@ -265,11 +278,30 @@ table.one-third-width {
   display: block;
   margin-bottom: 20px !important;
 }
+.graph-row .tickLabel {
+  color: #585858;
+}
 .graph-row .flot-x-axis {
   margin-top: 5px;
 }
 .graph-row .flot-x-axis .flot-tick-label {
   max-width: 150px !important;
+}
+.graph-row.rotate-x-labels-tiny {
+  height: 320px;
+  margin-bottom: 20px !important;
+}
+.graph-row.rotate-x-labels-tiny .flot-x-axis .flot-tick-label {
+  transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  /* IE 9 */
+  -moz-transform: rotate(-15deg);
+  /* Firefox */
+  -webkit-transform: rotate(-15deg);
+  /* Safari and Chrome */
+  -o-transform: rotate(-15deg);
+  /* Opera */
+  margin-top: 20px;
 }
 .graph-row.rotate-x-labels-small {
   height: 325px;
@@ -289,7 +321,7 @@ table.one-third-width {
 }
 .graph-row.rotate-x-labels-medium {
   height: 335px;
-  margin-bottom: 30px !important;
+  margin-bottom: 40px !important;
 }
 .graph-row.rotate-x-labels-medium .flot-x-axis .flot-tick-label {
   transform: rotate(-45deg);
@@ -354,7 +386,6 @@ table.one-third-width {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d8d7d7', GradientType=0) !important;
   /* IE6-9 */
   border: 1px solid #d8d7d7 !important;
-  height: 50px !important;
   padding: 4px 8px !important;
   position: relative;
 }
@@ -367,9 +398,9 @@ table.one-third-width {
   font-size: 15px;
   line-height: 15px;
   color: #189fad;
-  position: absolute;
   bottom: 4px;
   left: 8px;
+  margin-top: 10px;
 }
 .info {
   background: url(../images/kmc/kmc_sprite.png) no-repeat -175px -152px;

@@ -1,4 +1,5 @@
 <div class='row-fluid graph-row' ng-class='{
+	"rotate-x-labels-tiny": graph.data[0].data.length >=constants.graph.labelRotation.tiny && graph.data[0].data.length < constants.graph.labelRotation.small,
 	"rotate-x-labels-small": graph.data[0].data.length >=constants.graph.labelRotation.small && graph.data[0].data.length < constants.graph.labelRotation.medium,
 	"rotate-x-labels-medium": graph.data[0].data.length >= constants.graph.labelRotation.medium && graph.data[0].data.length < constants.graph.labelRotation.large,
 	"rotate-x-labels-large": graph.data[0].data.length >= constants.graph.labelRotation.large && graph.data[0].data.length < constants.graph.labelRotation.full,

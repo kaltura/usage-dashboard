@@ -3,6 +3,17 @@ do ->
 	module = angular.module 'KalturaUsageDashboard.rest.plays-report', []
 
 
+	module.service 'playsReport', [
+		'playsReport.playsNumber'
+		'playsReport.mediaEntriesNumber'
+		'playsReport.graphData'
+		(playsNumber, mediaEntriesNumber, graphData) ->
+			playsNumber: playsNumber
+			mediaEntriesNumber: mediaEntriesNumber
+			graphData: graphData
+	]
+
+
 	module.service 'playsReport.playsNumber', [
 		'RestFactory'
 		(RestFactory) ->
@@ -46,18 +57,7 @@ do ->
 					'reportInputFilter:interval': 'days'
 
 			@addFetchInterceptor (response) =>
-				@extract.graph(response).count_plays or []
+				@extract.graph(response, 'day').count_plays or []
 
 			@
-	]
-
-
-	module.service 'playsReport', [
-		'playsReport.playsNumber'
-		'playsReport.mediaEntriesNumber'
-		'playsReport.graphData'
-		(playsNumber, mediaEntriesNumber, graphData) ->
-			playsNumber: playsNumber
-			mediaEntriesNumber: mediaEntriesNumber
-			graphData: graphData
 	]
