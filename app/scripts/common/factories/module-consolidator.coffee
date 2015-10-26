@@ -8,9 +8,12 @@ do ->
 			injector = angular.injector [
 				'ng'
 				'KalturaUsageDashboard'
-				($provide) ->
-					$provide.value '$rootElement', angular.element window.document
-					undefined
+				[
+					'$provide'
+					($provide) ->
+						$provide.value '$rootElement', angular.element window.document
+						undefined
+				]
 			]
 			for f in module._invokeQueue
 				name = f[2][0]
