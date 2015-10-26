@@ -1,6 +1,6 @@
 do ->
 
-	module = angular.module 'KalturaUsageDashboard.directives.csv', ['classy']
+	module = angular.module 'KalturaUsageDashboard.directives.csv', []
 
 	module.directive 'csv', ->
 		replace: yes

@@ -30,6 +30,7 @@ do ->
 		'KalturaUsageDashboard.directives.report-controls'
 		'KalturaUsageDashboard.directives.spinner'
 		'KalturaUsageDashboard.directives.csv'
+		'KalturaUsageDashboard.directives.overlay'
 		#services
 		'KalturaUsageDashboard.services.go'
 		#factories

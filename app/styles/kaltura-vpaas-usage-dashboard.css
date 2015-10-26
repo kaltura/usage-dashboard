@@ -572,6 +572,17 @@ table.one-third-width {
 .select2-drop-active {
   border: 1px solid #d8d7d7;
 }
+.overlay-parent {
+  position: relative;
+}
+.overlay-parent .overlay {
+  position: absolute;
+  display: block;
+  top: 0;
+  cursor: default;
+  width: 100%;
+  height: 100%;
+}
 #overall-usage-report .panel-table thead th {
   width: 16.666666666666668%;
 }
