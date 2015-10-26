@@ -29,6 +29,7 @@ do ->
 		'KalturaUsageDashboard.services.go'
 		#factories
 		'KalturaUsageDashboard.factories.rest'
+		'KalturaUsageDashboard.factories.module-consolidator'
 		#pages
 		'KalturaUsageDashboard.usage-dashboard'
 	]

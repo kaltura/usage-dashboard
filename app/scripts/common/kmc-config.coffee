@@ -6,4 +6,4 @@ do ->
 		$get: ->
 			window.kmc or vars:
 				service_url: 'http://www.kaltura.com'
-				ks: 'MDlmMDlmYmQzZGMwMWYwNTEzOWEwNWUyNTA1ODY4ZDJiODU0ZjRjMnw5MzkzNDE7OTM5MzQxOzE0NDU2OTI0Nzg7MjsxNDQ1NjA2MDc4LjkzMzU7cmtzaGFyZWRib3hAZ21haWwuY29tO2Rpc2FibGVlbnRpdGxlbWVudDs7'
+				ks: 'YzRlMGFkM2VkYmI4MmUxNGY0ZTQ1ZGNkYmRlYTNmM2FjOGQwZDkwOXw5MzkzNDE7OTM5MzQxOzE0NDU5MzA4MzQ7MjsxNDQ1ODQ0NDM0LjMyMTtya3NoYXJlZGJveEBnbWFpbC5jb207ZGlzYWJsZWVudGl0bGVtZW50Ozs='

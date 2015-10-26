@@ -12,7 +12,7 @@ do ->
 
 	module.classy.controller
 		name: 'GraphCtrl'
-		inject: ['graph']
+		inject: ['constants']
 
 		watch:
 			data: (value) -> 
@@ -47,7 +47,7 @@ do ->
 			@$.graph =
 				data: [
 					# label: '2012 Average Temperature'
-					color: @graph.colorColumn
+					color: @constants.graph.colorColumn
 					data: data
 					# shadowSize: 2
 					# highlightColor: '#bbbbbb'
@@ -58,7 +58,7 @@ do ->
 						bars:
 							show: yes
 							fill: yes
-							fillColor: @graph.colorColumn
+							fillColor: @constants.graph.colorColumn
 						# points:
 						# 	show: yes
 						# 	radius: 3
@@ -76,7 +76,7 @@ do ->
 						barWidth: 0.75
 					xaxis:
 						show: yes
-						color: @graph.colorAxis
+						color: @constants.graph.colorAxis
 						axisLabel: 'Months'
 						# axisLabelUseCanvas: yes
 						axisLabelFontSizePixels: 12
@@ -88,7 +88,7 @@ do ->
 						max: data.length - 0.5
 					yaxis:
 						axisLabel: 'Plays Number'
-						color: @graph.colorAxis
+						color: @constants.graph.colorAxis
 						axisLabelUseCanvas: yes
 						axisLabelFontSizePixels: 12
 						axisLabelFontFamily: 'arial,sans serif'
@@ -112,10 +112,10 @@ do ->
 						borderWidth:
 							top: 0
 							right: 0
-							bottom: @graph.borderWidth
-							left: @graph.borderWidth
-						borderColor: @graph.colorAxis
-						backgroundColor: @graph.mainBg
+							bottom: @constants.graph.borderWidth
+							left: @constants.graph.borderWidth
+						borderColor: @constants.graph.colorAxis
+						backgroundColor: @constants.graph.mainBg
 						aboveData: no
 						axisMargin: 10
 

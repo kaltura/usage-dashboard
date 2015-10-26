@@ -2,6 +2,12 @@ do ->
 
 	module = angular.module 'KalturaUsageDashboard.constants', []
 
+	module.service 'constants', [
+		'ModuleConsolidator',
+		(ModuleConsolidator) ->
+			new ModuleConsolidator module
+	]
+
 
 	module.constant 'dayms', 1000*60*60*24
 
