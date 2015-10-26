@@ -262,6 +262,7 @@ table.one-third-width {
 }
 .graph-row {
   height: 300px;
+  display: block;
   margin-bottom: 20px !important;
 }
 .graph-row .flot-x-axis {
@@ -271,7 +272,7 @@ table.one-third-width {
   max-width: 150px !important;
 }
 .graph-row.rotate-x-labels-small {
-  height: 320px;
+  height: 325px;
   margin-bottom: 30px !important;
 }
 .graph-row.rotate-x-labels-small .flot-x-axis .flot-tick-label {
@@ -284,10 +285,10 @@ table.one-third-width {
   /* Safari and Chrome */
   -o-transform: rotate(-30deg);
   /* Opera */
-  margin-top: 20px;
+  margin-top: 25px;
 }
 .graph-row.rotate-x-labels-medium {
-  height: 330px;
+  height: 335px;
   margin-bottom: 30px !important;
 }
 .graph-row.rotate-x-labels-medium .flot-x-axis .flot-tick-label {
@@ -300,24 +301,40 @@ table.one-third-width {
   /* Safari and Chrome */
   -o-transform: rotate(-45deg);
   /* Opera */
-  margin-top: 30px;
+  margin-top: 35px;
 }
 .graph-row.rotate-x-labels-large {
   height: 350px;
   margin-bottom: 50px !important;
-  margin-left: -5px;
 }
 .graph-row.rotate-x-labels-large .flot-x-axis .flot-tick-label {
-  transform: rotate(-80deg);
-  -ms-transform: rotate(-80deg);
+  transform: rotate(-78deg);
+  -ms-transform: rotate(-78deg);
   /* IE 9 */
-  -moz-transform: rotate(-80deg);
+  -moz-transform: rotate(-78deg);
   /* Firefox */
-  -webkit-transform: rotate(-80deg);
+  -webkit-transform: rotate(-78deg);
   /* Safari and Chrome */
-  -o-transform: rotate(-80deg);
+  -o-transform: rotate(-78deg);
   /* Opera */
   margin-top: 50px;
+  margin-left: -7px;
+}
+.graph-row.rotate-x-labels-full {
+  height: 355px;
+  margin-bottom: 60px !important;
+}
+.graph-row.rotate-x-labels-full .flot-x-axis .flot-tick-label {
+  transform: rotate(-89deg);
+  -ms-transform: rotate(-89deg);
+  /* IE 9 */
+  -moz-transform: rotate(-89deg);
+  /* Firefox */
+  -webkit-transform: rotate(-89deg);
+  /* Safari and Chrome */
+  -o-transform: rotate(-89deg);
+  /* Opera */
+  margin-top: 55px;
 }
 .graph-tooltip {
   background: -moz-linear-gradient(top, #ffffff 10%, #d8d7d7 100%) !important;

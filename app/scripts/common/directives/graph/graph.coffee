@@ -9,24 +9,35 @@ do ->
 		controller: 'GraphCtrl'
 		scope:
 			data: '=graph'
+			decorate: '='
 
 	module.classy.controller
 		name: 'GraphCtrl'
-		inject: ['constants']
+		injectToScope: ['constants']
 
 		watch:
 			data: (value) -> 
 				if value? and not _.isEmpty value
+					@_decorate()
 					@_buildGraphData()
 				else
 					@$.graph = null
-				
+
+		_decorate: ->
+			if _.isArray @$.decorate
+				@__decorate name for name in @$.decorate
+			else
+				@__decorate @$.decorate
+
+		__decorate: (name) ->
+			@constants.graph.dataDecorators[name]? @$.data
+
 		_buildGraphData: ->
 			data = []
 			xaxisTicks = []
 			index = 0
 			maxDataValue = 0
-			for k, month of @$.data
+			for month in @$.data
 				data.push [
 					index
 					month.value
@@ -41,8 +52,12 @@ do ->
 
 			str = maxDataValue.toString()
 			rank = Math.pow 10, (str.length - 1) or 1
+			tickSize = rank/2
 			maxYTick = parseInt(str[0]) * rank or 10
 			maxYTick+=rank if maxYTick < maxDataValue
+
+			while maxYTick/tickSize <= 10 and tickSize/2 is Math.floor tickSize/2
+				tickSize /= 2
 
 			@$.graph =
 				data: [
@@ -57,6 +72,7 @@ do ->
 					series:
 						bars:
 							show: yes
+							lineWidth: 0
 							fill: yes
 							fillColor: @constants.graph.colorColumn
 						# points:
@@ -96,10 +112,10 @@ do ->
 						# alignTicksWithAxis: 10
 						reserveSpace: yes
 						tickLength: 15
-						tickSize: rank/2
+						tickSize: tickSize
 						max: maxYTick
 						tickFormatter: (val) ->
-							"<p>#{if val % rank then '' else val}</p>"
+							"<p>#{if val % (tickSize*2) then '' else val}</p>"
 					legend:
 						noColumns: 0
 						labelBoxBorderColor: '#000000'

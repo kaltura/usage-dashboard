@@ -5,7 +5,7 @@ do ->
 	module.service 'utils', ->
 		arrToObjByFn: (arr, fn) ->
 			obj = {}
-			obj[fn(i)] = i for i in arr
+			obj[fn i] = i for i in arr
 			obj
 
 		arrToObjByField: (arr, field) ->

@@ -1,13 +1,17 @@
 @rotate-small: -30deg;
 @rotate-medium: -45deg;
-@rotate-large: -80deg;
-@rotate-small-height: 20px;
-@rotate-medium-height: 30px;
+@rotate-large: -78deg;
+@rotate-full: -89deg;
+@rotate-small-height: 25px;
+@rotate-medium-height: 35px;
 @rotate-large-height: 50px;
+@rotate-full-height: 55px;
 @height: 300px;
+
 
 .graph-row{
 	height: @height;
+	display: block;
 	margin-bottom: @padding * 2 !important;
 
 	.flot-x-axis{
@@ -42,11 +46,21 @@
 			.flot-tick-label{
 				.rotate(@rotate-large);
 				margin-top: @rotate-large-height;
+				margin-left: -7px;
 			}
 		}
 		height: @height + @rotate-large-height;
 		margin-bottom: @padding * 5 !important;
-		margin-left: -5px;
+	}
+	&.rotate-x-labels-full{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-full);
+				margin-top: @rotate-full-height;
+			}
+		}
+		height: @height + @rotate-full-height;
+		margin-bottom: @padding * 6 !important;
 	}
 }
 
