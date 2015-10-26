@@ -27,7 +27,8 @@
     "angular-ui-router": "~0.2.15",
     "ng-bundle-collection": "~1.0.3",
     "angular-x2js": "~0.2.0",
-    "angular-spinkit": "~0.3.3"
+    "angular-spinkit": "~0.3.3",
+    "ng-csv": "~0.3.6"
   },
   "resolutions": {
     "angular": "~1.4.0"

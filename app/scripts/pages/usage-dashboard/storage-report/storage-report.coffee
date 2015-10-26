@@ -44,3 +44,18 @@ do ->
 					date.setDate date.getDate() + 1
 				@$.months = @utils.objToArr months
 				@$.months.dates = @$.dates
+
+		getCsv: ->
+			return unless @$.months?
+			[
+				[
+					'Month'
+					'Average Storage'
+				]
+			].concat (
+				for month in @$.months
+					[
+						month.label
+						month.value
+					]
+			)

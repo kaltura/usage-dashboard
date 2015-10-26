@@ -261,6 +261,9 @@ table.one-third-width {
   font-size: 15px;
   cursor: pointer;
 }
+.title-text .export-to-csv [ng-csv] {
+  display: block;
+}
 .controls-row {
   padding: 0 10px;
   line-height: 24px;

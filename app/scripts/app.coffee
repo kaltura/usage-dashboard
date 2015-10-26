@@ -12,6 +12,8 @@ do ->
 		'cb.x2js'
 		'ng-bundle-collection'
 		'angular-spinkit'
+		'ngSanitize'
+		'ngCsv'
 		#common
 		'KalturaUsageDashboard.kmc-config'
 		'KalturaUsageDashboard.config'
@@ -27,6 +29,7 @@ do ->
 		'KalturaUsageDashboard.directives.graph'
 		'KalturaUsageDashboard.directives.report-controls'
 		'KalturaUsageDashboard.directives.spinner'
+		'KalturaUsageDashboard.directives.csv'
 		#services
 		'KalturaUsageDashboard.services.go'
 		#factories
