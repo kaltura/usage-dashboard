@@ -50,7 +50,7 @@ do ->
 			[
 				[
 					'Month'
-					'Average Storage'
+					'Average Storage (MB)'
 				]
 			].concat (
 				for month in @$.months
