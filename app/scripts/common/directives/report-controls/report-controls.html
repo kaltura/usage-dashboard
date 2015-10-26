@@ -3,7 +3,9 @@
 	<span class='select'>
 		<select2 ng-model="select.model" s2-options="range.id as range.name for range in select.data" options='select.options' ng-disabled='disabled || go.isLoading()'></select2>
 	</span>
-	<span class='text'>Dates:</span>
-	<span kaltura-datepicker='dates.low' disabled='disabled || go.isLoading() || !range.allowDatepickers' max='dates.high'></span>
-	<span kaltura-datepicker='dates.high' disabled='disabled || go.isLoading() || !range.allowDatepickers' min='dates.low'></span>
+	<span class='dates' ng-show='range.allowDatepickers'>
+		<span class='text'>Dates:</span>
+		<span kaltura-datepicker='dates.low' disabled='disabled || go.isLoading() || !range.allowDatepickers' max='dates.high'></span>
+		<span kaltura-datepicker='dates.high' disabled='disabled || go.isLoading() || !range.allowDatepickers' min='dates.low'></span>
+	</span>
 </div>

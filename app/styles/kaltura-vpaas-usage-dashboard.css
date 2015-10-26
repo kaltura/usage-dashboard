@@ -270,7 +270,10 @@ table.one-third-width {
   display: block;
   float: left;
 }
-.controls-row > *.text {
+.controls-row > *.dates > * {
+  float: left;
+}
+.controls-row > *.dates .text {
   padding-left: 10px;
 }
 .graph-row {
