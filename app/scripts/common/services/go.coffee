@@ -6,7 +6,7 @@ do ->
 		'$state'
 		($state) ->
 			_.extend @,
-				current: -> $state.current
+				current: -> _.extend {}, $state.current, $state.current
 
 				go: -> $state.go arguments...
 

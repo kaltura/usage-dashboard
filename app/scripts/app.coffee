@@ -22,6 +22,7 @@ do ->
 		'KalturaUsageDashboard.utils'
 		'KalturaUsageDashboard.rest'
 		'KalturaUsageDashboard.collections'
+		'KalturaUsageDashboard.head'
 		#directives
 		'KalturaUsageDashboard.directives.header'
 		'KalturaUsageDashboard.directives.side-menu'
