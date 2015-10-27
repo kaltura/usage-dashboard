@@ -9,13 +9,19 @@ do ->
 		controller: 'GraphCtrl'
 		scope:
 			data: '=graph'
-			decorate: '='
+			decorate: '=?'
 			units: '@'
 			yLabel: '@'
+			valueField: '@'
+			labelField: '@'
 
 	module.classy.controller
 		name: 'GraphCtrl'
 		injectToScope: ['constants']
+		init: ->
+			@$.decorate = 'months' unless @$.decorate
+			@$.valueField = 'value' unless @$.valueField
+			@$.labelField = 'label' unless @$.labelField
 
 		watch:
 			data: (value) -> 
@@ -42,14 +48,14 @@ do ->
 			for month in @$.data
 				data.push [
 					index
-					month.value
+					month[@$.valueField]
 				]
 				xaxisTicks.push [
 					index
-					month.label
+					month[@$.labelField]
 				]
-				if maxDataValue < month.value
-					maxDataValue = month.value
+				if maxDataValue < month[@$.valueField]
+					maxDataValue = month[@$.valueField]
 				index++
 
 			str = parseInt(maxDataValue).toString()

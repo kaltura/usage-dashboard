@@ -69,7 +69,6 @@ do ->
 
 
 	module.constant 'StringPrototype',
-
 		noSpaces: -> @replace /\s/g, ''
 
 		splice: (idx, rem, s) -> @slice(0, idx) + s + @slice idx + Math.abs(rem)
@@ -81,6 +80,15 @@ do ->
 		nPoints: -> @nMatches '\\\.'
 
 		contains: (str) -> @indexOf(str) >= 0
+
+	module.constant 'NumberPrototype',
+		isFloat: -> @ % 1 isnt 0
+
+	module.constant 'NumberExtension',
+		round: (n, nDecimalPlaces=0) ->
+			rank = Math.pow 10, nDecimalPlaces
+			Math.round(n * rank) / rank
+
 
 	module.service 'DatePrototype', [
 		'$filter'
@@ -232,3 +240,25 @@ do ->
 				date = new Date date
 				@isInMonth date.setMonth date.getMonth() - 1
 	]
+
+	module.constant 'DateExtension',
+		#from number like 20151023, where 2015 - year, 10 - month, 23 - date
+		fromYMDn: (n) ->
+			new Date Math.floor(n / 10000), Math.floor(n % 10000 / 100 - 1), n % 100
+
+		#from number like 201510, where 2015 - year, 10 - month
+		fromYMn: (n) ->
+			new Date Math.floor(n / 100), n % 100 - 1
+
+		#from number like YMDn or YMn
+		fromn: (n) ->
+			Date[switch "#{n}".length
+				when 6 then 'fromYMn'
+				when 8 then 'fromYMDn'
+			] n
+
+		#string like "2015-10-23"
+		fromYMD: (str) -> new Date str
+
+		#string like "2015-10"
+		fromYM: (str) -> new Date "#{str}-01"

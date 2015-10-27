@@ -12,8 +12,8 @@ do ->
 					reportType: 201
 					'reportInputFilter:interval': 'months'
 
-			@addFetchInterceptor (response) =>
-				@extract.graph(response, 'month').bandwidth_consumption or []
+			@addFetchInterceptor (response, payload) =>
+				@extract.months response, payload, 'bandwidth_consumption'
 
 			@
 	]

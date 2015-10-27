@@ -31,31 +31,21 @@ do ->
 		_fetchData: ->
 			@$.months = null
 			@bandwidthReport.fetch(@payload).then (response) =>
-				months = @utils.arrToObjByFn response, (month) =>
-					_.extend month,
-						label: @$filter('date') month.date, 'MMMM, yyyy'
-						value: parseFloat(month.value).toFixed 2
-						dates: []
-					month.date.toYM()
-				date = new Date @$.dates.from
-				while date.toYMDn() <= @$.dates.to.toYMDn()
-					monthMark = date.toYM()
-					months[monthMark].dates.push new Date date
-					date.setDate date.getDate() + 1
-				@$.months = @utils.objToArr months
-				@$.months.dates = @$.dates
+				@$.months = _.extend response, dates: @$.dates
 
 		getCsv: ->
 			return unless @$.months?
 			[
 				[
 					'Month'
+					'Year'
 					'Bandwidth Consumption (MB)'
 				]
 			].concat (
 				for month in @$.months
 					[
-						month.label
+						@$filter('date') month.dates[0], 'MMMM'
+						@$filter('date') month.dates[0], 'yyyy'
 						month.value
 					]
 			)

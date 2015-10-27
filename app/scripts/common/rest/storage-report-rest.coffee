@@ -12,8 +12,8 @@ do ->
 					reportType: 201
 					'reportInputFilter:interval': 'months'
 
-			@addFetchInterceptor (response) =>
-				@extract.graph(response, 'month').average_storage or []
+			@addFetchInterceptor (response, payload) =>
+				@extract.months response, payload, 'average_storage'
 
 			@
 	]

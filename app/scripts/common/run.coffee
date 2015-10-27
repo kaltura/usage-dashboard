@@ -5,11 +5,17 @@ do ->
 	module.run [
 		'ArrayPrototype'
 		'StringPrototype'
+		'NumberPrototype'
+		'NumberExtension'
 		'DatePrototype'
-		(ArrayPrototype, StringPrototype, DatePrototype) ->
+		'DateExtension'
+		(ArrayPrototype, StringPrototype, NumberPrototype, NumberExtension, DatePrototype, DateExtension) ->
 			_.extend Array::, ArrayPrototype
 			_.extend String::, StringPrototype
+			_.extend Number::, NumberPrototype
+			_.extend Number, NumberExtension
 			_.extend Date::, DatePrototype
+			_.extend Date, DateExtension
 	]
 
 	module.run [

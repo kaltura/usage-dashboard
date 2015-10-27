@@ -5,7 +5,7 @@
 		<div csv='getCsv()' name='average-storage' disabled='months==null'></div>
 	</div>
 
-	<div graph='months' decorate='"months"' y-label='Average Storage' units='(MB)'></div>
+	<div graph='months' decorate='"months"' y-label='Average Storage' units='(MB)' value-field='average_storage'></div>
 
 	<div class='row-fluid title-text'>
 		Monthly Usage Breakdown
@@ -22,7 +22,7 @@
 			<tbody>
 				<tr ng-repeat='month in months' ng-class='{odd:$index%2==1, even:$index%2==0}'>
 					<td>{{month.label}}</td>
-					<td>{{month.value}}</td>
+					<td>{{month.average_storage}}</td>
 				</tr>
 			</tbody>
 		</table>

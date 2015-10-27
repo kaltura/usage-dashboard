@@ -11,7 +11,7 @@
 		<canvas tc-chartjs-bar chart-options="chart.options" chart-data="chart.data" auto-legend></canvas>
 	</div> -->
 	
-	<div graph='months' decorate='"months"' y-label='Plays Number'></div>
+	<div graph='months' y-label='Plays Number' value-field='count_plays'></div>
 
 	<div class='row-fluid title-text'>
 		Monthly Usage Breakdown
@@ -28,7 +28,7 @@
 			<tbody>
 				<tr ng-repeat='month in months' ng-class='{odd:$index%2==1, even:$index%2==0}'>
 					<td>{{month.label}}</td>
-					<td>{{month.value}}</td>
+					<td>{{month.count_plays}}</td>
 				</tr>
 			</tbody>
 		</table>

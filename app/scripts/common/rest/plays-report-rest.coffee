@@ -56,8 +56,8 @@ do ->
 					reportType: 1
 					'reportInputFilter:interval': 'days'
 
-			@addFetchInterceptor (response) =>
-				@extract.graph(response, 'day').count_plays or []
+			@addFetchInterceptor (response, payload) =>
+				@extract.months response, payload, 'count_plays'
 
 			@
 	]
