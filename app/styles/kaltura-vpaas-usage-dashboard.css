@@ -264,6 +264,10 @@ table.one-third-width {
 .title-text .export-to-csv [ng-csv] {
   display: block;
 }
+.title-text .export-to-csv.disabled {
+  color: #888888;
+  cursor: default;
+}
 .controls-row {
   padding: 0 10px;
   line-height: 24px;

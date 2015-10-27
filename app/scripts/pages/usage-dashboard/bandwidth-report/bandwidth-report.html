@@ -3,7 +3,7 @@
 
 	<div class='row-fluid title-text'>
 		<!-- 50 GB Bandwidth consumed -->
-		<div csv='getCsv()' name='bandwidth-consumption' disabled='months==null'></div>
+		<div csv='bandwidth' filename='bandwidth-consumption' months='months'></div>
 	</div>
 
 	<div graph='months' decorate='"months"' y-label='Bandwidth Consumption' units='(GB)' value-field='bandwidth_consumption'></div>

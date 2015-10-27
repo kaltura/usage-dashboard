@@ -39,13 +39,13 @@ do ->
 				[
 					'Month'
 					'Year'
-					'Bandwidth Consumption (MB)'
+					'Bandwidth Consumption (GB)'
 				]
 			].concat (
 				for month in @$.months
 					[
 						@$filter('date') month.dates[0], 'MMMM'
 						@$filter('date') month.dates[0], 'yyyy'
-						month.value
+						month.bandwidth_consumption
 					]
 			)

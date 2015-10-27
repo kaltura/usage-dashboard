@@ -32,20 +32,3 @@ do ->
 			@$.months = null
 			@storageReport.fetch(@payload).then (response) =>
 				@$.months = _.extend response, dates: @$.dates
-
-		getCsv: ->
-			return unless @$.months?
-			[
-				[
-					'Month'
-					'Year'
-					'Average Storage (MB)'
-				]
-			].concat (
-				for month in @$.months
-					[
-						@$filter('date') month.dates[0], 'MMMM'
-						@$filter('date') month.dates[0], 'yyyy'
-						month.value
-					]
-			)

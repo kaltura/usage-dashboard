@@ -39,13 +39,13 @@ do ->
 				[
 					'Month'
 					'Year'
-					'Transcoding Consumption (MB)'
+					'Transcoding Consumption (GB)'
 				]
 			].concat (
 				for month in @$.months
 					[
 						@$filter('date') month.dates[0], 'MMMM'
 						@$filter('date') month.dates[0], 'yyyy'
-						month.value
+						month.transcoding_consumption
 					]
 			)
