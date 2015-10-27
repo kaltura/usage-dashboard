@@ -80,6 +80,8 @@ do ->
 
 		nPoints: -> @nMatches '\\\.'
 
+		contains: (str) -> @indexOf(str) >= 0
+
 	module.service 'DatePrototype', [
 		'$filter'
 		'dayms'
