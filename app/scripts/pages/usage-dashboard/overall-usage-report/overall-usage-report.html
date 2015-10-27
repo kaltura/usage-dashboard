@@ -1,41 +1,42 @@
-<div class='main-content container-fluid span10' id='overall-usage-report'>
-	<div class='row-fluid title-text'>
-		Month to Date Usage Summary
-	</div>
+<div class='main-content container-fluid span10' id='overall-usage-report' ng-hide='go.isLoading()'>
 
 	<div class='row-fluid'>
+		<div class='row-fluid title-text'>
+			Month to Date Usage Summary
+			<div csv='overall-usage' months='months'></div>
+		</div>
 		<table class='panel-table row-fluid'>
 			<thead>
 				<tr>
 					<th class='span'>
 						<div class='title'>Plays</div>
 						<div class='units'>(CPM)</div>
-						<div class='value'>350</div>
-					</th>
-					<th class='span'>
-						<div class='title'>Bandwidth Consumption</div>
-						<div class='units'>(GB)</div>
-						<div class='value'>933</div>
+						<div class='value'>{{currentMonth.count_plays}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Average Storage</div>
 						<div class='units'>(GB)</div>
-						<div class='value'>10271</div>
+						<div class='value'>{{currentMonth.average_storage}}</div>
+					</th>
+					<th class='span'>
+						<div class='title'>Bandwidth Consumption</div>
+						<div class='units'>(GB)</div>
+						<div class='value'>{{currentMonth.bandwidth_consumption}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Transcoding Consumption</div>
 						<div class='units'>(GB)</div>
-						<div class='value'>22</div>
+						<div class='value'>{{currentMonth.transcoding_consumption}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Media Entries</div>
 						<div class='units'></div>
-						<div class='value'>50</div>
+						<div class='value'>{{currentMonth.count_total}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>End Users</div>
 						<div class='units'></div>
-						<div class='value'>20</div>
+						<div class='value'>{{}}</div>
 					</th>
 				</tr>
 			</thead>
@@ -50,7 +51,7 @@
 						<div class='title'>Plays</div>
 						<div class='units'>(CPM)</div>
 						<div class='values'>
-							<div class='value under-bound'>350</div>
+							<div class='value under-bound'>{{currentMonth.count_plays}}</div>
 							<div class='total'>of 700 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -59,7 +60,7 @@
 						<div class='title'>Bandwidth Consumption</div>
 						<div class='units'>(GB)</div>
 						<div class='values'>
-							<div class='value near-bound'>933</div>
+							<div class='value near-bound'>{{currentMonth.average_storage}}</div>
 							<div class='total'>of 1000 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -68,7 +69,7 @@
 						<div class='title'>Average Storage</div>
 						<div class='units'>(GB)</div>
 						<div class='values'>
-							<div class='value over-bound'>1027</div>
+							<div class='value over-bound'>{{currentMonth.bandwidth_consumption}}</div>
 							<div class='total'>of 1000 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -77,7 +78,7 @@
 						<div class='title'>Transcoding Consumption</div>
 						<div class='units'>(GB)</div>
 						<div class='values'>
-							<div class='value near-bound'>22</div>
+							<div class='value near-bound'>{{currentMonth.transcoding_consumption}}</div>
 							<div class='total'>of 25 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -86,7 +87,7 @@
 						<div class='title'>Media Entries</div>
 						<div class='units'></div>
 						<div class='values'>
-							<div class='value under-bound'>350</div>
+							<div class='value under-bound'>{{currentMonth.count_total}}</div>
 							<div class='total'>of 800 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -95,7 +96,7 @@
 						<div class='title'>End Users</div>
 						<div class='units'></div>
 						<div class='values'>
-							<div class='value under-bound'>20</div>
+							<div class='value under-bound'>{{}}</div>
 							<div class='total'>of 40 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -105,53 +106,5 @@
 		</table>
 	</div>
 
-	<div class='row-fluid title-text'>
-		<span>Monthly Usage Breakdown</span>
-		<span class='export-to-csv'>Export to CSV</span>
-	</div>
-
-	<div class='row-fluid'>
-		<table class='usual-table row-fluid'>
-			<thead>
-				<tr>
-					<th>Month</th>
-					<th>Plays (CPM)</th>
-					<th>Bandwidth Consumption (GB)</th>
-					<th>Average Storage (GB)</th>
-					<th>Transcoding Consumption (GB)</th>
-					<th>Media Entries</th>
-					<th>End Users</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class='even'>
-					<td>September 2015</td>
-					<td>350</td>
-					<td>933</td>
-					<td>10271</td>
-					<td>22</td>
-					<td>50</td>
-					<td>20</td>
-				</tr>
-				<tr class='odd'>
-					<td>August 2015</td>
-					<td>350</td>
-					<td>933</td>
-					<td>10271</td>
-					<td>22</td>
-					<td>50</td>
-					<td>20</td>
-				</tr>
-				<tr class='even'>
-					<td>July 2015</td>
-					<td>350</td>
-					<td>933</td>
-					<td>10271</td>
-					<td>22</td>
-					<td>50</td>
-					<td>20</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<div monthly-breakdown='overall-usage' months='lastThreeMonths'></div>
 </div>

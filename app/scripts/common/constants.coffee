@@ -69,6 +69,25 @@ do ->
 				title: 'Images'
 				field: 'count_image'
 			]
+			'overall-usage': [
+				title: 'Plays (CPM)'
+				field: 'count_plays'
+			,
+				title: 'Average Storage (GB)'
+				field: 'average_storage'
+			,
+				title: 'Transcoding Consumption (GB)'
+				field: 'transcoding_consumption'
+			,
+				title: 'Bandwidth Consumption (GB)'
+				field: 'bandwidth_consumption'
+			,
+				title: 'Media Entries'
+				field: 'count_total'
+			,
+				title: 'End Users'
+				field: 'end_users'
+			]
 
 
 	module.constant 'ArrayPrototype',
@@ -276,6 +295,8 @@ do ->
 			isInPreviousMonth: (date) ->
 				date = new Date date
 				@isInMonth date.setMonth date.getMonth() - 1
+
+			nMonths: -> @getFullYear() * 12 + @getMonth() - 11
 	]
 
 	module.constant 'DateExtension',
@@ -299,3 +320,5 @@ do ->
 
 		#string like "2015-10"
 		fromYM: (str) -> new Date "#{str}-01"
+
+		nMonths: (d1, d2) -> (new Date d2).nMonths() - (new Date d1).nMonths()
