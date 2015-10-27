@@ -24,28 +24,9 @@ do ->
 			@_fetchData()
 
 		_extractPayload: ->
-			@payload =
-				'reportInputFilter:fromDay': @$.dates.from.toYMDn()
-				'reportInputFilter:toDay': @$.dates.to.toYMDn()
+			@payload = @utils.reports.extractPayload @$.dates
 
 		_fetchData: ->
 			@$.months = null
 			@transcodingConsumptionReport.fetch(@payload).then (response) =>
 				@$.months = _.extend response, dates: @$.dates
-
-		getCsv: ->
-			return unless @$.months?
-			[
-				[
-					'Month'
-					'Year'
-					'Transcoding Consumption (GB)'
-				]
-			].concat (
-				for month in @$.months
-					[
-						@$filter('date') month.dates[0], 'MMMM'
-						@$filter('date') month.dates[0], 'yyyy'
-						month.transcoding_consumption
-					]
-			)

@@ -49,6 +49,11 @@ do ->
 				) navigator.userAgent or navigator.vendor or window.opera
 				check
 
+		reports:
+			extractPayload: (dates) ->
+				'reportInputFilter:fromDay': dates.from.toYMDn()
+				'reportInputFilter:toDay': dates.to.toYMDn()
+
 	module.service 'tryApply', [
 		'$rootScope'
 		($rootScope) ->

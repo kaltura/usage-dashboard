@@ -26,9 +26,7 @@ do ->
 			@_fetchData()
 
 		_extractPayload: ->
-			@payload =
-				'reportInputFilter:fromDay': @$.dates.from.toYMDn()
-				'reportInputFilter:toDay': @$.dates.to.toYMDn()
+			@payload = @utils.reports.extractPayload @$.dates
 
 		_fetchPlaysNumber: ->
 			@playsReport.playsNumber.fetch(@payload).then (response) =>
