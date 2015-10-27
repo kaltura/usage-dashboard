@@ -12,7 +12,9 @@ do ->
 
 	module.classy.controller
 		name: 'HeaderCtrl'
+		inject: ['kmc']
 		injectToScope: ['go']
 
 		init: ->
 			@$.items = @go.state().substates
+			@$.helpHref = "#{@kmc.vars.service_url}/content/docs/NetHelp/default.htm#!Documents/contentreports.htm"

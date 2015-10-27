@@ -41,7 +41,7 @@ do ->
 		]
 		reports:
 			plays: [
-				title: 'Plays'
+				title: 'Plays (CPM)'
 				field: 'count_plays'
 			]
 			storage: [
