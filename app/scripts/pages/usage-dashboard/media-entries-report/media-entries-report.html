@@ -6,30 +6,6 @@
 	</div>
 
 	<div graph='months' decorate='"months"' y-label='Media Entries Total' value-field='count_total'></div>
-
-	<div class='row-fluid title-text'>
-		Monthly Usage Breakdown
-	</div>
-	<div class='row-fluid'>
-		<table class='usual-table row-fluid'>
-			<thead>
-				<tr>
-					<th>Month</th>
-					<th>Total</th>
-					<th>Video</th>
-					<th>Audio</th>
-					<th>Image</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat='month in months' ng-class='{odd:$index%2==1, even:$index%2==0}'>
-					<td>{{month.label}}</td>
-					<td>{{month.count_total}}</td>
-					<td>{{month.count_video}}</td>
-					<td>{{month.count_audio}}</td>
-					<td>{{month.count_image}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	
+	<div monthly-breakdown='media-entries' months='months'></div>
 </div>

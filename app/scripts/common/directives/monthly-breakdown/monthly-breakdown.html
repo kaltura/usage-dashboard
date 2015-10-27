@@ -1,0 +1,17 @@
+<div class='row-fluid' ng-show='months!=null'>
+	<div class='row-fluid title-text'>
+		Monthly Usage Breakdown
+	</div>
+	<table class='usual-table row-fluid' ng-class='cls'>
+		<thead>
+			<tr>
+				<th ng-repeat='column in columns'>{{column.title}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat='month in months' ng-class='{odd:$index%2==1, even:$index%2==0}'>
+				<td ng-repeat='column in columns'>{{month[column.field]}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

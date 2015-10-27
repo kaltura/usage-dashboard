@@ -31,6 +31,7 @@ do ->
 		'KalturaUsageDashboard.directives.spinner'
 		'KalturaUsageDashboard.directives.csv'
 		'KalturaUsageDashboard.directives.overlay'
+		'KalturaUsageDashboard.directives.monthly-breakdown'
 		#services
 		'KalturaUsageDashboard.services.go'
 		#factories
