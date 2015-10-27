@@ -13,7 +13,7 @@ do ->
 					'reportInputFilter:interval': 'months'
 
 			@addFetchInterceptor (response) =>
-				@extract.graph(response, 'month').bandwidth_consumption or []
+				@extract.graph(response, 'month').average_storage or []
 
 			@
 	]
