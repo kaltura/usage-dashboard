@@ -19,6 +19,7 @@ do ->
 		'KalturaUsageDashboard.config'
 		'KalturaUsageDashboard.constants'
 		'KalturaUsageDashboard.run'
+		'KalturaUsageDashboard.filters'
 		'KalturaUsageDashboard.utils'
 		'KalturaUsageDashboard.rest'
 		'KalturaUsageDashboard.collections'

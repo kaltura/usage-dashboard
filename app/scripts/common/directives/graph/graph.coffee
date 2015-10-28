@@ -17,11 +17,13 @@ do ->
 
 	module.classy.controller
 		name: 'GraphCtrl'
+		inject: ['$filter']
 		injectToScope: ['constants']
 		init: ->
 			@$.decorate = 'months' unless @$.decorate
 			@$.valueField = 'value' unless @$.valueField
 			@$.labelField = 'label' unless @$.labelField
+			@output = @$filter 'output'
 
 		watch:
 			data: (value) -> 
@@ -92,7 +94,7 @@ do ->
 						content: (label, x, y, flot) =>
 							"""
 								<div class='text'>#{flot.series.xaxis.ticks[flot.dataIndex].label}</div>
-								<div class='value'>#{flot.series.data[flot.dataIndex][1]} #{@$.units or ''}</div>
+								<div class='value'>#{@output flot.series.data[flot.dataIndex][1]} #{@$.units or ''}</div>
 							"""
 						cssClass: 'graph-tooltip'
 					bars:
@@ -119,8 +121,8 @@ do ->
 						tickLength: 15
 						tickSize: tickSize
 						max: maxYTick
-						tickFormatter: (val) ->
-							"<p>#{if val % (tickSize*2) then '' else val}</p>"
+						tickFormatter: (val) =>
+							"<p>#{if val % (tickSize*2) then '' else @output val}</p>"
 					legend:
 						noColumns: 0
 						labelBoxBorderColor: '#000000'

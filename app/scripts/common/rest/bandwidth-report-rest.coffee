@@ -10,10 +10,12 @@ do ->
 				params:
 					action: 'getGraphs'
 					reportType: 201
-					'reportInputFilter:interval': 'months'
+					'reportInputFilter:interval': 'days'
 
-			@addFetchInterceptor (response, payload) =>
-				@extract.months response, payload, 'bandwidth_consumption'
+			modifiers = @modifiers 'bandwidth_consumption'
+
+			@addFetchInterceptor modifiers.extract.months
+			@addFetchInterceptor modifiers.convert.MBtoGB
 
 			@
 	]

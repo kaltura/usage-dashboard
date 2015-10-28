@@ -12,13 +12,12 @@ do ->
 					reportType: 5
 					'reportInputFilter:interval': 'days'
 
-			@addFetchInterceptor (response, payload) =>
-				@extract.months response, payload, [
-					'count_total'
-					'count_video'
-					'count_audio'
-					'count_image'
-				]
+			@addFetchInterceptor @modifiers([
+				'count_total'
+				'count_video'
+				'count_audio'
+				'count_image'
+			]).extract.months
 
 			@
 	]

@@ -23,7 +23,7 @@ do ->
 					reportType: 1
 
 			@addFetchInterceptor (response) =>
-				parseInt @extract.dict(response).count_plays or 0
+				parseInt @modifiers().extract.dict(response).count_plays or 0
 
 			@
 	]
@@ -56,8 +56,7 @@ do ->
 					reportType: 1
 					'reportInputFilter:interval': 'days'
 
-			@addFetchInterceptor (response, payload) =>
-				@extract.months response, payload, 'count_plays'
+			@addFetchInterceptor @modifiers('count_plays').extract.months
 
 			@
 	]

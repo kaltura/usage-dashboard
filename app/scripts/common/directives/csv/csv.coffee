@@ -15,6 +15,9 @@ do ->
 	module.classy.controller
 		name: 'CsvCtrl'
 		inject: ['constants', '$filter']
+		init: ->
+			@output = @$filter 'output'
+			@date = @$filter 'date'
 
 		getCsvArray: ->
 			columns = @constants.columns.reports[@$.name]
@@ -26,7 +29,7 @@ do ->
 			].concat (
 				for month in @$.months
 					[
-						@$filter('date') month.dates[0], 'MMMM'
-						@$filter('date') month.dates[0], 'yyyy'
-					].concat (month[column.field] for column in columns)
+						@date month.dates[0], 'MMMM'
+						@date month.dates[0], 'yyyy'
+					].concat (@output month[column.field] for column in columns)
 			)

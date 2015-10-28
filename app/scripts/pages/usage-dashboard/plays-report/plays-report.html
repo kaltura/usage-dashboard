@@ -3,7 +3,7 @@
 
 	<div class='row-fluid title-text'>
 		<span ng-show='mediaEntriesNumber!=null && playsNumber!=null && !go.isLoading()'>
-			{{mediaEntriesNumber}} media entries played {{playsNumber}} times
+			{{mediaEntriesNumber | output}} media entries played {{playsNumber | output}} times
 		</span>
 	</div>
 

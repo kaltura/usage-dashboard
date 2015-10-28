@@ -17,7 +17,7 @@ do ->
 
 	module.classy.controller
 		name: 'PlaysReportCtrl'
-		inject: ['playsReport', 'utils', '$filter']
+		inject: ['playsReport', 'utils']
 
 		fetch: ->
 			@_extractPayload()
