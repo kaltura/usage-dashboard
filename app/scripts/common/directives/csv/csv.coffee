@@ -14,22 +14,32 @@ do ->
 
 	module.classy.controller
 		name: 'CsvCtrl'
-		inject: ['constants', '$filter']
+		inject: ['constants', '$filter', 'modals', 'constants']
 		init: ->
 			@output = @$filter 'output'
 			@date = @$filter 'date'
 
 		getCsvArray: ->
-			columns = @constants.columns.reports[@$.name]
-			[
+			from = @$.months[0].dates[0]
+			to = @$.months[@$.months.length - 1].dates[@$.months[@$.months.length - 1].dates.length - 1]
+			@modals.confirm(
+				message: """
+					<div>You are going to download <b>#{@constants.reports[@$.name].name}</b> in .csv format.</div>
+					<div>Period: <b>#{@date from}#{if from.toYMD() isnt to.toYMD() then ' - ' + @date to else ''}</b></div>
+					<div>Proceed?</div>
+				"""
+				title: 'Export CSV'
+			).result.then =>
+				columns = @constants.columns.reports[@$.name]
 				[
-					'Month'
-					'Year'
-				].concat (column.title for column in columns)
-			].concat (
-				for month in @$.months
 					[
-						@date month.dates[0], 'MMMM'
-						@date month.dates[0], 'yyyy'
-					].concat (@output month[column.field] for column in columns)
-			)
+						'Month'
+						'Year'
+					].concat (column.title for column in columns)
+				].concat (
+					for month in @$.months
+						[
+							@date month.dates[0], 'MMMM'
+							@date month.dates[0], 'yyyy'
+						].concat (@output month[column.field] for column in columns)
+				)

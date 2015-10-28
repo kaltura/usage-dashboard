@@ -4,7 +4,7 @@ do ->
 
 	module.provider 'kmc', ->
 		$get: ->
-			ks = 'ZWQ5MWRkNmU3Zjc2YzA5Y2I5ZDVjNTdkNzhkY2E4YjIxY2JmOTkyN3w5MzkzNDE7OTM5MzQxOzE0NDYwNDQwNzI7MjsxNDQ1OTU3NjcyLjU1Njtya3NoYXJlZGJveEBnbWFpbC5jb207ZGlzYWJsZWVudGl0bGVtZW50Ozs='
+			ks = 'MTE3MmMwYjkwOTUzYTRkMDc1MzMwMmZhNjAzZWUxMmI2Y2M5ZmY5ZHw5MzkzNDE7OTM5MzQxOzE0NDYxMzMzOTk7MjsxNDQ2MDQ2OTk5LjYzNDI7cmtzaGFyZWRib3hAZ21haWwuY29tO2Rpc2FibGVlbnRpdGxlbWVudDs7'
 			for param in (location.search or location.hash)?.split('?')[1]?.split('&') or []
 				parts = param.split '='
 				if parts[0] is 'ks'

@@ -25,6 +25,20 @@ do ->
 			large: 26
 			full: 32
 
+	module.constant 'reports',
+		'overall-usage':
+			name: 'Overall Usage report'
+		plays:
+			name: 'Plays report'
+		storage:
+			name: 'Average Storage report'
+		bandwidth:
+			name: 'Bandwidth Consumption report'
+		'transcoding-consumption':
+			name: 'Transcoding Consumption report'
+		'media-entries':
+			name: 'Media Entries report'
+
 
 	module.constant 'columns',
 		default: [

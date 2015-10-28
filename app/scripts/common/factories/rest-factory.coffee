@@ -10,7 +10,8 @@ do ->
 		'kmc'
 		'utils'
 		'$filter'
-		(Restangular, Collection, x2js, go, kmc, utils, $filter) ->
+		'errorsHandler'
+		(Restangular, Collection, x2js, go, kmc, utils, $filter, errorsHandler) ->
 			(config) ->
 				#modify config with default settings
 				_.extend config,
@@ -88,10 +89,19 @@ do ->
 				@addFetchInterceptor (response) ->
 					x2js.xml_str2json(response).xml.result
 
+				#errors handling
+				@addFetchInterceptor (parsed, payload) =>
+					if parsed.error?
+						@cancelAllRequests parsed
+						{}
+					else
+						parsed
+
 				#affect global loading flag on fetching
 				@extendFetch
 					b: -> go.inc()
 					f: -> go.dec()
+					e: errorsHandler
 
 				@
 	]

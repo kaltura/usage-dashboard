@@ -30,3 +30,5 @@ do ->
 			@$.months = null
 			@bandwidthReport.fetch(@payload).then (response) =>
 				@$.months = _.extend response, dates: @$.dates
+			, (response) =>
+				console.log response

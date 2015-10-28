@@ -1,0 +1,12 @@
+<span>	
+	<div class='modal-header'>
+		<h3 class='modal-title'>{{title || 'Modal'}}</h3>
+	</div>
+	<div class='modal-body'>
+		<div ng-transclude></div>
+	</div>
+	<div class='modal-footer'>
+		<button class='btn btn-primary' type='button' ng-click='$parent.$close()' ng-show='okText'>{{okText}}</button>
+		<button class='btn btn-default' type='button' ng-click='$parent.$dismiss()' ng-show='cancelText'>{{cancelText}}</button>
+	</div>
+</span>

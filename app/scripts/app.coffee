@@ -24,6 +24,7 @@ do ->
 		'KalturaUsageDashboard.rest'
 		'KalturaUsageDashboard.collections'
 		'KalturaUsageDashboard.head'
+		'KalturaUsageDashboard.services.modals'
 		#directives
 		'KalturaUsageDashboard.directives.header'
 		'KalturaUsageDashboard.directives.side-menu'
@@ -34,8 +35,11 @@ do ->
 		'KalturaUsageDashboard.directives.csv'
 		'KalturaUsageDashboard.directives.overlay'
 		'KalturaUsageDashboard.directives.monthly-breakdown'
+		'KalturaUsageDashboard.directives.modal'
+		'KalturaUsageDashboard.directives.html-bind-compile'
 		#services
 		'KalturaUsageDashboard.services.go'
+		'KalturaUsageDashboard.services.errors-handler'
 		#factories
 		'KalturaUsageDashboard.factories.rest'
 		'KalturaUsageDashboard.factories.module-consolidator'

@@ -23,9 +23,9 @@
     "angular-ui-date": "~0.0.8",
     "flot.tooltip": "~0.8.5",
     "angular-select2": "~1.4.2",
-    "angular-bootstrap": "~0.14.1",
+    "angular-bootstrap": "~0.14.3",
     "angular-ui-router": "~0.2.15",
-    "ng-bundle-collection": "~1.0.5",
+    "ng-bundle-collection": "~1.0.6",
     "angular-x2js": "~0.2.0",
     "angular-spinkit": "~0.3.3",
     "ng-csv": "~0.3.6"
