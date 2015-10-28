@@ -47,8 +47,10 @@ do ->
 									for field in fields
 										parsed_objects[field] = utils.arrToObjByFn parsed[field] or [], (day) -> day.date.toYMD()
 									months = {}
-									date = Date.fromYMDn payload['reportInputFilter:fromDay']
-									while date.toYMDn() <= payload['reportInputFilter:toDay']
+									from = payload['reportInputFilter:fromDay']
+									to = payload['reportInputFilter:toDay']
+									date = Date.fromYMDn from
+									while date.toYMDn() <= to
 										monthMark = date.toYM()
 										unless months[monthMark]?
 											months[monthMark] =
@@ -60,13 +62,24 @@ do ->
 										for field in fields
 											months[monthMark][field] += parseFloat parsed_objects[field][date.toYMD()]?.value or 0
 										date.setDate date.getDate() + 1
-									utils.objToArr months
+									@convert.monthsLabels utils.objToArr(months),
+										from: Date.fromYMDn from
+										to: Date.fromYMDn to
 
 							convert:
 								MBtoGB: (months) ->
 									for month in months
 										for field in fields
 											month[field] /= 1024
+									months
+
+								monthsLabels: (months, dates) ->
+									for month in months
+										monthDate = new Date month.dates[0]
+										if month.dates.length isnt monthDate.nDaysInMonth() and monthDate.toYMn() in [dates.from.toYMn(), dates.to.toYMn()]
+											firstDate = monthDate.getDate()
+											lastDate = month.dates[month.dates.length-1].getDate()
+											month.label = "#{firstDate}#{if firstDate isnt lastDate then '-' + lastDate else ''} #{month.label}"
 									months
 
 
