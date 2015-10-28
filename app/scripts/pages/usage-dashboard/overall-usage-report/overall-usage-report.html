@@ -11,27 +11,27 @@
 					<th class='span'>
 						<div class='title'>Plays</div>
 						<div class='units'>(CPM)</div>
-						<div class='value'>{{currentMonth.count_plays}}</div>
+						<div class='value'>{{currentMonth.count_plays | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Average Storage</div>
 						<div class='units'>(GB)</div>
-						<div class='value'>{{currentMonth.average_storage}}</div>
+						<div class='value'>{{currentMonth.average_storage | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Bandwidth Consumption</div>
 						<div class='units'>(GB)</div>
-						<div class='value'>{{currentMonth.bandwidth_consumption}}</div>
+						<div class='value'>{{currentMonth.bandwidth_consumption | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Transcoding Consumption</div>
 						<div class='units'>(GB)</div>
-						<div class='value'>{{currentMonth.transcoding_consumption}}</div>
+						<div class='value'>{{currentMonth.transcoding_consumption | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Media Entries</div>
 						<div class='units'></div>
-						<div class='value'>{{currentMonth.count_total}}</div>
+						<div class='value'>{{currentMonth.count_total | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>End Users</div>
@@ -51,17 +51,8 @@
 						<div class='title'>Plays</div>
 						<div class='units'>(CPM)</div>
 						<div class='values'>
-							<div class='value under-bound'>{{currentMonth.count_plays}}</div>
+							<div class='value under-bound'>{{currentMonth.count_plays | output}}</div>
 							<div class='total'>of 700 used</div>
-							<div class='text'>Allowance reset on 1st of the Month</div>
-						</div>
-					</th>
-					<th class='span'>
-						<div class='title'>Bandwidth Consumption</div>
-						<div class='units'>(GB)</div>
-						<div class='values'>
-							<div class='value near-bound'>{{currentMonth.average_storage}}</div>
-							<div class='total'>of 1000 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
 					</th>
@@ -69,7 +60,16 @@
 						<div class='title'>Average Storage</div>
 						<div class='units'>(GB)</div>
 						<div class='values'>
-							<div class='value over-bound'>{{currentMonth.bandwidth_consumption}}</div>
+							<div class='value near-bound'>{{currentMonth.average_storage | output}}</div>
+							<div class='total'>of 1000 used</div>
+							<div class='text'>Allowance reset on 1st of the Month</div>
+						</div>
+					</th>
+					<th class='span'>
+						<div class='title'>Bandwidth Consumption</div>
+						<div class='units'>(GB)</div>
+						<div class='values'>
+							<div class='value over-bound'>{{currentMonth.bandwidth_consumption | output}}</div>
 							<div class='total'>of 1000 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -78,7 +78,7 @@
 						<div class='title'>Transcoding Consumption</div>
 						<div class='units'>(GB)</div>
 						<div class='values'>
-							<div class='value near-bound'>{{currentMonth.transcoding_consumption}}</div>
+							<div class='value near-bound'>{{currentMonth.transcoding_consumption | output}}</div>
 							<div class='total'>of 25 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -87,7 +87,7 @@
 						<div class='title'>Media Entries</div>
 						<div class='units'></div>
 						<div class='values'>
-							<div class='value under-bound'>{{currentMonth.count_total}}</div>
+							<div class='value under-bound'>{{currentMonth.count_total | output}}</div>
 							<div class='total'>of 800 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
