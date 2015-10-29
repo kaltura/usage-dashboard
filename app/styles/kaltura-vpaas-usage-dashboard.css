@@ -421,8 +421,8 @@ table.one-third-width {
   width: 100px;
   display: block;
   border: 1px solid #d8d7d7;
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
   border-right: 0;
   background: #ffffff;
 }
@@ -450,8 +450,8 @@ table.one-third-width {
   width: 24px;
   display: block;
   border: 1px solid #d8d7d7;
-  border-bottom-right-radius: 6px;
-  border-top-right-radius: 6px;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
 }
 .datepicker .icon i {
   display: block;
@@ -499,13 +499,13 @@ table.one-third-width {
   box-shadow: none;
   height: 24px;
   line-height: 24px;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .select .select2-container .select2-choice .select2-arrow,
 .select .select2-container .select2-choices .select2-arrow {
   border-left: 1px solid #d8d7d7;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   width: 24px;
   background: -moz-linear-gradient(top, #eeeeee 50%, #d6d6d6 100%);
   /* FF3.6+ */
@@ -554,8 +554,8 @@ table.one-third-width {
 .select2-drop {
   font-size: 12px;
   box-shadow: none;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 .select2-drop:focus {
   border: 1px solid #d8d7d7;
@@ -596,11 +596,11 @@ table.one-third-width {
   border-radius: 0;
 }
 .modal .modal-content {
-  border-radius: 9px;
+  border-radius: 10px;
 }
 .modal .modal-content .modal-header {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   background-color: #fff;
   color: black;
 }

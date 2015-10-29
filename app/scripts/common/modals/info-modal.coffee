@@ -20,6 +20,6 @@ do ->
 					@super().open _.defaults(data,
 						okText: 'OK'
 						cancelText: 'Cancel'
-						type: 'primary'
+						type: 'info'
 					), @params
 	]
