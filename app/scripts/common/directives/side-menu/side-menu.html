@@ -7,7 +7,7 @@
 			<ul class='inner-ul'>
 				<li ng-repeat='menuItem in menuItems' ng-class='{active:menuItem.name==go.current().name}'>
 					<span>
-						<a ui-sref='{{menuItem.name}}'>
+						<a ng-click='go.path(menuItem)'>
 							{{menuItem.data.pageTitle}}
 						</a>
 					</span>

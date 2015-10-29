@@ -2,7 +2,7 @@
 	<div class='usage-dashboard-header-inner container-fluid'>
 		<ul class='usage-dashboard-header-menu'>
 			<li ng-repeat='item in items' ng-class='{active:go.current().name.includes(item.name)}'>
-				<a ui-sref='{{item.name}}'>
+				<a ng-click='go.path(item)'>
 					{{item.data.pageTitle}}
 				</a>
 			</li>

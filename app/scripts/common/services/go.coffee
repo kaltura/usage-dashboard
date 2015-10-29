@@ -4,11 +4,20 @@ do ->
 
 	module.service 'go', [
 		'$state'
-		($state) ->
+		'$location'
+		($state, $location) ->
 			_.extend @,
 				current: -> _.extend {}, $state.current, $state.current
 
-				go: -> $state.go arguments...
+				go: (name) -> $state.transitionTo name, {}, inherit: yes
+
+				path: =>
+					switch arguments.length
+						when 0 then @$location.path
+						when 1
+							item = arguments[0]
+							target = $state.href item.name
+							$location.path target
 
 				$state: $state
 
