@@ -22,7 +22,7 @@ do ->
 		getCsvArray: ->
 			from = @$.months[0].dates[0]
 			to = @$.months[@$.months.length - 1].dates[@$.months[@$.months.length - 1].dates.length - 1]
-			@modals.confirm(
+			@modals.confirm.open(
 				message: """
 					<div>You are going to download <b>#{@constants.reports[@$.name].name}</b> in .csv format.</div>
 					<div>Period: <b>#{@date from}#{if from.toYMD() isnt to.toYMD() then ' - ' + @date to else ''}</b></div>

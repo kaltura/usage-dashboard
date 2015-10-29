@@ -12,5 +12,5 @@ do ->
 						else error.error.message
 				else "Unable to load the requested information"
 
-				modals.error message: message
+				modals.error.open message: message
 	]

@@ -43,6 +43,7 @@ do ->
 		#factories
 		'KalturaUsageDashboard.factories.rest'
 		'KalturaUsageDashboard.factories.module-consolidator'
+		'KalturaUsageDashboard.factories.modal'
 		#pages
 		'KalturaUsageDashboard.usage-dashboard'
 	]

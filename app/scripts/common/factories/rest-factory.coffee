@@ -29,9 +29,9 @@ do ->
 						fields = [fields] unless _.isArray fields
 						_.extend @,
 							extract:
-								dict: (response) ->
-									keys = response.header.split ','
-									values = response.data.split ','
+								dict: (response={}) ->
+									keys = response.header?.split ','
+									values = response.data?.split ','
 									_.zipObject keys, values
 
 								graph: (response) ->
