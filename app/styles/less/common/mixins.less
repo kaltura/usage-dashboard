@@ -11,12 +11,13 @@
 }
 
 .gradient(@start, @end, @start-percent:25%, @end-percent:100%){
-	background: -moz-linear-gradient(top, @start @start-percent, @end @end-percent); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(@start-percent,@start), color-stop(@end-percent, @end)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, @start @start-percent, @end @end-percent); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, @start @start-percent, @end @end-percent); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, @start @start-percent, @end @end-percent); /* IE10+ */
-	background: linear-gradient(to bottom, @start @start-percent, @end @end-percent); /* W3C */
+	background-image: -khtml-gradient(linear, left top, left bottom, from(@start), to(@end));
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(@start-percent,@start), color-stop(@end-percent, @end)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top, @start @start-percent, @end @end-percent); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top, @start @start-percent, @end @end-percent); /* Opera 11.10+ */
+	background-image: -moz-linear-gradient(top, @start @start-percent, @end @end-percent); /* FF3.6+ */
+	background-image: -ms-linear-gradient(top, @start @start-percent, @end @end-percent); /* IE10+ */
+	background-image: linear-gradient(to bottom, @start @start-percent, @end @end-percent); /* W3C */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start}',endColorstr='@{end}',GradientType=0)"; /* IE6-9 */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start}',endColorstr='@{end}',GradientType=0); /* IE6-9 */
 }
@@ -39,6 +40,18 @@
 
 .gradient-control-dark(){
 	.gradient(#eeeeee, #d6d6d6, 50%);
+}		
+
+.gradient-blue(){
+	.gradient(@blue-gradient-top, @blue-gradient-bottom, 0%);
+}
+
+.gradient-dark(){
+	.gradient(#ECECEC, #9E9E9E, 0%);
+}
+
+.gradient-light-blue{
+	.gradient(@light-blue-gradient-top, @light-blue-gradient-bottom, 0%);
 }
 
 .height-2(@height){

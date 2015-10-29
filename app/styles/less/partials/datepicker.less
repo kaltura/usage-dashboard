@@ -45,10 +45,45 @@
 	}
 }
 
-.ui-datepicker-div{
+.ui-datepicker{
 	.ui-datepicker-header{
+		.gradient-control();
 		.ui-datepicker-title{
+			select{
+				option{
+					&:hover{
+						background-color: @graph-column;
+					}
+				}
+			}
+		}
+	}
+	.ui-datepicker-calendar{
+		margin: 0;
+	}
+	.ui-datepicker-prev,.ui-datepicker-next{
+		span{
+			margin-top: -4px;
+		}
+	}
 
+	td{
+		.ui-state-active{
+			.gradient-light-blue() !important;
+		}
+		.ui-state-hover{
+			background-color: transparent;
+			background-image: none;
+		}
+		a:hover{
+			background-color: @graph-column !important;
+			.gradient-blue() !important;
+		}
+	}
+	.ui-datepicker-today{
+		a{
+			background-color: @graph-column;
+			.gradient-dark();
 		}
 	}
 }
