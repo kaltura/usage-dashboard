@@ -596,7 +596,7 @@ table.one-third-width {
   border-radius: 0;
 }
 .modal .modal-content {
-  border-radius: 10px;
+  border-radius: 11px;
 }
 .modal .modal-content .modal-header {
   border-top-left-radius: 8px;
