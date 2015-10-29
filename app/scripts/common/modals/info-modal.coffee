@@ -3,6 +3,8 @@ do ->
 	module = angular.module 'KalturaUsageDashboard.services.modals.info', [
 		'KalturaUsageDashboard.services.modals.confirm'
 		'KalturaUsageDashboard.services.modals.error'
+		'KalturaUsageDashboard.services.modals.warning'
+		'KalturaUsageDashboard.services.modals.success'
 	]
 
 	module.factory 'InfoModal', [
@@ -18,5 +20,6 @@ do ->
 					@super().open _.defaults(data,
 						okText: 'OK'
 						cancelText: 'Cancel'
+						type: 'primary'
 					), @params
 	]

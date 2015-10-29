@@ -6,11 +6,17 @@ do ->
 	]
 
 	module.service 'modals', [
+		'InfoModal'
 		'ConfirmModal'
 		'ErrorModal'
-		(ConfirmModal, ErrorModal) ->
+		'WarningModal'
+		'SuccessModal'
+		(InfoModal, ConfirmModal, ErrorModal, WarningModal, SuccessModal) ->
+			info: new InfoModal
 			confirm: new ConfirmModal
 			error: new ErrorModal
+			warning: new WarningModal
+			success: new SuccessModal
 	]
 
 

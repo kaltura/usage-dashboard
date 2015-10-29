@@ -421,8 +421,8 @@ table.one-third-width {
   width: 100px;
   display: block;
   border: 1px solid #d8d7d7;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
   border-right: 0;
   background: #ffffff;
 }
@@ -450,8 +450,8 @@ table.one-third-width {
   width: 24px;
   display: block;
   border: 1px solid #d8d7d7;
-  border-bottom-right-radius: 4px;
-  border-top-right-radius: 4px;
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
 }
 .datepicker .icon i {
   display: block;
@@ -499,13 +499,13 @@ table.one-third-width {
   box-shadow: none;
   height: 24px;
   line-height: 24px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 .select .select2-container .select2-choice .select2-arrow,
 .select .select2-container .select2-choices .select2-arrow {
   border-left: 1px solid #d8d7d7;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
   width: 24px;
   background: -moz-linear-gradient(top, #eeeeee 50%, #d6d6d6 100%);
   /* FF3.6+ */
@@ -554,8 +554,8 @@ table.one-third-width {
 .select2-drop {
   font-size: 12px;
   box-shadow: none;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 .select2-drop:focus {
   border: 1px solid #d8d7d7;
@@ -594,6 +594,35 @@ table.one-third-width {
   background: transparent;
   margin: 0;
   border-radius: 0;
+}
+.modal .modal-content {
+  border-radius: 9px;
+}
+.modal .modal-content .modal-header {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #fff;
+  color: black;
+}
+.modal .confirm .modal-header {
+  background-color: #428bca;
+  color: white;
+}
+.modal .error .modal-header {
+  background-color: #d9534f;
+  color: white;
+}
+.modal .success .modal-header {
+  background-color: #5cb85c;
+  color: white;
+}
+.modal .warning .modal-header {
+  background-color: #f0ad4e;
+  color: white;
+}
+.modal .info .modal-header {
+  background-color: #5bc0de;
+  color: white;
 }
 #overall-usage-report .panel-table thead th {
   width: 16.666666666666668%;

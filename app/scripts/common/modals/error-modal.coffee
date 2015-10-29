@@ -10,6 +10,7 @@ do ->
 				open: (data) =>
 					@super().open _.defaults data,
 						title: 'Error'
-						cancelText: null
+						okText: null
+						cancelText: 'OK'
 						type: 'error'
 	]

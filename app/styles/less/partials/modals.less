@@ -1,13 +1,76 @@
+@radius: 6px;
+
+.bg-default(){
+	background-color: #fff;
+	color: black;
+}
+
+.bg-primary(){
+	background-color: #428bca;
+	color: white;
+}
+
+.bg-error(){
+	background-color: #d9534f;
+	color: white;
+}
+
+.bg-warning(){
+	background-color: #f0ad4e;
+	color: white;
+}
+
+.bg-success(){
+	background-color: #5cb85c;
+	color: white;
+}
+
+.bg-info(){
+	background-color: #5bc0de;
+	color: white;
+}
+
 .modal{
 	background: transparent;
 	margin: 0;
 	border-radius: 0;
 
-	.confirm{
+	.modal-content{
+		border-radius: @radius+3px;
+		.modal-header{
+			border-top-left-radius: @radius;
+			border-top-right-radius: @radius;
+			.bg-default();
+		}
+	}
 
+	.confirm{
+		.modal-header{
+			.bg-primary();
+		}
 	}
 
 	.error{
-		
+		.modal-header{
+			.bg-error();
+		}
+	}
+
+	.success{
+		.modal-header{
+			.bg-success();
+		}
+	}
+
+	.warning{
+		.modal-header{
+			.bg-warning();
+		}
+	}
+
+	.info{
+		.modal-header{
+			.bg-info();
+		}
 	}
 }
