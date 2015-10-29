@@ -14,13 +14,14 @@ do ->
 		(Restangular, Collection, x2js, go, kmc, utils, $filter, errorsHandler) ->
 			(config) ->
 				#modify config with default settings
-				_.extend config,
+				_.defaults config,
 					dontCollect: yes
-					params: angular.copy _.extend config.params or {},
-						ks: kmc.vars.ks
-						service: 'report'
-						'reportInputFilter:timeZoneOffset': (new Date).getTimezoneOffset()
-						'reportInputFilter:objectType': 'KalturaReportInputFilter'						
+					params: {}
+				_.defaults config.params,
+					ks: kmc.vars.ks
+					service: 'report'
+					'reportInputFilter:timeZoneOffset': (new Date).getTimezoneOffset()
+					'reportInputFilter:objectType': 'KalturaReportInputFilter'
 
 
 				_.extend @, (new Collection Restangular.one(''), config),
@@ -97,10 +98,11 @@ do ->
 					else
 						parsed
 
-				#affect global loading flag on fetching
 				@extendFetch
+					#affect global loading flag on fetching
 					b: -> go.inc()
 					f: -> go.dec()
+					#errors handling
 					e: errorsHandler
 
 				@

@@ -6,4 +6,5 @@ do ->
 		'KalturaUsageDashboard.rest.storage-report'
 		'KalturaUsageDashboard.rest.transcoding-consumption-report'
 		'KalturaUsageDashboard.rest.media-entries-report'
+		'KalturaUsageDashboard.rest.users'
 	]

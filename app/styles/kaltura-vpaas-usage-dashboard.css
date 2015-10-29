@@ -243,6 +243,9 @@ table.one-third-width {
   line-height: 34px;
   height: 34px;
 }
+.title-text .title-text-inner {
+  float: left;
+}
 .title-text .export-to-csv {
   float: right;
   color: #189fad;

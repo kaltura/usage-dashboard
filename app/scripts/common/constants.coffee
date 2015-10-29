@@ -90,9 +90,9 @@ do ->
 			,
 				title: 'Media Entries'
 				field: 'count_total'
-			,
-				title: 'End Users'
-				field: 'end_users'
+			# ,
+			# 	title: 'End Users'
+			# 	field: 'end_users'
 			]
 
 

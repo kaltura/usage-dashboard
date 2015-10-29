@@ -23,6 +23,7 @@ do ->
 			'bandwidthReport'
 			'transcodingConsumptionReport'
 			'mediaEntriesReport'
+			'users'
 			'utils'
 			'$q'
 		]
@@ -31,6 +32,7 @@ do ->
 		init: ->
 			@_fetchCurrentMonth()
 			@_fetchLastThreeMonths()
+			@_fetchUsersTotal()
 
 		_fetchCurrentMonth: ->
 			@__fetch(
@@ -62,24 +64,6 @@ do ->
 						_.extend result, response[i]
 					result
 
-
-
-		__fetchPlays: (payload) ->
-			@playsReport.graphData.fetch(payload).then (response) =>
-				plays: response
-
-		__fetchStorage: (payload) ->
-			@storageReport.fetch(payload).then (response) =>
-				storage: response
-
-		__fetchBandwidth: (payload) ->
-			@bandwidthReport.fetch(payload).then (response) =>
-				bandwidth: response
-
-		__fetchTranscodingConsumption: (payload) ->
-			@transcodingConsumptionReport.fetch(payload).then (response) =>
-				transcoding: response
-
-		__fetchMediaEntries: (payload) ->
-			@mediaEntriesReport.fetch(payload).then (response) =>
-				media: response
+		_fetchUsersTotal: ->
+			@users.total.fetch().then (response) =>
+				@$.endUsers = response

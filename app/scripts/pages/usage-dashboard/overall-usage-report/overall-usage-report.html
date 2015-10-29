@@ -36,13 +36,13 @@
 					<th class='span'>
 						<div class='title'>End Users</div>
 						<div class='units'></div>
-						<div class='value'>{{}}</div>
+						<div class='value'>{{endUsers | output}}</div>
 					</th>
 				</tr>
 			</thead>
 		</table>
 	</div>
-
+<!-- 
 	<div class='row-fluid'>
 		<table class='panel-table richer row-fluid'>
 			<thead>
@@ -96,7 +96,7 @@
 						<div class='title'>End Users</div>
 						<div class='units'></div>
 						<div class='values'>
-							<div class='value under-bound'>{{}}</div>
+							<div class='value under-bound'>{{endUsers | output}}</div>
 							<div class='total'>of 40 used</div>
 							<div class='text'>Allowance reset on 1st of the Month</div>
 						</div>
@@ -104,7 +104,7 @@
 				</tr>
 			</thead>
 		</table>
-	</div>
+	</div> -->
 
 	<div monthly-breakdown='overall-usage' months='lastThreeMonths'></div>
 </div>

@@ -2,9 +2,10 @@
 	<div report-controls from='dates.from' to='dates.to' changed='fetch()'></div>
 
 	<div class='row-fluid title-text'>
-		<span ng-show='mediaEntriesNumber!=null && playsNumber!=null && !go.isLoading()'>
+		<span ng-show='mediaEntriesNumber!=null && playsNumber!=null && !go.isLoading()' class='title-text-inner'>
 			{{mediaEntriesNumber | output}} media entries played {{playsNumber | output}} times
 		</span>
+		<div csv='plays' months='months'></div>
 	</div>
 
 	<div graph='months' y-label='Plays' units='(CPM)' value-field='count_plays'></div>
