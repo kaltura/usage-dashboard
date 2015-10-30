@@ -1,9 +1,16 @@
 table{
 	outline: @table-border;
+	&:focus{
+		outline: @table-border;
+	}
+	&:active{
+		outline: @table-border;		
+	}
 	tr{
 		td,th{
-			&:not(:last-child){
-				border-right: @table-border;
+			border-left: @table-border;
+			&:first-child{
+				border-left: none;
 			}
 		}
 	}

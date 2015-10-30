@@ -11,6 +11,7 @@
 }
 
 .gradient(@start, @end, @start-percent:25%, @end-percent:100%){
+	background-image: @end;
 	background-image: -khtml-gradient(linear, left top, left bottom, from(@start), to(@end));
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(@start-percent,@start), color-stop(@end-percent, @end)); /* Chrome,Safari4+ */
 	background-image: -webkit-linear-gradient(top, @start @start-percent, @end @end-percent); /* Chrome10+,Safari5.1+ */
@@ -18,7 +19,6 @@
 	background-image: -moz-linear-gradient(top, @start @start-percent, @end @end-percent); /* FF3.6+ */
 	background-image: -ms-linear-gradient(top, @start @start-percent, @end @end-percent); /* IE10+ */
 	background-image: linear-gradient(to bottom, @start @start-percent, @end @end-percent); /* W3C */
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start}',endColorstr='@{end}',GradientType=0)"; /* IE6-9 */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start}',endColorstr='@{end}',GradientType=0); /* IE6-9 */
 }
 
