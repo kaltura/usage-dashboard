@@ -35,7 +35,7 @@ body .usage-dashboard .main-content .row-fluid {
   margin-bottom: 10px;
 }
 .usage-dashboard-header {
-  background: white;
+  background-color: white;
   font-weight: bold;
   font-size: 11px;
   line-height: 18px;
@@ -54,7 +54,7 @@ body .usage-dashboard .main-content .row-fluid {
   margin: 0;
 }
 .usage-dashboard-header .usage-dashboard-header-inner .usage-dashboard-header-menu li {
-  background: white;
+  background-color: white;
   color: #2b2b2b;
   border-radius: 20px;
   display: inline-block;
@@ -66,7 +66,7 @@ body .usage-dashboard .main-content .row-fluid {
   text-decoration: none;
 }
 .usage-dashboard-header .usage-dashboard-header-inner .usage-dashboard-header-menu li.active {
-  background: #2b2b2b;
+  background-color: #2b2b2b;
   color: #fbfbfb;
   box-shadow: 0 0 2px gray;
 }
@@ -298,6 +298,9 @@ table.one-third-width {
   height: 300px;
   display: block;
   margin-bottom: 20px !important;
+}
+.graph-row [flot] {
+  height: 300px;
 }
 .graph-row .tickLabel {
   color: #585858;

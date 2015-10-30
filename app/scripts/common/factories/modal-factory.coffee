@@ -3,8 +3,8 @@ do ->
 	module = angular.module 'KalturaUsageDashboard.factories.modal', []
 
 	module.factory 'Modal', [
-		'$uibModal'
-		($uibModal) ->
+		'$modal'
+		($modal) ->
 			class Modal extends Class
 				opened: {}
 
@@ -23,7 +23,7 @@ do ->
 
 					return if @opened[mark]
 
-					instance = $uibModal.open params
+					instance = $modal.open params
 
 					@opened[mark] = yes
 

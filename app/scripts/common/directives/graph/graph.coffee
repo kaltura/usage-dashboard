@@ -19,8 +19,6 @@ do ->
 		inject: ['$filter']
 		injectToScope: ['constants']
 		init: ->
-			@$.valueField = 'value' unless @$.valueField
-			@$.labelField = 'label' unless @$.labelField
 			@output = @$filter 'output'
 
 		watch:
@@ -38,14 +36,14 @@ do ->
 			for month in @$.data
 				data.push [
 					index
-					month[@$.valueField]
+					month[@$.valueField or 'value']
 				]
 				xaxisTicks.push [
 					index
-					month[@$.labelField]
+					month[@$.labelField or 'label']
 				]
-				if maxDataValue < month[@$.valueField]
-					maxDataValue = month[@$.valueField]
+				if maxDataValue < month[@$.valueField or 'value']
+					maxDataValue = month[@$.valueField or 'value']
 				index++
 
 			str = parseInt(maxDataValue).toString()
