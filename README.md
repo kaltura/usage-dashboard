@@ -10,7 +10,6 @@ Kaltura VPaaS Usage Dashboard frontend (Angular.js)
 
 ## Serving
 
-
 ### Development version
 
 Builds, watches and serves project without minification and concatenation
@@ -44,6 +43,17 @@ which is equal to
 ### Production version
 
 > grunt build:production
+
+## Tests
+
+### E2E tests
+
+> grunt e2e:target:ks
+
+Where
+
+- `target` is 'development' or 'production'. *Default:* 'development'
+- 'ks' is kaltura login token (kmc.vars.ks) which would be passed to app during testing (a way to append ?ks=<ks> as a url parameter to all urls)
 
 ## Deploying to github pages
 
