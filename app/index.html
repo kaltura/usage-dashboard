@@ -33,7 +33,20 @@
 
 	<div ui-view='main'></div>
 
-	<!--[if lte IE 8]><!-->
+	<!--[if lt IE 9]>
+		<script>
+			navigator.isIE9orLess = true;
+		</script>
+		<script src="bower_components/Downloadify/src/downloadify.js"></script>
+	<![endif]-->
+
+	<!--[if lt IE 8]>
+		<script>
+			navigator.isIE8orLess = true;
+		</script>
+	<![endif]-->
+
+	<!--[if lte IE 8]>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/json2/20130526/json2.js"></script>
 		<script type="text/javascript">
@@ -49,8 +62,8 @@
 			document.createElement('wave-spinner');
 			document.createElement('wave:spinner');
 		</script>
-	<!--<![endif]-->
-	<!--[if IE]><!-->
+	<![endif]-->
+	<!--[if IE]>
 		<script type="text/javascript">
 			// Fix for IE ignoring relative base tags.
 			(function() {
@@ -58,7 +71,7 @@
 				baseTag.href = baseTag.href;
 			})();
 		</script>
-	<!--<![endif]-->
+	<![endif]-->
 
 	<!-- bower:js -->
 	<!-- endbower -->

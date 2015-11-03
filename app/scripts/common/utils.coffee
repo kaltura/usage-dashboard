@@ -49,6 +49,11 @@ do ->
 				) navigator.userAgent or navigator.vendor or window.opera
 				check
 
+			isIE9orLess: -> navigator.isIE9orLess
+			
+			isIE8orLess: -> navigator.isIE8orLess
+
+
 		reports:
 			extractPayload: (dates) ->
 				'reportInputFilter:fromDay': dates.from.toYMDn()

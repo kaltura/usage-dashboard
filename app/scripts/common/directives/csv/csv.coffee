@@ -15,11 +15,16 @@ do ->
 	module.classy.controller
 		name: 'CsvCtrl'
 		inject: ['constants', '$filter', 'modals', 'constants']
+		injectToScope: ['utils']
+
 		init: ->
 			@output = @$filter 'output'
 			@date = @$filter 'date'
 
-		getCsvArray: ->
+		filename_: ->
+			"kaltura-#{@$.filename or @$.name}-report.csv"
+
+		exportCsv: ->
 			from = @$.months[0].dates[0]
 			to = @$.months[@$.months.length - 1].dates[@$.months[@$.months.length - 1].dates.length - 1]
 			@modals.confirm.open(
@@ -30,16 +35,30 @@ do ->
 				"""
 				title: 'Export CSV'
 			).result.then =>
-				columns = @constants.columns.reports[@$.name]
-				[
+				if @utils.navigator.isIE9orLess()
+					Downloadify.create 'downloadify',
+						filename: @$.filename_
+						data: ->
+							data = "Month;Year"
+							for column in columns
+								data +=";#{column.title}"
+							for month in @$.months
+								str = "#{@date month.dates[0], 'MMMM'};#{@date month.dates[0], 'yyyy'}"
+								for column in columns
+									str += ";#{@output month[column.field]}"
+								data += "\n#{str}"
+							data
+				else
+					columns = @constants.columns.reports[@$.name]
 					[
-						'Month'
-						'Year'
-					].concat (column.title for column in columns)
-				].concat (
-					for month in @$.months
 						[
-							@date month.dates[0], 'MMMM'
-							@date month.dates[0], 'yyyy'
-						].concat (@output month[column.field] for column in columns)
-				)
+							'Month'
+							'Year'
+						].concat (column.title for column in columns)
+					].concat (
+						for month in @$.months
+							[
+								@date month.dates[0], 'MMMM'
+								@date month.dates[0], 'yyyy'
+							].concat (@output month[column.field] for column in columns)
+					)

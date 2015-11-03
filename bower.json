@@ -12,6 +12,7 @@
   },
   "directory": "bower_components",
   "devDependencies": {
+    "Downloadify": "~0.2.1",
     "ExplorerCanvas": "excanvas#*",
     "html5shiv": "~3.7.3",
     "jquery": "~1.11.3",

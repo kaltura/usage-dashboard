@@ -1,6 +1,10 @@
 <span class='export-to-csv' ng-class='{disabled:months==null}'>
-	<span ng-csv='getCsvArray()' filename='kaltura-{{filename || name}}-report.csv'>
+	<span class='csv-button' ng-csv='exportCsv()' filename='{{filename_()}}' ng-hide='utils.navigator.isIE9orLess()'>
 		Export to CSV
+	</span>
+	<span class='csv-button' id='csv' ng-click='exportCsv()' ng-show='utils.navigator.isIE9orLess()'>
+		Export to CSV
+		<p id='downloadify'></p>
 	</span>
 	<div overlay='months==null'></div>
 </span>

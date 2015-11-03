@@ -280,7 +280,7 @@ table.one-third-width {
   font-size: 15px;
   cursor: pointer;
 }
-.title-text .export-to-csv [ng-csv] {
+.title-text .export-to-csv .csv-button {
   display: block;
 }
 .title-text .export-to-csv.disabled {
