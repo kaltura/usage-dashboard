@@ -6,3 +6,4 @@ gitignore/*
 app/scripts/build/*
 app/scripts/*.js
 index.html
+app/tests/protractor/specs/*
