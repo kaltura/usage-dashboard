@@ -21,8 +21,32 @@ do ->
 			@output = @$filter 'output'
 			@date = @$filter 'date'
 
+			if @utils.navigator.isIE9orLess()
+				Downloadify.create 'downloadify',
+					filename: @$.filename_
+					data: =>
+						columns = @_columns()
+						data = "Month;Year"
+						for column in columns
+							data +=";#{column.title}"
+						for month in @$.months
+							str = "#{@date month.dates[0], 'MMMM'};#{@date month.dates[0], 'yyyy'}"
+							for column in columns
+								str += ";#{@output month[column.field]}"
+							data += "\n#{str}"
+						data
+					swf: 'bower_components/Downloadify/media/downloadify.swf'
+					transparent: yes
+					downloadImage: 'bower_components/Downloadify/images/download.png'
+					width: 100
+					height: 30
+					append: no
+
 		filename_: ->
 			"kaltura-#{@$.filename or @$.name}-report.csv"
+
+		_columns: ->
+			@constants.columns.reports[@$.name]
 
 		exportCsv: ->
 			from = @$.months[0].dates[0]
@@ -36,20 +60,10 @@ do ->
 				title: 'Export CSV'
 			).result.then =>
 				if @utils.navigator.isIE9orLess()
-					Downloadify.create 'downloadify',
-						filename: @$.filename_
-						data: ->
-							data = "Month;Year"
-							for column in columns
-								data +=";#{column.title}"
-							for month in @$.months
-								str = "#{@date month.dates[0], 'MMMM'};#{@date month.dates[0], 'yyyy'}"
-								for column in columns
-									str += ";#{@output month[column.field]}"
-								data += "\n#{str}"
-							data
+					angular.element('#downloadify object').click()
+					null
 				else
-					columns = @constants.columns.reports[@$.name]
+					columns = @_columns()
 					[
 						[
 							'Month'

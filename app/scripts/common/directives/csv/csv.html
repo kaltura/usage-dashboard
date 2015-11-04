@@ -2,8 +2,8 @@
 	<span class='csv-button' ng-csv='exportCsv()' filename='{{filename_()}}' ng-hide='utils.navigator.isIE9orLess()'>
 		Export to CSV
 	</span>
-	<span class='csv-button' id='csv' ng-click='exportCsv()' ng-show='utils.navigator.isIE9orLess()'>
-		Export to CSV
+	<span class='csv-button' ng-show='utils.navigator.isIE9orLess()'>
+		<!-- <span>Export to CSV</span> -->
 		<p id='downloadify'></p>
 	</span>
 	<div overlay='months==null'></div>

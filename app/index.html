@@ -33,14 +33,15 @@
 
 	<div ui-view='main'></div>
 
-	<!--[if lt IE 9]>
+	<!--[if lte IE 9]>
 		<script>
 			navigator.isIE9orLess = true;
 		</script>
+		<script src="bower_components/Downloadify/js/swfobject.js"></script>
 		<script src="bower_components/Downloadify/src/downloadify.js"></script>
 	<![endif]-->
 
-	<!--[if lt IE 8]>
+	<!--[if lte IE 8]>
 		<script>
 			navigator.isIE8orLess = true;
 		</script>
