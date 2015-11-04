@@ -21,12 +21,14 @@ module.exports = (grunt) ->
 		targets:
 			default: 'development'
 			prod: 'production'
+		ports:
+			dev: 9000
 
 
 		connect:
 			app:
 				options:
-					port: 9000
+					port: '<%= ports.dev %>'
 					middleware: (connect, options) ->
 						[
 							modrewrite [ '!(\\..+)$ /index.html [L]' ]
@@ -132,22 +134,25 @@ module.exports = (grunt) ->
 		]
 		grunt.task.run tasks
 
-	grunt.registerTask 'serve', (target=grunt.config('targets').default, watch=yes) ->
+	grunt.registerTask 'serve', (target=grunt.config('targets').default) ->
 		grunt.config 'config.target', target
 		grunt.task.run [
 			"build:#{target}"
-			'connect'
-		].concat if watch is 'no' then [] else ['watch']
+			'connect:app'
+			'watch'
+		]
 
 	grunt.registerTask 'test', ['karma', 'watch:tests']
 
 	grunt.registerTask 'e2e', (target=grunt.config('targets').default, ks) ->
 		if ks
 			grunt.config 'protractor.e2e.options.args.params.ks', ks
+
 		grunt.task.run [
 			'clean:protractor_specs'
 			'coffee:protractor_specs'
-			"serve:#{target}:no"
+			"build:#{target}"
+			'connect:app'
 			'webdrivermanager:start'
 			'protractor:e2e'
 			'webdrivermanager:stop'
