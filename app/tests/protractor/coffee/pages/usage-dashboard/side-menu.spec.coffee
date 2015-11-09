@@ -3,9 +3,9 @@ describe 'Side Menu', ->
 	beforeEach =>
 		element.all(By.css '.side-menu').all(By.repeater 'menuItem in menuItems').then (@items) =>
 
-	it 'should be 6 menu items', => expect(@items.length).toBe 6
+	xit 'should be 6 menu items', => expect(@items.length).toBe 6
 
-	it 'should redirect to corresponding pages on menu items clicks', =>
+	xit 'should redirect to corresponding pages on menu items clicks', =>
 		promise = q.when()
 		for item in @items
 			promise = promise.then ->
@@ -16,7 +16,7 @@ describe 'Side Menu', ->
 								expect(url.indexOf '/usage-dashboard').toBeGreaterThan length()
 								expect(url.indexOf menuItem.url).toBeGreaterThan length()
 
-	it 'should highlight hovered menu item', =>
+	xit 'should highlight hovered menu item', =>
 		item = _.sample(@items).$ 'span'
 		item.getCssValue('text-shadow').then (val) ->
 			split = (val) ->
@@ -28,7 +28,7 @@ describe 'Side Menu', ->
 						_.compact(split val).length > 0
 				, 1000
 
-	it 'should distinguish the current menu item', =>
+	xit 'should distinguish the current menu item', =>
 		browser.getCurrentUrl().then (url) =>
 			loop
 				item = _.sample @items

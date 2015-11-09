@@ -48,6 +48,12 @@ which is equal to
 
 ### E2E tests
 
+> npm install -g protractor
+
+> npm install
+
+> node_modules/grunt-webdriver-manager/bin/webdriver-manager update
+
 > grunt e2e:target:ks
 
 Where

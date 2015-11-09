@@ -113,10 +113,13 @@ module.exports = (grunt) ->
 			e2e:
 				options:
 					configFile: '<%= config.protractor %>/conf.js'
+					args:
+						chromeDriver: 'node_modules/grunt-webdriver-manager/bin'
+
 
 		webdrivermanager:
 			seleniumPort: 4444
-			
+			proxy: no
 
 	# allowed 'development' or 'production'
 	grunt.registerTask 'build', (target=grunt.config('targets').default) ->
