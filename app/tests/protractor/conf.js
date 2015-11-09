@@ -7,5 +7,8 @@ exports.config = {
   specs: ['specs/**/*.js'],
   jasmineNodeOpts: {
     showColors: true
+  },
+  onPrepare: function() {
+    browser.driver.manage().window().maximize();
   }
 }

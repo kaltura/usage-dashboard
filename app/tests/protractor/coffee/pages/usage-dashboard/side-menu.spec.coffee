@@ -23,18 +23,19 @@ describe 'Side Menu', ->
 				_.filter(val.split(' '), (s) -> s.indexOf('px') > -1).map parseInt
 			expect(_.compact(split val).length).toBe 0
 			browser.actions().mouseMove(item).perform().then ->
-				console.log browser.timeouts
-				browser.timeouts().setScriptTimeout().then ->
+				browser.wait ->
 					item.getCssValue('text-shadow').then (val) ->
-						expect(_.compact(split val).length).not.toBe 0
+						_.compact(split val).length > 0
+				, 1000
 
 	it 'should distinguish the current menu item', =>
 		browser.getCurrentUrl().then (url) =>
 			loop
 				item = _.sample @items
 				break unless url.indexOf(item.url) >= 0
-			item.click().then ->
-				browser.timeouts().setScriptTimeout().then ->
-					item.getAttribute('class').then (cls) ->
-						log cls
-						expect(cls.split(' ').indexOf 'active').toBeGreaterThan -1
+			click(item).then ->
+				browser.waitForAngular().then ->
+					browser.wait ->
+						item.getAttribute('class').then (cls) ->
+							cls.split(' ').indexOf('active') > -1
+					, 1000

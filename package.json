@@ -32,6 +32,7 @@
     "karma-jasmine": "^0.3.6",
     "load-grunt-tasks": "^3.3.0",
     "lodash": "^3.10.1",
+    "protractor-http-mock": "^0.1.18",
     "q": "^1.4.1",
     "serve-static": "^1.10.0"
   }
