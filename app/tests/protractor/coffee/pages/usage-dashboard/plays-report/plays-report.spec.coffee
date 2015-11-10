@@ -7,19 +7,15 @@ describe 'Plays Report', ->
 	describe 'Controls row', ->
 
 		clickOnSelect = ->
-			click($ '.select2-container a').then =>
-				log "browser.waitForAngular = #{_.isFunction browser.waitForAngular}"
-				log "browser.waitForAngular().then = #{_.isFunction browser.waitForAngular().then}"
+			click($ '.select2-container a').then ->
 				browser.waitForAngular()
 
 		getSelectItems = ->
 			$$ '.select2-results li'
 
 		clickAndGetSelectItems = ->
-			clickOnSelect().then ->
-				getSelectItems().then (items) ->
-					items.count().then log
-					items
+			clickOnSelect().then getSelectItems
+			#select remains opened!
 
 		findLiByRange = (range) ->
 			clickAndGetSelectItems().then (items) ->
@@ -64,33 +60,41 @@ describe 'Plays Report', ->
 				expect(@select.$('.select2-chosen').getText()).toEqual range.name
 
 
-		describe 'Select Items', ->
+		describe 'Select Items', =>
 
-			forEachLi = (fn) =>
-				browser.executeScript( ->
+			getRanges = ->
+				browser.executeScript ->
 					injector = angular.element('[ng-app]').injector()
 					injector.get('reportControlsSelectCollection').arr
-				).then (ranges) =>
-					clickAndGetSelectItems().then (items) ->
-						for li, index in items
-							do (li, index) ->
-								fn li, ranges[index]
 
-			it 'Select should be opened when clicked', ->
+			forEachLi = (fn) ->
+				getRanges().then (ranges) ->
+					promise = q.when()
+					for range, index in ranges
+						do (range, index) ->
+							promise = promise.then ->
+								clickAndGetSelectItems().then (items) ->
+									fn(items[index], range).then ->
+										#close select after each iteration
+										clickOnSelect()
+
+			xit 'Select should be opened when clicked', ->
 				clickAndGetSelectItems().then (items) ->
-					log items
-					# expect(items.count()).toBeDefined()
-					# expect(items.count()).toBe 4
+					getRanges().then (ranges) ->
+						expect(items.length).toBeDefined()
+						expect(items.length).toBe ranges.length
 
-			xit 'correct range names should be listed in select in correct order', =>
-				forEachLi (li) ->
-					expect(li.getText()).toContain ranges[index].name
+			xit 'correct range names should be listed in select in correct order', ->
+				forEachLi (li, range) ->
+					li.getText().then (text) ->
+						expect(text).toContain range.name
 
 			xit 'select should update its model', =>
 				forEachLi (li, range) =>
 					click(li).then =>
 						browser.waitForAngular().then =>
-							expect(@controls.evaluate 'select.model').toEqual range.id
+							@select.evaluate('select.model').then (model) ->
+								expect(model).toEqual range.id
 
 			xit 'should enable datepickers only if they are allowed by selection in select', =>
 				forEachLi (li, range) =>

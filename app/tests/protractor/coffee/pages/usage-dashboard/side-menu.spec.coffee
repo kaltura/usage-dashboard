@@ -5,16 +5,21 @@ describe 'Side Menu', ->
 
 	xit 'should be 6 menu items', => expect(@items.length).toBe 6
 
-	xit 'should redirect to corresponding pages on menu items clicks', =>
-		promise = q.when()
+	it 'should redirect to corresponding pages on menu items clicks', =>
 		for item in @items
-			promise = promise.then ->
-				do (item) ->
-					item.click().then ->
-						item.evaluate('menuItem').then (menuItem) ->
-							browser.getCurrentUrl().then (url) ->
-								expect(url.indexOf '/usage-dashboard').toBeGreaterThan length()
-								expect(url.indexOf menuItem.url).toBeGreaterThan length()
+		for item, index in @items
+			do (item, index) ->
+				promise = promise.then ->
+					log item
+					log index
+					click(item).then ->
+						# item.evaluate('menuItem').then (menuItem) ->
+						# 	log menuItem.url
+						# 	browser.getCurrentUrl().then (url) ->
+						# 		log url
+						# 		expect(url.indexOf '/usage-dashboard').toBeGreaterThan length()
+						# 		expect(url.indexOf menuItem.url).toBeGreaterThan length()
+						# 		deferred.resolve()
 
 	xit 'should highlight hovered menu item', =>
 		item = _.sample(@items).$ 'span'
