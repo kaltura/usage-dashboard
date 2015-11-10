@@ -6,38 +6,42 @@ describe 'Plays Report', ->
 
 	describe 'Controls row', ->
 
-		_.extend @,
-			clickOnSelect: ->
-				click($ '.select2-container a').then =>
-					browser.waitForAngular()
+		clickOnSelect = ->
+			click($ '.select2-container a').then =>
+				log "browser.waitForAngular = #{_.isFunction browser.waitForAngular}"
+				log "browser.waitForAngular().then = #{_.isFunction browser.waitForAngular().then}"
+				browser.waitForAngular()
 
-			getSelectItems: ->
-				$$ '.select2-results li'
+		getSelectItems = ->
+			$$ '.select2-results li'
 
-			clickAndGetSelectItems: =>
-				@clickOnSelect().then @getSelectItems
+		clickAndGetSelectItems = ->
+			clickOnSelect().then ->
+				getSelectItems().then (items) ->
+					items.count().then log
+					items
 
-			findLiByRange: (range) =>
-				@clickAndGetSelectItems().then (items) =>
-					q.all([li.getText() for li in items]).then (texts) ->
-						li = _.find texts, (text) ->
-							text.indexOf(range.name) > -1
-						range.li = li
-						range
+		findLiByRange = (range) ->
+			clickAndGetSelectItems().then (items) ->
+				q.all([li.getText() for li in items]).then (texts) ->
+					li = _.find texts, (text) ->
+						text.indexOf(range.name) > -1
+					range.li = li
+					range
 
-			getDefaultRange: =>
-				browser.executeScript( ->
-					injector = angular.element('[ng-app]').injector()
-					(injector.get 'reportControlsSelectCollection').singleWhere default: yes
-				).then (range) =>
-					@findLiByRange range
+		getDefaultRange = ->
+			browser.executeScript( ->
+				injector = angular.element('[ng-app]').injector()
+				(injector.get 'reportControlsSelectCollection').singleWhere default: yes
+			).then (range) ->
+				findLiByRange range
 
-			getDatepickersRange: =>
-				browser.executeScript( ->
-					injector = angular.element('[ng-app]').injector()
-					(injector.get 'reportControlsSelectCollection').singleWhere allowDatepickers: yes
-				).then (range) =>
-					@findLiByRange range
+		getDatepickersRange = ->
+			browser.executeScript( ->
+				injector = angular.element('[ng-app]').injector()
+				(injector.get 'reportControlsSelectCollection').singleWhere allowDatepickers: yes
+			).then (range) ->
+				findLiByRange range
 
 		beforeEach =>
 			browser.waitForAngular().then =>
@@ -56,27 +60,27 @@ describe 'Plays Report', ->
 			@datepickers.isPresent()
 
 		xit 'Default value should be prepopulated in select', =>
-			@getDefaultRange().then (range) =>
+			getDefaultRange().then (range) =>
 				expect(@select.$('.select2-chosen').getText()).toEqual range.name
 
 
-		describe 'Select Items', =>
+		describe 'Select Items', ->
 
 			forEachLi = (fn) =>
 				browser.executeScript( ->
 					injector = angular.element('[ng-app]').injector()
 					injector.get('reportControlsSelectCollection').arr
 				).then (ranges) =>
-					# @clickAndGetSelectItems().then (items) ->
-					# 	log items
-					# 	for li, index in items
-					# 		do (li, index) ->
-					# 			fn li, ranges[index]
+					clickAndGetSelectItems().then (items) ->
+						for li, index in items
+							do (li, index) ->
+								fn li, ranges[index]
 
-			it 'Select should be opened when clicked', =>
-				@clickAndGetSelectItems().then (items) =>
-					expect(items.count()).toBeDefined()
-					expect(items.count()).toBe 4
+			it 'Select should be opened when clicked', ->
+				clickAndGetSelectItems().then (items) ->
+					log items
+					# expect(items.count()).toBeDefined()
+					# expect(items.count()).toBe 4
 
 			xit 'correct range names should be listed in select in correct order', =>
 				forEachLi (li) ->
@@ -97,21 +101,21 @@ describe 'Plays Report', ->
 		describe 'Datepickers', =>
 
 			xit 'should open datepicker when clicking on inputs', =>
-				@getDatepickersRange().then (range) =>
+				getDatepickersRange().then (range) =>
 					click(range.li).then =>
 						expect(@datepickerDiv.isDisplayed()).not.toBeTruthy()
 						click(@datepickers.$$('.datepicker input')[0]).then =>
 							expect(@datepickerDiv.isDisplayed()).toBeTruthy()
 
 			xit 'should open datepicker when clicking on icon', =>
-				@getDatepickersRange().then (range) =>
+				getDatepickersRange().then (range) =>
 					click(range.li).then =>
 						expect(@datepickerDiv.isDisplayed()).not.toBeTruthy()
 						click(@datepickers.$$('.datepicker .icon')[0]).then =>
 							expect(@datepickerDiv.isDisplayed()).toBeTruthy()
 
 			xit 'should close datepicker when clicked away', =>
-				@getDatepickersRange().then (range) =>
+				getDatepickersRange().then (range) =>
 					click(range.li).then =>
 						expect(@datepickerDiv.isDisplayed()).not.toBeTruthy()
 						click(@datepickers.$$('.datepicker .icon')[0]).then =>

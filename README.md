@@ -54,6 +54,8 @@ which is equal to
 
 > node_modules/grunt-webdriver-manager/bin/webdriver-manager update
 
+*Important!* webdriver-manager update this must be ran exactly in that folder
+
 > grunt e2e:target:ks
 
 Where
