@@ -17,7 +17,10 @@ do ->
 
 	module.classy.controller
 		name: 'MediaEntriesReportCtrl'
-		inject: ['mediaEntriesReport', 'utils', '$filter']
+		inject: [
+			'vpaasUsageReport'
+			'utils'
+		]
 
 		fetch: ->
 			@_extractPayload()
@@ -28,5 +31,5 @@ do ->
 
 		_fetchData: ->
 			@$.months = null
-			@mediaEntriesReport.fetch(@payload).then (response) =>
+			@vpaasUsageReport.media(@payload).then (response) =>
 				@$.months = _.extend response, dates: @$.dates

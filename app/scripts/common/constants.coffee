@@ -48,48 +48,39 @@ do ->
 		reports:
 			plays: [
 				title: 'Plays (CPM)'
-				field: 'count_plays'
+				field: 'total_plays'
 			]
 			storage: [
 				title: 'Average Storage (GB)'
-				field: 'average_storage'
+				field: 'avg_storage_gb'
 			]
 			bandwidth: [
 				title: 'Bandwidth Consumption (GB)'
-				field: 'bandwidth_consumption'
+				field: 'bandwidth_gb'
 			]
 			'transcoding-consumption': [
 				title: 'Transcoding Consumption (GB)'
-				field: 'transcoding_consumption'
+				field: 'transcoding_gb'
 			]
 			'media-entries': [
 				title: 'Total'
-				field: 'count_total'
-			,
-				title: 'Video'
-				field: 'count_video'
-			,
-				title: 'Audio'
-				field: 'count_audio'
-			,
-				title: 'Images'
-				field: 'count_image'
+				field: 'total_media_entries'
 			]
 			'overall-usage': [
 				title: 'Plays (CPM)'
-				field: 'count_plays'
+				field: 'total_plays'
 			,
 				title: 'Average Storage (GB)'
-				field: 'average_storage'
+				field: 'avg_storage_gb'
 			,
 				title: 'Transcoding Consumption (GB)'
-				field: 'transcoding_consumption'
+				field: 'transcoding_gb'
 			,
 				title: 'Bandwidth Consumption (GB)'
-				field: 'bandwidth_consumption'
+				field: 'bandwidth_gb'
 			,
 				title: 'Media Entries'
-				field: 'count_total'
+				field: 'total_media_entries'
 			# ,
 			# 	title: 'End Users'
 			# 	field: 'end_users'
@@ -195,8 +186,7 @@ do ->
 
 			nDaysInMonth: ->
 				d = new Date @
-				d.setMonth d.getMonth() + 1
-				d.setDate 0
+				d.toMonthEnd()
 				d.getDate()
 
 			#date greater (@ > date ?) comparison in DAYS context

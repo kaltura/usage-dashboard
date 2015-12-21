@@ -17,7 +17,10 @@ do ->
 
 	module.classy.controller
 		name: 'StorageReportCtrl'
-		inject: ['storageReport', 'utils', '$filter']
+		inject: [
+			'vpaasUsageReport'
+			'utils'
+		]
 
 		fetch: ->
 			@_extractPayload()
@@ -28,5 +31,5 @@ do ->
 
 		_fetchData: ->
 			@$.months = null
-			@storageReport.fetch(@payload).then (response) =>
+			@vpaasUsageReport.storage(@payload).then (response) =>
 				@$.months = _.extend response, dates: @$.dates

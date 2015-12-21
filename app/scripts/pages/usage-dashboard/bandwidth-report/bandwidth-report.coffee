@@ -17,7 +17,10 @@ do ->
 
 	module.classy.controller
 		name: 'BandwidthReportCtrl'
-		inject: ['bandwidthReport', 'utils', '$filter']
+		inject: [
+			'utils'
+			'vpaasUsageReport'
+		]
 
 		fetch: ->
 			@_extractPayload()
@@ -28,7 +31,5 @@ do ->
 
 		_fetchData: ->
 			@$.months = null
-			@bandwidthReport.fetch(@payload).then (response) =>
+			@vpaasUsageReport.bandwidth(@payload).then (response) =>
 				@$.months = _.extend response, dates: @$.dates
-			, (response) =>
-				console.log response

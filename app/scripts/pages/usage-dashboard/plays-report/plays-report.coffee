@@ -17,7 +17,10 @@ do ->
 
 	module.classy.controller
 		name: 'PlaysReportCtrl'
-		inject: ['playsReport', 'utils']
+		inject: [
+			'utils'
+			'vpaasUsageReport'
+		]
 
 		fetch: ->
 			@_extractPayload()
@@ -29,14 +32,14 @@ do ->
 			@payload = @utils.reports.extractPayload @$.dates
 
 		_fetchPlaysNumber: ->
-			@playsReport.playsNumber.fetch(@payload).then (response) =>
+			@vpaasUsageReport.plays.number(@payload).then (response) =>
 				@$.playsNumber = response
 
 		_fetchMediaEntriesNumber: ->
-			@playsReport.mediaEntriesNumber.fetch(@payload).then (response) =>
+			@vpaasUsageReport.plays.mediaEntriesNumber(@payload).then (response) =>
 				@$.mediaEntriesNumber = response
 
 		_fetchData: ->
 			@$.months = null
-			@playsReport.graphData.fetch(@payload).then (response) =>
+			@vpaasUsageReport.plays.data(@payload).then (response) =>
 				@$.months = _.extend response, dates: @$.dates

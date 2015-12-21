@@ -14,5 +14,5 @@ do ->
 						else
 							nFilter input, 0
 					else
-						input
+						input or 0
 	]

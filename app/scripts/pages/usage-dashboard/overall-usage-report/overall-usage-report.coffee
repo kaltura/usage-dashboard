@@ -18,12 +18,7 @@ do ->
 	module.classy.controller
 		name: 'OverallUsageReportCtrl'
 		inject: [
-			'playsReport'
-			'storageReport'
-			'bandwidthReport'
-			'transcodingConsumptionReport'
-			'mediaEntriesReport'
-			'users'
+			'vpaasUsageReport'
 			'utils'
 			'$q'
 		]
@@ -32,7 +27,6 @@ do ->
 		init: ->
 			@_fetchCurrentMonth()
 			@_fetchLastThreeMonths()
-			@_fetchUsersTotal()
 
 		_fetchCurrentMonth: ->
 			@__fetch(
@@ -51,19 +45,4 @@ do ->
 
 		__fetch: (params) ->
 			payload = @utils.reports.extractPayload params
-			@$q.all([
-				@playsReport.graphData.fetch payload
-				@storageReport.fetch payload
-				@bandwidthReport.fetch payload
-				@transcodingConsumptionReport.fetch payload
-				@mediaEntriesReport.fetch payload
-			]).then (responses) =>
-				for i in [0..Date.nMonths params.from, params.to]
-					result = {}
-					for response in responses
-						_.extend result, response[i]
-					result
-
-		_fetchUsersTotal: ->
-			@users.total.fetch().then (response) =>
-				@$.endUsers = response
+			@vpaasUsageReport.fetch payload

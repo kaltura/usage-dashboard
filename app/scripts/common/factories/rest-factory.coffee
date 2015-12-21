@@ -31,7 +31,10 @@ do ->
 							extract:
 								dict: (response={}) ->
 									keys = response.header?.split ','
-									values = response.data?.split ','
+									lines = _.compact response.data?.split ';'
+									values = _.unzip (for line in lines
+										line.split ','
+									)
 									_.zipObject keys, values
 
 								graph: (response) ->
@@ -68,6 +71,21 @@ do ->
 										from: Date.fromYMDn from
 										to: Date.fromYMDn to
 
+								monthsComprehensive: (response, payload) =>
+									dict = @extract.dict response
+									result = []
+									for index in [0..dict.month_id.length-1]
+										result[index] = {}
+										for key, values of dict
+											result[index][key] = values[index]
+
+									from = payload['reportInputFilter:fromDay']
+									to = payload['reportInputFilter:toDay']
+									@convert.parseFloat @convert.monthsLabelsComprehensive result,
+										from: Date.fromYMDn from
+										to: Date.fromYMDn to
+
+
 							convert:
 								MBtoGB: (months) ->
 									for month in months
@@ -83,6 +101,44 @@ do ->
 											lastDate = month.dates[month.dates.length-1].getDate()
 											month.label = "#{firstDate}#{if firstDate isnt lastDate then '-' + lastDate else ''} #{month.label}"
 									months
+
+								monthsLabelsComprehensive: (months, dates) ->
+									fromYMn = dates.from.toYMn()
+									toYMn = dates.to.toYMn()
+									for month in months
+										monthDateYMn = parseInt month.month_id
+										monthDate = Date.fromYMn monthDateYMn
+										firstDate = if monthDateYMn is fromYMn
+											dates.from.getDate()
+										else
+											1
+										lastDate = if monthDateYMn is toYMn
+											dates.to.getDate()
+										else
+											monthDate.nDaysInMonth()
+
+										month.label = $filter('date') monthDate, 'MMMM, yyyy'
+										if firstDate isnt 1 or lastDate isnt monthDate.nDaysInMonth()
+											month.label = "#{firstDate}#{if firstDate isnt lastDate then '-' + lastDate else ''} #{month.label}"
+									months
+
+								parseFloat: (months) ->
+									for month in months
+										for key, value of month when key isnt 'label'
+											month[key] = parseFloat(value) or 0
+									months
+
+								sum: (months, field) ->
+									sum = 0
+									for month in months
+										sum += parseFloat(month[field]) or 0
+									sum
+
+								pick: (months, field) ->
+									for month in months
+										item = _.pick month, 'label', field
+										item[field] = parseFloat(item[field]) or 0
+										item
 
 
 

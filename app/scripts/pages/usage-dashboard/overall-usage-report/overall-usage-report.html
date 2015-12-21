@@ -11,32 +11,32 @@
 					<th class='span'>
 						<div class='title'>Plays</div>
 						<div class='units'>(CPM)</div>
-						<div class='value'>{{currentMonth.count_plays | output}}</div>
+						<div class='value'>{{currentMonth.total_plays | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Average Storage</div>
 						<div class='units'>(GB)</div>
-						<div class='value'>{{currentMonth.average_storage | output}}</div>
+						<div class='value'>{{currentMonth.avg_storage_gb | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Bandwidth Consumption</div>
 						<div class='units'>(GB)</div>
-						<div class='value'>{{currentMonth.bandwidth_consumption | output}}</div>
+						<div class='value'>{{currentMonth.bandwidth_gb | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Transcoding Consumption</div>
 						<div class='units'>(GB)</div>
-						<div class='value'>{{currentMonth.transcoding_consumption | output}}</div>
+						<div class='value'>{{currentMonth.transcoding_gb | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>Media Entries</div>
 						<div class='units'></div>
-						<div class='value'>{{currentMonth.count_total | output}}</div>
+						<div class='value'>{{currentMonth.total_media_entries | output}}</div>
 					</th>
 					<th class='span'>
 						<div class='title'>End Users</div>
 						<div class='units'></div>
-						<div class='value'>{{endUsers | output}}</div>
+						<div class='value'>{{currentMonth.total_end_users | output}}</div>
 					</th>
 				</tr>
 			</thead>
