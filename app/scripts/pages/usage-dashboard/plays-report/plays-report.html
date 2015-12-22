@@ -5,7 +5,7 @@
 		<span ng-show='mediaEntriesNumber!=null && playsNumber!=null && !go.isLoading()' class='title-text-inner'>
 			{{mediaEntriesNumber | output}} media entries played {{playsNumber | output}} times
 		</span>
-		<div csv='plays' months='months'></div>
+		<div csv='plays' dates='dates'></div>
 	</div>
 
 	<div graph='months' y-label='Plays' units='(CPM)' value-field='total_plays'></div>

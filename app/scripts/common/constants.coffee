@@ -49,38 +49,48 @@ do ->
 			plays: [
 				title: 'Plays (CPM)'
 				field: 'total_plays'
+				csvHeader: 'plays'
 			]
 			storage: [
 				title: 'Average Storage (GB)'
 				field: 'avg_storage_gb'
+				csvHeader: 'plays'
 			]
 			bandwidth: [
 				title: 'Bandwidth Consumption (GB)'
 				field: 'bandwidth_gb'
+				csvHeader: 'plays'
 			]
 			'transcoding-consumption': [
 				title: 'Transcoding Consumption (GB)'
 				field: 'transcoding_gb'
+				csvHeader: 'plays'
 			]
 			'media-entries': [
 				title: 'Total'
 				field: 'total_media_entries'
+				csvHeader: 'plays'
 			]
 			'overall-usage': [
 				title: 'Plays (CPM)'
 				field: 'total_plays'
+				csvHeader: 'plays'
 			,
 				title: 'Average Storage (GB)'
 				field: 'avg_storage_gb'
+				csvHeader: 'plays'
 			,
 				title: 'Transcoding Consumption (GB)'
 				field: 'transcoding_gb'
+				csvHeader: 'plays'
 			,
 				title: 'Bandwidth Consumption (GB)'
 				field: 'bandwidth_gb'
+				csvHeader: 'plays'
 			,
 				title: 'Media Entries'
 				field: 'total_media_entries'
+				csvHeader: 'plays'
 			# ,
 			# 	title: 'End Users'
 			# 	field: 'end_users'

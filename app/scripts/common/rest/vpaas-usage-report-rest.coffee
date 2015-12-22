@@ -17,7 +17,11 @@ do ->
 
 			modifiers = @modifiers()
 
-			@addFetchInterceptor modifiers.extract.monthsComprehensive
+			@addFetchInterceptor (response, payload) ->
+				if _.isObject response
+					modifiers.extract.monthsComprehensive response, payload
+				else
+					response
 
 
 			_.extend @,

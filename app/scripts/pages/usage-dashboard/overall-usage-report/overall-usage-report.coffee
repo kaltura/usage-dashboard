@@ -25,23 +25,22 @@ do ->
 		injectToScope: ['go']
 
 		init: ->
+			@$.currentMonthDates =
+				from: (new Date).toMonthStart()
+				to: new Date
+			@$.lastThreeMonthsDates =
+				from: (new Date).subMonth(2).toMonthStart()
+				to: new Date
 			@_fetchCurrentMonth()
 			@_fetchLastThreeMonths()
 
 		_fetchCurrentMonth: ->
-			@__fetch(
-				from: (new Date).toMonthStart()
-				to: new Date
-			).then (result) =>
+			@__fetch(@$.currentMonthDates).then (result) =>
 				@$.currentMonth = result[0]
 
 		_fetchLastThreeMonths: ->
-			@__fetch(
-				from: (new Date).subMonth(2).toMonthStart()
-				to: new Date
-			).then (result) =>
+			@__fetch(@$.lastThreeMonthsDates).then (result) =>
 				@$.lastThreeMonths = result
-
 
 		__fetch: (params) ->
 			payload = @utils.reports.extractPayload params
