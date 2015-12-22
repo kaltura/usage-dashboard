@@ -150,6 +150,7 @@ do ->
 				@addFetchInterceptor (parsed, payload) =>
 					if parsed.error?
 						@cancelAllRequests parsed
+						errorsHandler parsed
 						{}
 					else
 						parsed
