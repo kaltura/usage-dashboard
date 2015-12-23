@@ -1,8 +1,7 @@
 module.exports =
 	dist: 'dist'
-	dist_styles: '<%= config.dist %>/styles'
-	dist_scripts: '<%= config.dist %>/scripts'
-	dist_images: '<%= config.dist %>/images'
+	dist_scripts: '<%= config.dist %>/<%= bower.name %>.min.js'
+	dist_styles: '<%= config.dist %>/<%= bower.name %>.min.css'
 	packages: 'packages'
 	app: 'app'
 	assets: '<%= config.app %>/assets'
@@ -11,6 +10,7 @@ module.exports =
 	less: '<%= config.styles %>/less'
 	scripts: '<%= config.app %>/scripts'
 	tests: '<%= config.app %>/tests'
+	images: '<%= config.app %>/images'
 	protractor: '<%= config.tests %>/protractor'
 	protractor_build: '<%= config.protractor %>/specs'
 	pages: '<%= config.scripts %>/pages'
@@ -18,36 +18,36 @@ module.exports =
 	js_build: '<%= config.scripts %>/build'
 	js_templates: '<%= config.js_build %>/templates.js'
 	js_concat: '<%= config.js_build %>/all_concatenated.js'
+	css_url_replace: '<%= config.dist %>/all_url_replaced.css'
 
 	bower_files: [
-		'**/*.css'
+		'<%= bower.directory %>/**/*.png'
+		'<%= bower.directory %>/**/*.jpg'
+		'<%= bower.directory %>/**/*.jpeg'
+		'<%= bower.directory %>/**/*.ico'
+		'<%= bower.directory %>/**/*.gif'
 
-		'**/*.png'
-		'**/*.jpg'
-		'**/*.jpeg'
-		'**/*.ico'
-		'**/*.gif'
-
-		'**/*.eot'
-		'**/*.svg'
-		'**/*.ttf'
-		'**/*.woff'
-		'**/*.woff2'
-		'**/*.otf'
+		'<%= bower.directory %>/**/*.eot'
+		'<%= bower.directory %>/**/*.svg'
+		'<%= bower.directory %>/**/*.ttf'
+		'<%= bower.directory %>/**/*.woff'
+		'<%= bower.directory %>/**/*.woff2'
+		'<%= bower.directory %>/**/*.otf'
 	]
 
-	css_files:
-		bower: [
-			'<%= bower.directory %>/jquery-ui/themes/smoothness/jquery-ui.css'
-			'<%= bower.directory %>/jquery-ui-bootstrap/jquery.ui.theme.css'
-			'<%= bower.directory %>/font-awesome/css/font-awesome.css'
-			'<%= bower.directory %>/select2/select2.css'
-			'<%= bower.directory %>/angular-spinkit/build/angular-spinkit.min.css'
-			'<%= bower.directory %>/bootstrap/dist/css/bootstrap.min.css'
-		]
-		app: [
-			'<%= config.styles %>/<%= bower.name %>.css'
-		]
+	image_files: [
+		'<%= config.images %>/**'
+	]
+
+	css_files: [
+		'<%= bower.directory %>/jquery-ui/themes/smoothness/jquery-ui.css'
+		'<%= bower.directory %>/jquery-ui-bootstrap/jquery.ui.theme.css'
+		'<%= bower.directory %>/font-awesome/css/font-awesome.css'
+		'<%= bower.directory %>/select2/select2.css'
+		'<%= bower.directory %>/angular-spinkit/build/angular-spinkit.min.css'
+		'<%= bower.directory %>/bootstrap/dist/css/bootstrap.min.css'
+		'<%= config.styles %>/<%= bower.name %>.css'
+	]
 
 	js_files: [
 		'<%= config.shims %>/**/*.js'

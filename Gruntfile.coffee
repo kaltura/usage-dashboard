@@ -91,6 +91,8 @@ module.exports = (grunt) ->
 			dist: ['<%= config.dist %>']
 			protractor_specs: ['<%= config.protractor_build %>']
 
+			production: ['<%= config.css_url_replace %>']
+
 		concat:
 			production:
 				src: config.js_files
@@ -99,22 +101,34 @@ module.exports = (grunt) ->
 		uglify:
 			production:
 				files:
-					'<%= config.dist_scripts %>/<%= bower.name %>.min.js': [
+					'<%= config.dist_scripts %>': [
 						config.js_concat
 					]
+
+		css_url_replace:
+			production:
+				options:
+					staticRoot: __dirname
+				files:
+					'<%= config.css_url_replace %>': config.css_files
 
 		cssmin:
 			production:
 				files:
-					'<%= config.dist_styles %>/<%= bower.name %>.min.css': config.css_files.app
+					'<%= config.dist_styles %>': config.css_url_replace
 
 		copy:
 			production:
 				files: [
 					expand: yes
-					cwd: '<%= bower.directory %>'
+					cwd: '.'
 					src: config.bower_files
-					dest: '<%= config.dist %>/<%= bower.directory %>'
+					dest: '<%= config.dist %>'
+				,
+					expand: yes
+					cwd: '.'
+					src: config.image_files
+					dest: '<%= config.dist %>'
 				]
 
 		ngtemplates:
@@ -160,10 +174,10 @@ module.exports = (grunt) ->
 		switch target
 			when targets.dev
 				grunt.config 'included_js_files', config.js_files
-				grunt.config 'included_css_files', config.css_files.app
+				grunt.config 'included_css_files', config.css_files
 			when targets.dist
-				grunt.config 'included_js_files', '<%= config.dist_scripts %>/<%= bower.name %>.min.js'
-				grunt.config 'included_css_files', '<%= config.dist_styles %>/<%= bower.name %>.min.css'
+				grunt.config 'included_js_files', '<%= config.dist_scripts %>'
+				grunt.config 'included_css_files', '<%= config.dist_styles %>'
 
 		tasks = [
 			'clean:dist'
@@ -178,8 +192,12 @@ module.exports = (grunt) ->
 		tasks = tasks.concat [
 			'less'
 		]
+		if grunt.config('css_url_replace')[target]?
+			tasks.push "css_url_replace:#{target}"
 		if grunt.config('cssmin')[target]?
 			tasks.push "cssmin:#{target}"
+		if grunt.config('clean')[target]?
+			tasks.push "clean:#{target}"
 		if grunt.config('includeSource')[target]?
 			tasks.push "includeSource:#{target}"
 		if grunt.config('copy')[target]?

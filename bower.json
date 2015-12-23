@@ -1,6 +1,6 @@
 {
   "name": "kaltura-vpaas-usage-dashboard",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "SEE LICENSE IN LICENSE",
   "description": "Kaltura VPaaS Usage Dashbaord frontend (Angular.js)",
   "authors": [
