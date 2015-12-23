@@ -19,6 +19,23 @@ module.exports =
 	js_templates: '<%= config.js_build %>/templates.js'
 	js_concat: '<%= config.js_build %>/all_concatenated.js'
 
+	bower_files: [
+		'**/*.css'
+
+		'**/*.png'
+		'**/*.jpg'
+		'**/*.jpeg'
+		'**/*.ico'
+		'**/*.gif'
+
+		'**/*.eot'
+		'**/*.svg'
+		'**/*.ttf'
+		'**/*.woff'
+		'**/*.woff2'
+		'**/*.otf'
+	]
+
 	css_files:
 		bower: [
 			'<%= bower.directory %>/jquery-ui/themes/smoothness/jquery-ui.css'

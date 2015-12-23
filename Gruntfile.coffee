@@ -113,22 +113,7 @@ module.exports = (grunt) ->
 				files: [
 					expand: yes
 					cwd: '<%= bower.directory %>'
-					src: [
-						'**/*.css'
-
-						'**/*.png'
-						'**/*.jpg'
-						'**/*.jpeg'
-						'**/*.ico'
-						'**/*.gif'
-
-						'**/*.eot'
-						'**/*.svg'
-						'**/*.ttf'
-						'**/*.woff'
-						'**/*.woff2'
-						'**/*.otf'
-					]
+					src: config.bower_files
 					dest: '<%= config.dist %>/<%= bower.directory %>'
 				]
 
