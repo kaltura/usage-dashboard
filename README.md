@@ -1,6 +1,6 @@
-# Kaltura VPaaS Usage Dashboard
+# vpaas-usage-dashboard
 
-Kaltura VPaaS Usage Dashboard frontend (Angular.js)
+VPaaS Usage Dashboard frontend (Angular.js)
 
 ## Preparations
 
@@ -43,6 +43,8 @@ which is equal to
 ### Production version
 
 > grunt build:production
+
+This also creates a zip package in `packages` folder with name as version taken from bower.json
 
 ## Tests
 
