@@ -6,7 +6,7 @@ describe 'Side Menu', ->
 	xit 'should be 6 menu items', => expect(@items.length).toBe 6
 
 	it 'should redirect to corresponding pages on menu items clicks', =>
-		for item in @items
+		# for item in @items
 		for item, index in @items
 			do (item, index) ->
 				promise = promise.then ->

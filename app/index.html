@@ -15,15 +15,10 @@
 	<base href="/">
 	<link rel='shortcut icon' href='http://corp.kaltura.com/sites/default/files/favicon%20%289%29_0.ico' type='image/ico'>
 
-	<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css"/>
-	<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui-bootstrap/jquery.ui.theme.css"/>
-	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css"/>
-	<link rel="stylesheet" type="text/css" href="bower_components/select2/select2.css"/>
-	<link rel="stylesheet" type="text/css" href="bower_components/angular-spinkit/build/angular-spinkit.min.css">
-	<!-- include: "type": "css", "files": "<%= config.styles %>/!kmc.css" -->
+	<!-- include: "type": "css", "files": "<%= config.css_files.bower %>" -->
 	<!-- /include -->
-	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<!-- include: "type": "css", "files": "<%= config.styles %>/<%= bower.name %>.css" -->
+
+	<!-- include: "type": "css", "files": "<%= included_css_files %>" -->
 	<!-- /include -->
 </head>
 
@@ -37,8 +32,6 @@
 		<script>
 			navigator.isIE9orLess = true;
 		</script>
-		<script src="bower_components/Downloadify/js/swfobject.js"></script>
-		<script src="bower_components/Downloadify/src/downloadify.js"></script>
 	<![endif]-->
 
 	<!--[if lte IE 8]>
@@ -46,42 +39,14 @@
 			navigator.isIE8orLess = true;
 		</script>
 	<![endif]-->
-
-	<!--[if lte IE 8]>
-		<script src="app/assets/ie-shims/es5-shim.js"></script>
-		<script src="app/assets/ie-shims/json2.js"></script>
-		<script type="text/javascript">
-			document.createElement('header');
-			document.createElement('article');
-			document.createElement('section');
-			document.createElement('aside');
-			document.createElement('nav');
-			document.createElement('footer');
-			document.createElement('alert');
-			document.createElement('select2');
-			document.createElement('flot');
-			document.createElement('wave-spinner');
-			document.createElement('wave:spinner');
-		</script>
-	<![endif]-->
+	
 	<!--[if IE]>
-		<script type="text/javascript">
-			// Fix for IE ignoring relative base tags.
-			(function() {
-				var baseTag = document.getElementsByTagName('base')[0];
-				baseTag.href = baseTag.href;
-			})();
+		<script>
+			navigator.isIE = true;
 		</script>
 	<![endif]-->
 
-	<!-- bower:js -->
-	<!-- endbower -->
-	<script src="bower_components/flot-axislabels/jquery.flot.axislabels.js"></script>
-
-	<!-- include: "type": "js", "files": "<%= config.assets %>/**/*.js" -->
-	<!-- /include -->
-
-	<!-- include: "type": "js", "files": "<%= config.js_build %>/**/*.js" -->
+	<!-- include: "type": "js", "files": "<%= included_js_files %>" -->
 	<!-- /include -->
 
 

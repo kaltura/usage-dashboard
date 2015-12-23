@@ -5,5 +5,6 @@ html/*
 gitignore/*
 app/scripts/build/*
 app/scripts/*.js
+dist/*
 index.html
 app/tests/protractor/specs/*
