@@ -24,7 +24,7 @@
     "restangular": "~1.5.1",
     "angular-flot": "~0.0.13",
     "flot-axislabels": "*",
-    "angular-ui-date": "~0.0.8",
+    "angular-ui-date": "0.0.10",
     "flot.tooltip": "~0.8.5",
     "angular-select2-ie": ">=2.0.0",
     "angular-bootstrap": "~0.12.0",

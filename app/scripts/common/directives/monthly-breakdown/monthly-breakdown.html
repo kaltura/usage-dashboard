@@ -9,7 +9,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat='month in months' ng-class='{odd:$index%2==1, even:$index%2==0}'>
+			<tr ng-repeat='month in (months | arr_reverse)' ng-class='{odd:$index%2==1, even:$index%2==0}'>
 				<td ng-repeat='column in columns'>{{month[column.field] | output}}</td>
 			</tr>
 		</tbody>

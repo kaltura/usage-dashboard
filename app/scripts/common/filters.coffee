@@ -16,3 +16,13 @@ do ->
 					else
 						input or 0
 	]
+
+	module.filter 'arr_reverse', [
+		->
+			(input) ->
+				if _.isArray input
+					for index in [input.length-1..0]
+						input[index]
+				else
+					input
+	]
