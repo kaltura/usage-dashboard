@@ -5,6 +5,8 @@ module.exports = (grunt) ->
 	serveStatic = require 'serve-static'
 	config = require './build_config'
 
+	grunt.loadTasks 'grunt_tasks/cssUrlReplace/tasks'
+
 	grunt.initConfig
 		bower: grunt.file.readJSON 'bower.json'
 		config: config
@@ -105,10 +107,11 @@ module.exports = (grunt) ->
 						config.js_concat
 					]
 
-		css_url_replace:
+		cssUrlReplace:
 			production:
 				options:
 					staticRoot: __dirname
+					relative: yes
 				files:
 					'<%= config.css_url_replace %>': config.css_files
 
@@ -192,8 +195,8 @@ module.exports = (grunt) ->
 		tasks = tasks.concat [
 			'less'
 		]
-		if grunt.config('css_url_replace')[target]?
-			tasks.push "css_url_replace:#{target}"
+		if grunt.config('cssUrlReplace')[target]?
+			tasks.push "cssUrlReplace:#{target}"
 		if grunt.config('cssmin')[target]?
 			tasks.push "cssmin:#{target}"
 		if grunt.config('clean')[target]?

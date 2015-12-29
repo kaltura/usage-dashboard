@@ -133,9 +133,6 @@ a {
 #kmcHeader #user_links a:hover {
   color: #76c5ee;
 }
-#kmcHeader.whiteLabel div#logo {
-  background: url(../images/kmc/whitelabel_logo.png) no-repeat 0 0;
-}
 #loading {
   color: #fff;
   font-weight: bold;

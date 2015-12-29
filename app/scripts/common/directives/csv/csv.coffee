@@ -34,9 +34,13 @@ do ->
 			from = @$.dates.from
 			to = @$.dates.to
 			@modals.confirm.open
+				# message: """
+				# 	<div>You are going to download <b>#{@constants.reports[@$.name].name}</b> in .csv format.</div>
+				# 	<div>Period: <b>#{@date from}#{if from.toYMD() isnt to.toYMD() then ' - ' + @date to else ''}</b></div>
+				# 	<div>Proceed?</div>
+				# """
 				message: """
-					<div>You are going to download <b>#{@constants.reports[@$.name].name}</b> in .csv format.</div>
-					<div>Period: <b>#{@date from}#{if from.toYMD() isnt to.toYMD() then ' - ' + @date to else ''}</b></div>
+					<div>You are going to download <b>full usage report</b> in .csv format for <b>#{@date from}#{if from.toYMD() isnt to.toYMD() then ' - ' + @date to else ''}</b>.</div>
 					<div>Proceed?</div>
 				"""
 				title: 'Export CSV'

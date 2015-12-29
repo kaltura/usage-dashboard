@@ -68,7 +68,8 @@ do ->
 							action: 'getUrlForReportAsCsv'
 							reportTitle: 'Usage report'
 							reportText: ''
-							headers: "month,#{_.pluck(columns.reports[name], 'csvHeader').join()}"
+							# headers: "month,#{_.pluck(columns.reports[name], 'csvHeader').join()}"
+							headers: ";month,plays,bandwidth,avg_storage,transcoding,entries,users"
 	]
 
 

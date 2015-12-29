@@ -8,6 +8,6 @@ do ->
 		templateUrl: 'app/scripts/common/directives/modal/modal.html'
 		transclude: yes
 		scope:
-			title: '='
+			ttl: '='
 			okText: '='
 			cancelText: '='
