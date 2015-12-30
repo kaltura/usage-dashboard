@@ -51,4 +51,7 @@ do ->
 					a = document.createElement 'a'
 					a.download = @$.filename_()
 					a.href = response
+					# a[if navigator.isFF then 'onclick' else 'click']?()
+					# a.dispatchEvent new Event 'click'
 					a.click()
+					null
