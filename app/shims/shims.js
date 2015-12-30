@@ -16,6 +16,8 @@ if(navigator.isIE){
 	// Fix for IE ignoring relative base tags.
 	(function() {
 		var baseTag = document.getElementsByTagName('base')[0];
-		baseTag.href = baseTag.href;
+		if(baseTag){
+			baseTag.href = baseTag.href;
+		}
 	})();
 }

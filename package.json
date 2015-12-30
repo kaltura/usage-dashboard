@@ -28,6 +28,7 @@
     "grunt-css-url-replace": "0.2.5",
     "grunt-include-source": "^0.7.0",
     "grunt-karma": "^0.12.1",
+    "grunt-processhtml": "^0.3.8",
     "grunt-protractor-runner": "^2.1.0",
     "grunt-webdriver-manager": "0.0.5",
     "grunt-wiredep": "^2.0.0",

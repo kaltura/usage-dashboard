@@ -10,18 +10,12 @@ module.exports = (grunt) ->
 	grunt.initConfig
 		bower: grunt.file.readJSON 'bower.json'
 		config: config
-		targets:
-			dev: 'development'
-			dist: 'production'
-		ports:
-			dev: 9000
-			dist: 9000
 
 
 		connect:
 			development:
 				options:
-					port: '<%= ports.dev %>'
+					port: '<%= config.ports.dev %>'
 					middleware: (connect, options) ->
 						[
 							modrewrite [ '!(\\..+)$ /index.html [L]' ]
@@ -30,7 +24,7 @@ module.exports = (grunt) ->
 			production:
 				options:
 					base: '<%= config.dist %>'
-					port: '<%= ports.dist %>'
+					port: '<%= config.ports.dist %>'
 					middleware: (connect, options) ->
 						[
 							modrewrite [ '!(\\..+)$ /index.html [L]' ]
@@ -120,6 +114,20 @@ module.exports = (grunt) ->
 				files:
 					'<%= config.dist_styles %>': config.css_url_replace
 
+		processhtml:
+			development:
+				options:
+					data:
+						base: '<%= config.bases[config.target] %>'
+				files:
+					'index.html': ['index.html']
+			production:
+				options:
+					data:
+						base: '<%= config.bases[config.target] %>'
+				files:
+					'<%= config.dist %>/index.html': ['<%= config.dist %>/index.html']
+
 		copy:
 			production:
 				files: [
@@ -172,8 +180,9 @@ module.exports = (grunt) ->
 			seleniumPort: 4444
 			proxy: no
 
-	grunt.registerTask 'build', (target = grunt.config('targets').dev) ->
-		targets = grunt.config 'targets'
+	grunt.registerTask 'build', (target = grunt.config('config.targets').dev) ->
+		grunt.config 'config.target', target
+		targets = grunt.config 'config.targets'
 		switch target
 			when targets.dev
 				grunt.config 'included_js_files', config.js_files
@@ -203,6 +212,13 @@ module.exports = (grunt) ->
 			tasks.push "clean:#{target}"
 		if grunt.config('includeSource')[target]?
 			tasks.push "includeSource:#{target}"
+		if grunt.config('processhtml')[target]?
+			isServing = grunt.config('config').isServing
+			grunt.log.writeln isServing
+			if isServing
+				grunt.config.set "processhtml.#{target}.options.data.base", config.bases[targets.dev]
+				grunt.log.writeln grunt.config 'processhtml[<%= config.target %>].options.data.base'
+			tasks.push "processhtml:#{target}"
 		if grunt.config('copy')[target]?
 			tasks.push "copy:#{target}"
 
@@ -212,8 +228,8 @@ module.exports = (grunt) ->
 
 		grunt.task.run tasks
 
-	grunt.registerTask 'serve', (target=grunt.config('targets').dev) ->
-		grunt.config 'config.target', target
+	grunt.registerTask 'serve', (target=grunt.config('config.targets').dev) ->
+		grunt.config 'config.isServing', yes
 		grunt.task.run [
 			"build:#{target}"
 			"connect:#{target}"
@@ -222,7 +238,7 @@ module.exports = (grunt) ->
 
 	grunt.registerTask 'test', ['karma', 'watch:tests']
 
-	grunt.registerTask 'e2e', (target=grunt.config('targets').dev, ks) ->
+	grunt.registerTask 'e2e', (target=grunt.config('config.targets').dev, ks) ->
 		if ks
 			grunt.config 'protractor.e2e.options.args.params.ks', ks
 

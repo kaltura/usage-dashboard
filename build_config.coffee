@@ -1,4 +1,14 @@
 module.exports =
+	bases:
+		development: '/'
+		production: '/apps/usage-dashboard/v0.9.0/'
+	targets:
+		dev: 'development'
+		dist: 'production'
+	ports:
+		dev: 9000
+		dist: 9000
+
 	dist: 'dist'
 	dist_scripts: '<%= config.dist %>/<%= bower.name %>.min.js'
 	dist_styles: '<%= config.dist %>/<%= bower.name %>.min.css'
