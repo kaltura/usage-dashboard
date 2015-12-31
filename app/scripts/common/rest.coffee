@@ -8,4 +8,5 @@ do ->
 		'KalturaUsageDashboard.rest.transcoding-consumption-report'
 		'KalturaUsageDashboard.rest.media-entries-report'
 		'KalturaUsageDashboard.rest.users'
+		'KalturaUsageDashboard.rest.partner'
 	]

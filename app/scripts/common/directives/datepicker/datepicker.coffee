@@ -25,7 +25,7 @@ do ->
 			@$.options =
 				changeYear: yes
 				changeMonth: yes
-				yearRange: '2000:-0'
+				# yearRange: '2000:-0'
 			@$.name = 'datepicker' unless @$.name
 			@$timeout =>
 				@_flushMin()

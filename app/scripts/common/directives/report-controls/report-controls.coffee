@@ -15,8 +15,14 @@ do ->
 
 	module.classy.controller
 		name: 'ReportControlsCtrl'
-		inject: ['$timeout']
-		injectToScope: ['reportControlsSelectCollection', 'go']
+		inject: [
+			'$timeout'
+		]
+		injectToScope: [
+			'reportControlsSelectCollection'
+			'go'
+			'partner'
+		]
 
 		init: ->
 			@_initParams()
@@ -54,6 +60,13 @@ do ->
 		_changed: ->
 			@$timeout =>
 				@$.changed?()
+			if @$.range.allowDatepickers
+				@_calcMinDate()
+
+		_calcMinDate: ->
+			@partner.fetch().then =>
+				date =  new Date parseInt(@partner.info.createdAt) * 1000
+				@$.minDate = date.toMonthStart()
 
 		_calcRange: ->
 			@$.range = @reportControlsSelectCollection.by @$.select.model

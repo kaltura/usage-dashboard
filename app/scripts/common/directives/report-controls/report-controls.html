@@ -5,7 +5,7 @@
 	</span>
 	<span class='dates' ng-show='range.allowDatepickers'>
 		<span class='text'>Dates:</span>
-		<span kaltura-datepicker='dates.low' disabled='disabled || go.isLoading() || !range.allowDatepickers' max='dates.high'></span>
+		<span kaltura-datepicker='dates.low' disabled='disabled || go.isLoading() || !range.allowDatepickers' max='dates.high' min='minDate'></span>
 		<span kaltura-datepicker='dates.high' disabled='disabled || go.isLoading() || !range.allowDatepickers' min='dates.low'></span>
 	</span>
 </div>

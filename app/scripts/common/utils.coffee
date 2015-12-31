@@ -36,6 +36,18 @@ do ->
 
 				parity: (index) -> if index % 2 then 'odd' else 'even'
 
+				dates:
+					min: (d1, d2) ->
+						return unless d1? and d2?
+						d1 = new Date d1
+						d2 = new Date d2
+						if d1.valueOf() < d2.valueOf() then d1 else d2
+					max: (d1, d2) ->
+						return unless d1? and d2?
+						d1 = new Date d1
+						d2 = new Date d2
+						if d1.valueOf() > d2.valueOf() then d1 else d2
+
 				navigator:
 					isMobileOrTablet: ->
 						check = no
