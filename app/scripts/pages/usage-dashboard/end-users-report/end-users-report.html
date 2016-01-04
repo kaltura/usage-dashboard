@@ -1,0 +1,11 @@
+<div class='main-content container-fluid span10' id='end-users-report'>
+	<div report-controls from='dates.from' to='dates.to' changed='fetch()'></div>
+
+	<div class='row-fluid title-text'>
+		<div csv='end-users' dates='dates'></div>
+	</div>
+
+	<div graph='months' decorate='"months"' y-label='End Users Total' value-field='total_end_users'></div>
+	
+	<div monthly-breakdown='end-users' months='months' cls='half-width'></div>
+</div>

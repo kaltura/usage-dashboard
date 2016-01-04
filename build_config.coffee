@@ -1,7 +1,7 @@
 module.exports =
 	bases:
 		development: '/'
-		production: '/apps/usage-dashboard/v0.9.0/'
+		production: '/apps/usage-dashboard/v<%= bower.version %>/'
 	targets:
 		dev: 'development'
 		dist: 'production'

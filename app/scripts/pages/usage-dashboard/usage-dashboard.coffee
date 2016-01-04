@@ -8,6 +8,7 @@ do ->
 		'KalturaUsageDashboard.usage-dashboard.bandwidth-report'
 		'KalturaUsageDashboard.usage-dashboard.transcoding-consumption-report'
 		'KalturaUsageDashboard.usage-dashboard.media-entries-report'
+		'KalturaUsageDashboard.usage-dashboard.end-users-report'
 	]
 
 	module.config [

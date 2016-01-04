@@ -71,6 +71,11 @@ do ->
 				field: 'total_media_entries'
 				csvHeader: 'plays'
 			]
+			'end-users': [
+				title: 'Total'
+				field: 'total_end_users'
+				csvHeader: 'plays'
+			]
 			'overall-usage': [
 				title: 'Plays (CPM)'
 				field: 'total_plays'
@@ -91,9 +96,10 @@ do ->
 				title: 'Media Entries'
 				field: 'total_media_entries'
 				csvHeader: 'plays'
-			# ,
-			# 	title: 'End Users'
-			# 	field: 'end_users'
+			,
+				title: 'End Users'
+				field: 'total_end_users'
+				csvHeader: 'plays'
 			]
 
 
@@ -167,7 +173,7 @@ do ->
 			zero: ->
 				@setHours 0, 0, 0, 0
 				@
-				
+
 			dateTimeZoneFix: -> new Date @setHours @getHours() + @getTimezoneOffset() / 60
 
 			toMonthStart: ->
