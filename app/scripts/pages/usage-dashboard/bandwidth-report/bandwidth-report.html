@@ -1,0 +1,12 @@
+<div class='main-content container-fluid span10' id='bandwidth-report'>
+	<div report-controls from='dates.from' to='dates.to' changed='fetch()'></div>
+
+	<div class='row-fluid title-text'>
+		<!-- 50 GB Bandwidth consumed -->
+		<div csv='bandwidth' filename='bandwidth-consumption' dates='dates'></div>
+	</div>
+
+	<div graph='months' decorate='"months"' y-label='Bandwidth Consumption' units='(GB)' value-field='bandwidth_gb'></div>
+
+	<div monthly-breakdown='bandwidth' months='months' cls='half-width'></div>
+</div>

@@ -1,0 +1,10 @@
+node_modules/*
+bower_components/*
+html/*
+*.sublime*
+gitignore/*
+app/scripts/build/*
+app/scripts/*.js
+dist/*
+index.html
+app/tests/protractor/specs/*

@@ -1,0 +1,89 @@
+@icon-size: 15px;
+
+.datepicker{
+	height: @controls-row-height;
+	line-height: @controls-row-height;
+	padding: 0 10px;
+	input{
+		float: left;
+		font-size: @small-font;
+		height: @controls-row-height;
+		line-height: @controls-row-height;
+		width: 100px;
+		display: block;
+		.border();
+		border-bottom-left-radius: @radius;
+		border-top-left-radius: @radius;
+		border-right: 0;
+		background: @white-bg;
+	}
+	.icon{
+		.gradient-control();
+		float: left;
+		cursor: pointer;
+		height: @controls-row-height;
+		line-height: @controls-row-height;
+		width: @controls-row-height;
+		display: block;
+		.border();
+		border-bottom-right-radius: @radius;
+		border-top-right-radius: @radius;
+		i{
+			display: block;
+			height: @icon-size;
+			width: @icon-size;
+			position: relative;
+			margin: auto;
+			top: 3px;
+		}
+	}
+	&.disabled{
+		.icon{
+			cursor: default;
+			color: @text-gray-disabled;
+		}
+	}
+}
+
+.ui-datepicker{
+	.ui-datepicker-header{
+		.gradient-control();
+		.ui-datepicker-title{
+			select{
+				option{
+					&:hover{
+						background-color: @graph-column;
+					}
+				}
+			}
+		}
+	}
+	.ui-datepicker-calendar{
+		margin: 0;
+	}
+	.ui-datepicker-prev,.ui-datepicker-next{
+		span{
+			margin-top: -4px;
+		}
+	}
+
+	td{
+		.ui-state-active{
+			.gradient-light-blue() !important;
+		}
+		.ui-state-hover{
+			background-color: transparent;
+			background-image: none;
+		}
+		a:hover{
+			background-color: @graph-column !important;
+			.gradient-blue() !important;
+		}
+	}
+	.ui-datepicker-today{
+		a{
+			background-color: @graph-column;
+			.gradient-dark();
+		}
+	}
+}

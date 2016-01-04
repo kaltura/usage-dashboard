@@ -1,0 +1,109 @@
+@rotate-tiny: -15deg;
+@rotate-small: -30deg;
+@rotate-medium: -45deg;
+@rotate-large: -78deg;
+@rotate-full: -89deg;
+@rotate-tiny-height: 20px;
+@rotate-small-height: 25px;
+@rotate-medium-height: 35px;
+@rotate-large-height: 50px;
+@rotate-full-height: 55px;
+@height: 300px;
+
+
+.graph-row{
+	height: @height;
+	[flot]{
+		height: @height;
+	}
+	display: block;
+	margin-bottom: @padding * 2 !important;
+
+	.tickLabel{
+		color: @graph-text;
+	}
+	.flot-x-axis{
+		margin-top: 5px;
+		.flot-tick-label{
+			max-width: 150px !important;
+		}
+	}
+
+	&.rotate-x-labels-tiny{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-tiny);
+				margin-top: @rotate-tiny-height;
+			}
+		}
+		height: @height + @rotate-tiny-height;
+		margin-bottom: @padding * 2 !important;
+	}
+	&.rotate-x-labels-small{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-small);
+				margin-top: @rotate-small-height;
+			}
+		}
+		height: @height + @rotate-small-height;
+		margin-bottom: @padding * 3 !important;
+	}
+	&.rotate-x-labels-medium{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-medium);
+				margin-top: @rotate-medium-height;
+			}
+		}
+		height: @height + @rotate-medium-height;
+		margin-bottom: @padding * 4 !important;
+	}
+	&.rotate-x-labels-large{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-large);
+				margin-top: @rotate-large-height;
+				margin-left: -7px;
+			}
+		}
+		height: @height + @rotate-large-height;
+		margin-bottom: @padding * 5 !important;
+	}
+	&.rotate-x-labels-full{
+		.flot-x-axis{
+			.flot-tick-label{
+				.rotate(@rotate-full);
+				margin-top: @rotate-full-height;
+			}
+		}
+		height: @height + @rotate-full-height;
+		margin-bottom: @padding * 6 !important;
+	}
+}
+
+@tooltip-padding-top: 4px;
+@tooltip-padding-right: 8px;
+@gradient-tooltip-top: @white-bg;
+@gradient-tooltip-bottom: @dark-gray;
+@tooltip-margin: 10px;
+
+.graph-tooltip{
+	.gradient(@gradient-tooltip-top, @gradient-tooltip-bottom, 10%) !important;
+	border: 1px solid @dark-gray !important;
+	padding: @tooltip-padding-top @tooltip-padding-right !important;
+	position: relative;
+	.text{
+		.text-shadow();
+		font-size: @small-font;
+		color: @text-gray;
+	}
+	.value{
+		font-size: @medium-font;
+		line-height: @medium-font;
+		color: @dark-aqua;
+		bottom: @tooltip-padding-top;
+		left: @tooltip-padding-right;
+		margin-top: @tooltip-margin;
+	}
+}

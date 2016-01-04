@@ -1,0 +1,11 @@
+<div class='main-content container-fluid span10' id='transcoding-consumption-report'>
+	<div report-controls from='dates.from' to='dates.to' changed='fetch()'></div>
+
+	<div class='row-fluid title-text'>
+		<div csv='transcoding-consumption' dates='dates'></div>
+	</div>
+
+	<div graph='months' decorate='"months"' y-label='Transcoding Consumption' units='(GB)' value-field='transcoding_gb'></div>
+
+	<div monthly-breakdown='transcoding-consumption' months='months' cls='half-width'></div>
+</div>

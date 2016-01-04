@@ -1,0 +1,22 @@
+@controls-row-height: 24px;
+@radius: 4px;
+
+.controls-row{
+	line-height: @controls-row-height;
+	font-size: @medium-font;
+
+	&>*{
+		display: block;
+		float: left;
+
+		&.dates{
+			&>*{
+				float: left;
+			}
+
+			.text{
+				padding-left: 10px;
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+<div class='side-menu row-fluid span2'>
+	<ul class='top-ul'>
+		<!-- <li class='side-menu-top-ul-item' ng-click='go.go("usage-dashboard")'>
+			<span>Dashboard Usage Reports</span>
+		</li> -->
+		<li>
+			<div ng-show='angular!=null'>ANGULAR</div>
+			<ul class='inner-ul'>
+				<li ng-repeat='menuItem in menuItems' ng-class='{active:menuItem.name==go.current().name}'>
+					<span>
+						<a ng-click='go.path(menuItem)'>
+							{{menuItem.data.pageTitle}}
+						</a>
+					</span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>

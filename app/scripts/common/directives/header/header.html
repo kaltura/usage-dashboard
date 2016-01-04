@@ -1,0 +1,15 @@
+<header class="usage-dashboard-header row-fluid">
+	<div class='usage-dashboard-header-inner container-fluid'>
+		<ul class='usage-dashboard-header-menu'>
+			<li ng-repeat='item in items' ng-class='{active:go.current().name.contains(item.name)}'>
+				<a ng-click='go.path(item)'>
+					{{item.data.pageTitle}}
+				</a>
+			</li>
+		</ul>
+		<!-- <a ng-href='{{helpHref}}' target='_blank'>
+			<i class='info' uib-tooltip='Go to Kaltura documentation' tooltip-placement='left' tooltip-animation='true' tooltip-trigger='mouseenter' tooltip-append-to-body='true'></i>
+		</a> -->
+	</div>
+	<hr class='row-fluid'/>
+</header>

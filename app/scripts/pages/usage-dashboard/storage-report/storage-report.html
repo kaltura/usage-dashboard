@@ -1,0 +1,11 @@
+<div class='main-content container-fluid span10' id='storage-report'>
+	<div report-controls from='dates.from' to='dates.to' changed='fetch()'></div>
+
+	<div class='row-fluid title-text'>
+		<div csv='storage' filename='average-storage' dates='dates'></div>
+	</div>
+
+	<div graph='months' decorate='"months"' y-label='Average Storage' units='(GB)' value-field='avg_storage_gb'></div>
+
+	<div monthly-breakdown='storage' months='months' cls='half-width'></div>
+</div>

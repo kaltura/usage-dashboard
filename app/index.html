@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" xmlns:wave="ignored" ng-app='KalturaUsageDashboard' id='ng-app'>
+
+<head ng-controller='HeadCtrl'>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="title" content="Kaltura - Open Source Video Platform">
+	<meta name="robots" content="index, follow">
+	<meta name="description" content="Kaltura Management Console. Media Asset Management System. Video solutions for video streaming and video management. Kaltura - The Open Source Video Platform.">
+	<meta name="keywords" content="production, shows, talent, discover, contribute, share, enhance, first open source video platform, video editing, media collaboration, online video, movie, wikimentaries, wiki">
+	<meta name="language" content="en">
+	<meta name="verify-v1" content="JIjZEB+ZCdDyAw49II0fIpcLfFc40M9EzXEY5/Tva68=">
+
+	<title>KMC &gt; Usage Dashboard &gt; {{go.current().data.pageTitle}}</title>
+	<!-- build:template:production,development
+	<base href="<%= base %>"/>
+	/build -->
+	<link rel='shortcut icon' href='http://corp.kaltura.com/sites/default/files/favicon%20%289%29_0.ico' type='image/ico'>
+
+	<!-- include: "type": "css", "files": "<%= included_css_files %>" -->
+	<!-- /include -->
+</head>
+
+<body ng-cloak>
+
+	<div header></div>
+
+	<div ui-view='main'></div>
+
+	<!--[if lte IE 9]>
+		<script>
+			navigator.isIE9orLess = true;
+		</script>
+	<![endif]-->
+
+	<!--[if lte IE 8]>
+		<script>
+			navigator.isIE8orLess = true;
+			document.createElement('header');
+			document.createElement('article');
+			document.createElement('section');
+			document.createElement('aside');
+			document.createElement('nav');
+			document.createElement('footer');
+			document.createElement('alert');
+			document.createElement('select2');
+			document.createElement('flot');
+			document.createElement('wave-spinner');
+			document.createElement('wave:spinner');
+		</script>
+	<![endif]-->
+	
+	<!--[if IE]>
+		<script>
+			navigator.isIE = true;
+			if(navigator.isIE){
+				// Fix for IE ignoring relative base tags.
+				(function() {
+					var baseTag = document.getElementsByTagName('base')[0];
+					if(baseTag){
+						baseTag.href = baseTag.href;
+					}
+				})();
+			}
+		</script>
+	<![endif]-->
+
+	<!-- include: "type": "js", "files": "<%= included_js_files %>" -->
+	<!-- /include -->
+
+
+	<div spinner></div>
+
+</body>
+
+</html>
