@@ -25,6 +25,10 @@ do ->
 			kmc = kmcProvider.$get()
 
 			RestangularProvider.setBaseUrl "#{kmc.vars.service_url}/api_v3/index.php"
+			RestangularProvider.setJsonp yes;
+			RestangularProvider.setDefaultRequestParams 'jsonp',
+				callback: 'JSON_CALLBACK'
+				format: 9
 
 			$urlRouterProvider.when '/usage-dashboard', [
 				'redirector'

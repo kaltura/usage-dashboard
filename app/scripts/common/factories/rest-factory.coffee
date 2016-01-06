@@ -5,13 +5,12 @@ do ->
 	module.factory 'RestFactory', [
 		'Restangular'
 		'Collection'
-		'x2js'
 		'go'
 		'kmc'
 		'utils'
 		'$filter'
 		'errorsHandler'
-		(Restangular, Collection, x2js, go, kmc, utils, $filter, errorsHandler) ->
+		(Restangular, Collection, go, kmc, utils, $filter, errorsHandler) ->
 			(config) ->
 				#modify config with default settings
 				_.defaults config,
@@ -141,10 +140,6 @@ do ->
 										item
 
 
-
-				#parse xml in response
-				@addFetchInterceptor (response) ->
-					x2js.xml_str2json(response).xml.result
 
 				#errors handling
 				@addFetchInterceptor (parsed, payload) =>
