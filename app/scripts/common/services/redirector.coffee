@@ -4,10 +4,10 @@ do ->
 
 	module.service 'redirector', [
 		'$location'
-		'$state'
-		($location, $state) ->
+		'go'
+		($location, go) ->
 			(name) ->
-				url = $state.href name
+				url = go.stateHref name
 				params = $location.search()
 				unless _.isEmpty params
 					url += '?'
