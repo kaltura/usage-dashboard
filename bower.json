@@ -1,14 +1,14 @@
 {
-  "name": "kaltura-vpaas-usage-dashboard",
-  "version": "0.9.0",
+  "name": "kaltura-usage-dashboard",
+  "version": "0.9.1",
   "license": "SEE LICENSE IN LICENSE",
-  "description": "Kaltura VPaaS Usage Dashbaord frontend (Angular.js)",
+  "description": "Kaltura Usage Dashboard frontend (Angular.js)",
   "authors": [
     "Vitaliy Tarash <tarash@steelkiwi.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "https://git.steelkiwi.com/tarash/kaltura-vpaas-usage-dashboard"
+    "url": "https://github.com/kaltura/usage-dashboard"
   },
   "directory": "bower_components",
   "devDependencies": {
@@ -31,7 +31,6 @@
     "angular-sanitize": "=1.2.29",
     "angular-ui-router": "=0.2.15",
     "ng-bundle-collection": "=1.0.14",
-    "angular-x2js": "=0.2.0",
     "angular-spinkit": "=0.3.3",
     "jquery-ui-bootstrap": "=0.2.5"
   },

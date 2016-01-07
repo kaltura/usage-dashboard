@@ -9,7 +9,6 @@ do ->
 		'ui.router'
 		'restangular'
 		'classy'
-		'cb.x2js'
 		'ng-bundle-collection'
 		'angular-spinkit'
 		'ngSanitize'

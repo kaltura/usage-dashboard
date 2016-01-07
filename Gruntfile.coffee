@@ -140,6 +140,9 @@ module.exports = (grunt) ->
 					cwd: '.'
 					src: config.image_files
 					dest: '<%= config.dist %>'
+				,
+					src: '.htaccess',
+					dest: '<%= config.dist %>/.htaccess'
 				]
 
 		ngtemplates:
@@ -157,6 +160,7 @@ module.exports = (grunt) ->
 					expand: yes
 					cwd: '<%= config.dist %>'
 					src: ['**']
+					dot: yes
 					dest: 'v<%= bower.version %>'
 				]
 
