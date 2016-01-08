@@ -1693,6 +1693,12 @@ body .usage-dashboard .main-content .row-fluid {
 body ul {
   padding: 0;
 }
+body.ie .datepicker input {
+  line-height: 15px !important;
+}
+body.ie .select2-choice {
+  line-height: 22px !important;
+}
 .usage-dashboard-header {
   background-color: white;
   font-weight: bold;
