@@ -14,7 +14,8 @@ do ->
 				stateHref: (name) ->
 					href = $state.href name
 					regex = new RegExp "^#{angular.element('base').attr('href')}"
-					href.replace regex, ''
+					href = href.replace regex, ''
+					href = href.replace /^\#(\/|\\)/, ''
 
 				path: =>
 					switch arguments.length
