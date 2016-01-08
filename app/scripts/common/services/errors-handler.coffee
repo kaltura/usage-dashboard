@@ -6,10 +6,11 @@ do ->
 		'modals'
 		(modals) ->
 			(error) ->
-				message = if error?.error?.code?
-					switch error.error.code
+				error = error?.error or error
+				message = if error?.code?
+					switch error.code
 						when 'INVALID_KS' then "Your session has expired. Please refresh the page to continue."
-						else error.error.message
+						else error.message
 				else "Unable to load the requested information"
 
 				modals.error.open message: message

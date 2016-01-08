@@ -143,7 +143,7 @@ do ->
 
 				#errors handling
 				@addFetchInterceptor (parsed, payload) =>
-					if parsed.error?
+					if parsed.error? or parsed.objectType is 'KalturaAPIException'
 						@cancelAllRequests parsed
 						errorsHandler parsed
 						{}
