@@ -12,7 +12,7 @@ do ->
 		'ng-bundle-collection'
 		'angular-spinkit'
 		'ngSanitize'
-		'ngCsv'
+		# 'ngCsv'
 		#common
 		'KalturaUsageDashboard.kmc-config'
 		'KalturaUsageDashboard.config'
