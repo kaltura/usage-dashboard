@@ -1,6 +1,6 @@
 {
   "name": "kaltura-usage-dashboard",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "license": "SEE LICENSE IN LICENSE",
   "description": "Kaltura Usage Dashboard frontend (Angular.js)",
   "authors": [
