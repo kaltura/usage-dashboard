@@ -11,11 +11,11 @@ do ->
 		'kmcProvider'
 		($urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider, kmcProvider) ->
 			
-			$locationProvider.html5Mode
-				enabled: yes
-				# requireBase: no
-				requireBase: yes
-			$locationProvider.hashPrefix '!'
+			# $locationProvider.html5Mode
+			# 	enabled: yes
+			# 	# requireBase: no
+			# 	requireBase: yes
+			# $locationProvider.hashPrefix '!'
 
 			# $httpProvider.defaults.useXDomain = yes
 			# $httpProvider.interceptors.push 'authHttpResponseInterceptor'
