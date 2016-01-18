@@ -48,10 +48,14 @@ do ->
 		export: ->
 			@_modal().result.then =>
 				@vpaasUsageReport.fetch(@utils.csv.extractPayload @$.dates, @$.name).then (response) =>
-					a = document.createElement 'a'
-					a.download = @$.filename_()
-					a.href = response
-					# a[if navigator.isFF then 'onclick' else 'click']?()
-					# a.dispatchEvent new Event 'click'
-					a.click()
+					if (document.documentMode) # for IE, just open it in a new window
+						window.open(response)
+					else
+						a = document.createElement 'a'
+						a.download = @$.filename_()
+						a.href = response
+						# a[if navigator.isFF then 'onclick' else 'click']?()
+						# a.dispatchEvent new Event 'click'
+						a.click()
+
 					null
