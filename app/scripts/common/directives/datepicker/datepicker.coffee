@@ -37,10 +37,14 @@ do ->
 			max: (value) -> @_flushMax() if value
 
 		_flushMin: ->
-			@input.datepicker 'option', 'minDate', @$.min
+			today = new Date
+			min = if not @$.min? or @$.min.dg? today then today else @$.min
+			@input.datepicker 'option', 'minDate', min
 
 		_flushMax: ->
-			@input.datepicker 'option', 'maxDate', @$.max
+			today = new Date
+			max = if not @$.max? or @$.max.dg? today then today else @$.max
+			@input.datepicker 'option', 'maxDate', max
 
 
 		open: ->

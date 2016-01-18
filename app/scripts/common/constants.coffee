@@ -207,8 +207,8 @@ do ->
 
 			#date greater (@ > date ?) comparison in DAYS context
 			dg: (date) ->
-				v1 = @valueOf() / dayms
-				v2 = (new Date date).valueOf() / dayms
+				v1 = parseInt @valueOf() / dayms
+				v2 = parseInt (new Date date).valueOf() / dayms
 				v1 > v2
 
 			#date smaller (@ < date ?) comparison in DAYS context
@@ -216,8 +216,8 @@ do ->
 
 			#date greater or equals (@ >= date ?) comparison in DAYS context
 			dge: (date) ->
-				v1 = @valueOf() / dayms
-				v2 = (new Date date).valueOf() / dayms
+				v1 = parseInt @valueOf() / dayms
+				v2 = parseInt (new Date date).valueOf() / dayms
 				v1 >= v2
 
 			#date smaller or equals (@ <= date ?) comparison in DAYS context
@@ -225,8 +225,8 @@ do ->
 
 			#date equals (@ = date ?) comparison in DAYS context
 			de: (date) ->
-				v1 = @valueOf() / dayms
-				v2 = (new Date date).valueOf() / dayms
+				v1 = parseInt @valueOf() / dayms
+				v2 = parseInt (new Date date).valueOf() / dayms
 				v1 is v2
 
 			#date greater (@ > date ?) comparison by milliseconds
