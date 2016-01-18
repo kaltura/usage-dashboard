@@ -2384,6 +2384,8 @@ table.one-third-width {
 }
 .modal .modal-content {
   border-radius: 11px;
+  max-width: 598px;
+  margin: 30px auto;
 }
 .modal .modal-content .modal-header {
   border-top-left-radius: 8px;
