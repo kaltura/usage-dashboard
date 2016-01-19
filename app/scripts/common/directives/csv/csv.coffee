@@ -48,14 +48,15 @@ do ->
 		export: ->
 			@_modal().result.then =>
 				@vpaasUsageReport.fetch(@utils.csv.extractPayload @$.dates, @$.name).then (response) =>
-					if (document.documentMode) # for IE, just open it in a new window
-						window.open(response)
-					else
-						a = document.createElement 'a'
-						a.download = @$.filename_()
-						a.href = response
-						# a[if navigator.isFF then 'onclick' else 'click']?()
-						# a.dispatchEvent new Event 'click'
-						a.click()
-
-					null
+					# a = document.createElement 'a'
+					# a.href = response
+					# a.innerHtml = ' '
+					# $a = angular.element a
+					# $a.attr 'download', @$.filename_()
+					# $a.attr 'href', response
+					# $a.attr 'target', '_blank'
+					# a[if navigator.isFF then 'onclick' else 'click']?()
+					# a.dispatchEvent new Event 'click'
+					# a.click()
+					window.location.replace response
+					# null
