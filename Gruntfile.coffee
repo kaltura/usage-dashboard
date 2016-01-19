@@ -141,8 +141,8 @@ module.exports = (grunt) ->
 					src: config.image_files
 					dest: '<%= config.dist %>'
 				,
-					src: '.htaccess',
-					dest: '<%= config.dist %>/.htaccess'
+					src: 'LICENSE',
+					dest: '<%= config.dist %>/LICENSE'
 				]
 
 		ngtemplates:
