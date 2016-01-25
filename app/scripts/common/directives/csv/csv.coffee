@@ -58,5 +58,9 @@ do ->
 					# a[if navigator.isFF then 'onclick' else 'click']?()
 					# a.dispatchEvent new Event 'click'
 					# a.click()
-					window.location.replace response
+					if !!navigator.userAgent.match /Version\/[\d\.]+.*Safari/
+						window.open response
+					else
+						window.location.replace response
+					# fn response
 					# null
